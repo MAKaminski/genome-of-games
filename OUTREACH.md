@@ -135,16 +135,20 @@ Structural work already built into the site that keeps earning links without fur
 
 ## Highest-value improvement before launching
 
-Upgrade the external links from resolvers to hand-verified permalinks. Right now every entity page
-links to a Wikipedia search that lands on the article when an exact title match exists. Verified
-canonical URLs would:
+**Done for Wikipedia.** Every entity was resolved against the Wikipedia API by
+`scripts/verify-links.js`; entities with a confirmed article carry a permalink, and entities without
+one carry no Wikipedia link rather than a search that lands nowhere. Games are near-complete
+coverage; studios are strong; mechanics are mostly absent, because this ontology names concepts
+Wikipedia has no separate article for. That removes the one thing a skeptical editor could point at
+and call sloppy.
 
-1. make the pages materially more useful, which is what actually earns links
-2. remove the one thing a skeptical editor could point at and call sloppy
+Two pieces of that job remain, in order of value:
 
-For the ~200 highest-traffic entities (all 168 mechanic origin games, plus the top studios) this is a
-bounded job — a batch lookup against the Wikipedia API and a manual pass on the ambiguous ones. It is
-the difference between "nice project" and "reference I'd cite."
+1. **Work `data/links-review.json`.** It lists every entity the automated pass refused to guess at,
+   with the candidate titles it tried. Most are genuinely absent from Wikipedia; a handful are title
+   mismatches worth fixing by hand (*Might and Magic: Book One* is the clearest example).
+2. **MobyGames and Giant Bomb are still site searches.** Both gate their APIs behind free keys.
+   With keys, the same two-pass structure in `scripts/verify-links.js` extends to them directly.
 
 ---
 

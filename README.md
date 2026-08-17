@@ -1,10 +1,10 @@
 # The Genome of Games
 
-An ontology of video game mechanics. 168 mechanics, 619 games, 394 companies, 4,371 recorded links,
+An ontology of video game mechanics. 168 mechanics, 618 games, 394 companies, 4,366 recorded links,
 1962 to the present. Every mechanic has one credited origin game and a traceable chain of ancestors
 reaching back to a root.
 
-**1,244 static pages. Zero runtime dependencies. Builds in under two seconds.**
+**1,243 static pages. Zero runtime dependencies. Builds in under two seconds.**
 
 ---
 
@@ -43,7 +43,7 @@ build.js              page generation — every route is defined here
 serve.js              local static preview server
 lib/data.js           loads JSON, builds slugs, indexes, adjacency and lineage helpers
 lib/shell.js          HTML shell, <head>, nav, footer, shared components
-data/graph.json       1,181 nodes and 4,371 edges with precomputed graph layouts
+data/graph.json       1,180 nodes and 4,366 edges with precomputed graph layouts
 data/prose.json       ~34,000 words: three body paragraphs per mechanic
 data/copy.json        homepage, 15 family essays, 7 era essays, methodology
 data/features.json    the mechanic ontology (source of truth for families and parentage)
@@ -63,13 +63,13 @@ out/                  build output (gitignored)
 | `/features/` + `/features/<family>/` | 16 | Index and 15 family hubs, ~250-word essay each |
 | `/feature/<slug>/` | 168 | The primary content pages |
 | `/games/` + `/games/<decade>s/` | 8 | Index and 7 decade pages |
-| `/game/<slug>/` | 619 | |
+| `/game/<slug>/` | 618 | |
 | `/studios/` + `/studios/<letter>/` | 28 | Index and A–Z pages |
 | `/studio/<slug>/` | 394 | |
 | `/eras/` + `/era/<slug>/` | 8 | |
 | `/methodology/` | 1 | How origins are assigned; known limits |
 | `/graph/` | 1 | Interactive canvas, deep-linkable |
-| **Total** | **1,244** | plus `sitemap.xml`, `robots.txt`, `search-index.json`, `404.html` |
+| **Total** | **1,243** | plus `sitemap.xml`, `robots.txt`, `search-index.json`, `404.html` |
 
 ## SEO surface
 
@@ -78,9 +78,10 @@ out/                  build output (gitignored)
   on mechanics, `VideoGame` on games, `Organization` on studios, `WebSite` + `Dataset` on the homepage.
 - **Unique title and meta description** per page, generated from that page's own data.
 - **16 Open Graph images**, one per mechanic family plus a default.
-- **Outbound citation links** on every entity page to Wikipedia, MobyGames and Giant Bomb.
-  These are resolver links (they land on the exact article when one exists, a search when it does
-  not) rather than hand-verified permalinks — see *Known limitations* below.
+- **Outbound citation links** on every entity page. Wikipedia links are **verified permalinks**:
+  every entity was resolved against the Wikipedia API, and where no article exists the link is
+  omitted rather than pointing at an empty search. MobyGames and Giant Bomb remain site searches.
+  Re-run with `node scripts/verify-links.js` — see *Verifying outbound links* below.
 - **`sitemap.xml`** with per-route priority, referenced from `robots.txt`.
 
 ## Graph deep links
@@ -107,8 +108,29 @@ than dismissible. In short:
   strategy and mobile interaction design are all thinner than they should be.
 - **`adopts` edges are illustrative and incomplete** by design. They show that an idea spread; they
   do not claim to enumerate everywhere it spread.
-- **External links are resolvers, not verified permalinks.** Upgrading them to hand-checked
-  Wikipedia and MobyGames URLs is the single highest-value improvement available to this dataset.
+- **Wikipedia links are verified; MobyGames and Giant Bomb are not.** Those two remain site
+  searches, because verifying them needs API keys. `data/links-review.json` lists every entity the
+  Wikipedia pass refused to guess at, and is where the remaining link errors live.
+
+## Verifying outbound links
+
+```bash
+node scripts/verify-links.js              # all entities, ~3 minutes
+node scripts/verify-links.js --only C     # studios only (F | T | C)
+node scripts/verify-links.js --limit 40   # smoke test
+```
+
+Run manually, never as part of the build — `data/links.json` is committed output, so the build stays
+offline and reproducible. The script resolves candidate titles against the Wikipedia API, rejects
+disambiguation pages, glossaries and lists, and classifies the result by its **categories**: every
+article about a game carries a `<year> video games` category and no company or person article does.
+That is what stops a studio linking to the one game it made — `Shedworks` redirects to
+`Sable (video game)` — while still allowing the renames this dataset exists to trace
+(`DMA Design` → `Rockstar North`) and solo studios that resolve to their founder
+(`ConcernedApe` → `Eric Barone`).
+
+Everything it refuses to guess at lands in `data/links-review.json` with the candidates it tried and
+why each failed. That file is the manual-pass worklist.
 
 ## Editing the data
 

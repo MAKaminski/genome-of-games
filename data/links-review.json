@@ -1,0 +1,3299 @@
+[
+ {
+  "id": "f_collision",
+  "name": "Object Collision As Verb",
+  "type": "F",
+  "year": 1962,
+  "page": "/feature/object-collision-as-verb/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Object Collision As Verb",
+   "Object collision as verb",
+   "Object Collision As Verb (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_single_screen",
+  "name": "Single-Screen Arena",
+  "type": "F",
+  "year": 1972,
+  "page": "/feature/single-screen-arena/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Single-Screen Arena",
+   "Single-screen arena",
+   "Single-Screen Arena (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_screen_wrap",
+  "name": "Wraparound Topology",
+  "type": "F",
+  "year": 1979,
+  "page": "/feature/wraparound-topology/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Wraparound Topology",
+   "Wraparound topology",
+   "Wraparound Topology (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_flip_screen",
+  "name": "Flip-Screen Room Graph",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/flip-screen-room-graph/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Flip-Screen Room Graph",
+   "Flip-screen room graph",
+   "Flip-Screen Room Graph (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_side_scroll",
+  "name": "Continuous Scrolling Playfield",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/continuous-scrolling-playfield/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Continuous Scrolling Playfield",
+   "Continuous scrolling playfield",
+   "Continuous Scrolling Playfield (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_parallax",
+  "name": "Parallax Depth Layers",
+  "type": "F",
+  "year": 1982,
+  "page": "/feature/parallax-depth-layers/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Parallax Depth Layers",
+   "Parallax depth layers",
+   "Parallax Depth Layers (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_iso_view",
+  "name": "Isometric Projection",
+  "type": "F",
+  "year": 1982,
+  "page": "/feature/isometric-projection/",
+  "reason": "not about video games",
+  "tried": [
+   "Isometric Projection",
+   "Isometric projection",
+   "Isometric Projection (video games)"
+  ],
+  "liveButRejected": [
+   "Isometric projection"
+  ]
+ },
+ {
+  "id": "f_scaling_pseudo3d",
+  "name": "Sprite-Scaling Pseudo-3D",
+  "type": "F",
+  "year": 1982,
+  "page": "/feature/sprite-scaling-pseudo-3d/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Sprite-Scaling Pseudo-3D",
+   "Sprite-scaling pseudo-3d",
+   "Sprite-Scaling Pseudo-3D (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_maze_fp",
+  "name": "First-Person Vector Space",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/first-person-vector-space/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "First-Person Vector Space",
+   "First-person vector space",
+   "First-Person Vector Space (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_precision_platform",
+  "name": "Momentum-Based Platform Control",
+  "type": "F",
+  "year": 1985,
+  "page": "/feature/momentum-based-platform-control/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Momentum-Based Platform Control",
+   "Momentum-based platform control",
+   "Momentum-Based Platform Control (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_metroidvania",
+  "name": "Ability-Gated Interlocked Map",
+  "type": "F",
+  "year": 1986,
+  "page": "/feature/ability-gated-interlocked-map/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Ability-Gated Interlocked Map",
+   "Ability-gated interlocked map",
+   "Ability-Gated Interlocked Map (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_mode7_plane",
+  "name": "Rotating Ground Plane",
+  "type": "F",
+  "year": 1990,
+  "page": "/feature/rotating-ground-plane/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Rotating Ground Plane",
+   "Rotating ground plane",
+   "Rotating Ground Plane (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_raycast_3d",
+  "name": "Raycast Corridor 3D",
+  "type": "F",
+  "year": 1992,
+  "page": "/feature/raycast-corridor-3d/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Raycast Corridor 3D",
+   "Raycast corridor 3d",
+   "Raycast Corridor 3D (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_true_3d_poly",
+  "name": "True Polygonal Free-Look Space",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/true-polygonal-free-look-space/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "True Polygonal Free-Look Space",
+   "True polygonal free-look space",
+   "True Polygonal Free-Look Space (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_free_roam_3d",
+  "name": "Analog Free-Roam 3D Movement",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/analog-free-roam-3d-movement/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Analog Free-Roam 3D Movement",
+   "Analog free-roam 3d movement",
+   "Analog Free-Roam 3D Movement (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_hub_world",
+  "name": "Hub-and-Spoke World Access",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/hub-and-spoke-world-access/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Hub-and-Spoke World Access",
+   "Hub-and-spoke world access",
+   "Hub-and-Spoke World Access (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_portal_space",
+  "name": "Non-Euclidean Portal Space",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/non-euclidean-portal-space/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Non-Euclidean Portal Space",
+   "Non-euclidean portal space",
+   "Non-Euclidean Portal Space (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_seamless_open_world",
+  "name": "Seamless Streaming Open World",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/seamless-streaming-open-world/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Seamless Streaming Open World",
+   "Seamless streaming open world",
+   "Seamless Streaming Open World (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_verticality_climb",
+  "name": "Systemic Climbable Surfaces",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/systemic-climbable-surfaces/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Systemic Climbable Surfaces",
+   "Systemic climbable surfaces",
+   "Systemic Climbable Surfaces (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_grapple_traversal",
+  "name": "Grapple & Tether Traversal",
+  "type": "F",
+  "year": 2004,
+  "page": "/feature/grapple-and-tether-traversal/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Grapple & Tether Traversal",
+   "Grapple & tether traversal",
+   "Grapple & Tether Traversal (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_parkour_traversal",
+  "name": "First-Person Parkour Flow",
+  "type": "F",
+  "year": 2008,
+  "page": "/feature/first-person-parkour-flow/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "First-Person Parkour Flow",
+   "First-person parkour flow",
+   "First-Person Parkour Flow (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_climb_anywhere",
+  "name": "Climb-Anything Stamina Traversal",
+  "type": "F",
+  "year": 2017,
+  "page": "/feature/climb-anything-stamina-traversal/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Climb-Anything Stamina Traversal",
+   "Climb-anything stamina traversal",
+   "Climb-Anything Stamina Traversal (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_vast_streaming",
+  "name": "Planetary-Scale Streaming",
+  "type": "F",
+  "year": 2016,
+  "page": "/feature/planetary-scale-streaming/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Planetary-Scale Streaming",
+   "Planetary-scale streaming",
+   "Planetary-Scale Streaming (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_fixed_cam",
+  "name": "Fixed Cinematic Camera",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/fixed-cinematic-camera/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Fixed Cinematic Camera",
+   "Fixed cinematic camera",
+   "Fixed Cinematic Camera (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_follow_cam",
+  "name": "Trailing Follow Camera",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/trailing-follow-camera/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Trailing Follow Camera",
+   "Trailing follow camera",
+   "Trailing Follow Camera (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_analog_input",
+  "name": "Graded Analog Input",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/graded-analog-input/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Graded Analog Input",
+   "Graded analog input",
+   "Graded Analog Input (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_dual_analog",
+  "name": "Dual-Analog Move + Look",
+  "type": "F",
+  "year": 2000,
+  "page": "/feature/dual-analog-move-look/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Dual-Analog Move + Look",
+   "Dual-analog move + look",
+   "Dual-Analog Move + Look (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_lock_on",
+  "name": "Contextual Lock-On Targeting",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/contextual-lock-on-targeting/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Contextual Lock-On Targeting",
+   "Contextual lock-on targeting",
+   "Contextual Lock-On Targeting (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_over_shoulder",
+  "name": "Over-the-Shoulder Aim",
+  "type": "F",
+  "year": 2003,
+  "page": "/feature/over-the-shoulder-aim/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Over-the-Shoulder Aim",
+   "Over-the-shoulder aim",
+   "Over-the-Shoulder Aim (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_ads",
+  "name": "Iron-Sight Aim-Down-Sights",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/iron-sight-aim-down-sights/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Iron-Sight Aim-Down-Sights",
+   "Iron-sight aim-down-sights",
+   "Iron-Sight Aim-Down-Sights (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_cinematic_direction",
+  "name": "Directed In-Engine Camera Language",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/directed-in-engine-camera-language/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Directed In-Engine Camera Language",
+   "Directed in-engine camera language",
+   "Directed In-Engine Camera Language (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_haptic_feedback",
+  "name": "Haptic Force Feedback",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/haptic-force-feedback/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Haptic Force Feedback",
+   "Haptic force feedback",
+   "Haptic Force Feedback (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_motion_control",
+  "name": "Spatial Motion Input",
+  "type": "F",
+  "year": 2006,
+  "page": "/feature/spatial-motion-input/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Spatial Motion Input",
+   "Spatial motion input",
+   "Spatial Motion Input (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_touch_input",
+  "name": "Direct Touch Manipulation",
+  "type": "F",
+  "year": 2005,
+  "page": "/feature/direct-touch-manipulation/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Direct Touch Manipulation",
+   "Direct touch manipulation",
+   "Direct Touch Manipulation (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_vr_presence",
+  "name": "Room-Scale VR Presence",
+  "type": "F",
+  "year": 2020,
+  "page": "/feature/room-scale-vr-presence/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Room-Scale VR Presence",
+   "Room-scale vr presence",
+   "Room-Scale VR Presence (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_score",
+  "name": "Numeric Score",
+  "type": "F",
+  "year": 1972,
+  "page": "/feature/numeric-score/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Numeric Score",
+   "Numeric score",
+   "Numeric Score (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_lives_continues",
+  "name": "Lives and Continues",
+  "type": "F",
+  "year": 1978,
+  "page": "/feature/lives-and-continues/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Lives and Continues",
+   "Lives and continues",
+   "Lives and Continues (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_high_score_table",
+  "name": "Persistent High-Score Table",
+  "type": "F",
+  "year": 1979,
+  "page": "/feature/persistent-high-score-table/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Persistent High-Score Table",
+   "Persistent high-score table",
+   "Persistent High-Score Table (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_permadeath",
+  "name": "Permadeath Run Structure",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/permadeath-run-structure/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Permadeath Run Structure",
+   "Permadeath run structure",
+   "Permadeath Run Structure (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_xp_levels",
+  "name": "Experience Points and Levels",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/experience-points-and-levels/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Experience Points and Levels",
+   "Experience points and levels",
+   "Experience Points and Levels (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_checkpoint",
+  "name": "Checkpoint Respawn",
+  "type": "F",
+  "year": 1984,
+  "page": "/feature/checkpoint-respawn/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Checkpoint Respawn",
+   "Checkpoint respawn",
+   "Checkpoint Respawn (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_password_save",
+  "name": "Password Continuation",
+  "type": "F",
+  "year": 1986,
+  "page": "/feature/password-continuation/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Password Continuation",
+   "Password continuation",
+   "Password Continuation (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_battery_save",
+  "name": "Battery-Backed Save File",
+  "type": "F",
+  "year": 1986,
+  "page": "/feature/battery-backed-save-file/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Battery-Backed Save File",
+   "Battery-backed save file",
+   "Battery-Backed Save File (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_skill_tree",
+  "name": "Branching Skill Tree",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/branching-skill-tree/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Branching Skill Tree",
+   "Branching skill tree",
+   "Branching Skill Tree (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_loot_rarity",
+  "name": "Colour-Coded Loot Rarity",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/colour-coded-loot-rarity/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Colour-Coded Loot Rarity",
+   "Colour-coded loot rarity",
+   "Colour-Coded Loot Rarity (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_gear_score",
+  "name": "Numeric Gear Power Treadmill",
+  "type": "F",
+  "year": 2004,
+  "page": "/feature/numeric-gear-power-treadmill/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Numeric Gear Power Treadmill",
+   "Numeric gear power treadmill",
+   "Numeric Gear Power Treadmill (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_perk_loadout",
+  "name": "Perk-Based Loadout Customization",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/perk-based-loadout-customization/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Perk-Based Loadout Customization",
+   "Perk-based loadout customization",
+   "Perk-Based Loadout Customization (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_prestige",
+  "name": "Prestige Reset-for-Status",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/prestige-reset-for-status/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Prestige Reset-for-Status",
+   "Prestige reset-for-status",
+   "Prestige Reset-for-Status (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_meta_progression",
+  "name": "Run-Persistent Meta-Progression",
+  "type": "F",
+  "year": 2013,
+  "page": "/feature/run-persistent-meta-progression/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Run-Persistent Meta-Progression",
+   "Run-persistent meta-progression",
+   "Run-Persistent Meta-Progression (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_soulslike_loop",
+  "name": "Bonfire Checkpoint & Currency Risk",
+  "type": "F",
+  "year": 2011,
+  "page": "/feature/bonfire-checkpoint-and-currency-risk/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Bonfire Checkpoint & Currency Risk",
+   "Bonfire checkpoint & currency risk",
+   "Bonfire Checkpoint & Currency Risk (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_attract_premise",
+  "name": "Attract-Mode Premise",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/attract-mode-premise/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Attract-Mode Premise",
+   "Attract-mode premise",
+   "Attract-Mode Premise (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_cutscene",
+  "name": "In-Engine Cutscene",
+  "type": "F",
+  "year": 1984,
+  "page": "/feature/in-engine-cutscene/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "In-Engine Cutscene",
+   "In-engine cutscene",
+   "In-Engine Cutscene (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_branching_dialogue",
+  "name": "Branching Dialogue Trees",
+  "type": "F",
+  "year": 1985,
+  "page": "/feature/branching-dialogue-trees/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Branching Dialogue Trees",
+   "Branching dialogue trees",
+   "Branching Dialogue Trees (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_morality_axis",
+  "name": "Explicit Morality Axis",
+  "type": "F",
+  "year": 1985,
+  "page": "/feature/explicit-morality-axis/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Explicit Morality Axis",
+   "Explicit morality axis",
+   "Explicit Morality Axis (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_env_storytelling",
+  "name": "Environmental Storytelling",
+  "type": "F",
+  "year": 1994,
+  "page": "/feature/environmental-storytelling/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Environmental Storytelling",
+   "Environmental storytelling",
+   "Environmental Storytelling (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_audio_log",
+  "name": "Found Audio Log",
+  "type": "F",
+  "year": 1994,
+  "page": "/feature/found-audio-log/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Found Audio Log",
+   "Found audio log",
+   "Found Audio Log (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_voice_acting",
+  "name": "Full Voice Performance",
+  "type": "F",
+  "year": 1994,
+  "page": "/feature/full-voice-performance/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Full Voice Performance",
+   "Full voice performance",
+   "Full Voice Performance (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_companion_approval",
+  "name": "Companion Approval",
+  "type": "F",
+  "year": 2000,
+  "page": "/feature/companion-approval/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Companion Approval",
+   "Companion approval",
+   "Companion Approval (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_faction_rep",
+  "name": "Faction Reputation",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/faction-reputation/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Faction Reputation",
+   "Faction reputation",
+   "Faction Reputation (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_karma_consequence",
+  "name": "Consequential Branching Endgame",
+  "type": "F",
+  "year": 2003,
+  "page": "/feature/consequential-branching-endgame/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Consequential Branching Endgame",
+   "Consequential branching endgame",
+   "Consequential Branching Endgame (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_dialogue_wheel",
+  "name": "Cinematic Dialogue Wheel",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/cinematic-dialogue-wheel/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Cinematic Dialogue Wheel",
+   "Cinematic dialogue wheel",
+   "Cinematic Dialogue Wheel (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_agency_twist",
+  "name": "Player-Agency Narrative Twist",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/player-agency-narrative-twist/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Player-Agency Narrative Twist",
+   "Player-agency narrative twist",
+   "Player-Agency Narrative Twist (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_combo_string",
+  "name": "Chained Combo Strings",
+  "type": "F",
+  "year": 1991,
+  "page": "/feature/chained-combo-strings/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Chained Combo Strings",
+   "Chained combo strings",
+   "Chained Combo Strings (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_cancel_meter",
+  "name": "Cancels and Super Meter",
+  "type": "F",
+  "year": 1993,
+  "page": "/feature/cancels-and-super-meter/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Cancels and Super Meter",
+   "Cancels and super meter",
+   "Cancels and Super Meter (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_parry_riposte",
+  "name": "Parry and Riposte Window",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/parry-and-riposte-window/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Parry and Riposte Window",
+   "Parry and riposte window",
+   "Parry and Riposte Window (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_directional_block",
+  "name": "Directional Attack and Block",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/directional-attack-and-block/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Directional Attack and Block",
+   "Directional attack and block",
+   "Directional Attack and Block (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_weapon_durability",
+  "name": "Weapon Durability Decay",
+  "type": "F",
+  "year": 1990,
+  "page": "/feature/weapon-durability-decay/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Weapon Durability Decay",
+   "Weapon durability decay",
+   "Weapon Durability Decay (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_ability_cooldown",
+  "name": "Ability Cooldown Economy",
+  "type": "F",
+  "year": 1999,
+  "page": "/feature/ability-cooldown-economy/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Ability Cooldown Economy",
+   "Ability cooldown economy",
+   "Ability Cooldown Economy (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_bullet_time",
+  "name": "Player-Controlled Bullet Time",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/player-controlled-bullet-time/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Player-Controlled Bullet Time",
+   "Player-controlled bullet time",
+   "Player-Controlled Bullet Time (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_regen_health",
+  "name": "Regenerating Health",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/regenerating-health/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Regenerating Health",
+   "Regenerating health",
+   "Regenerating Health (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_two_weapon_limit",
+  "name": "Constrained Weapon Loadout",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/constrained-weapon-loadout/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Constrained Weapon Loadout",
+   "Constrained weapon loadout",
+   "Constrained Weapon Loadout (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_cover_system",
+  "name": "Snap-to-Cover Combat",
+  "type": "F",
+  "year": 2003,
+  "page": "/feature/snap-to-cover-combat/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Snap-to-Cover Combat",
+   "Snap-to-cover combat",
+   "Snap-to-Cover Combat (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_recoil_pattern",
+  "name": "Learnable Recoil Patterns",
+  "type": "F",
+  "year": 1999,
+  "page": "/feature/learnable-recoil-patterns/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Learnable Recoil Patterns",
+   "Learnable recoil patterns",
+   "Learnable Recoil Patterns (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_stamina",
+  "name": "Stamina Action Economy",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/stamina-action-economy/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Stamina Action Economy",
+   "Stamina action economy",
+   "Stamina Action Economy (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_poise_stagger",
+  "name": "Poise and Stagger Break",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/poise-and-stagger-break/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Poise and Stagger Break",
+   "Poise and stagger break",
+   "Poise and Stagger Break (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_execution_finisher",
+  "name": "Contextual Execution",
+  "type": "F",
+  "year": 2006,
+  "page": "/feature/contextual-execution/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Contextual Execution",
+   "Contextual execution",
+   "Contextual Execution (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_gear_swap_combat",
+  "name": "Deflect-Focused Posture Combat",
+  "type": "F",
+  "year": 2019,
+  "page": "/feature/deflect-focused-posture-combat/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Deflect-Focused Posture Combat",
+   "Deflect-focused posture combat",
+   "Deflect-Focused Posture Combat (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_rigid_body_puzzle",
+  "name": "Rigid-Body Puzzle Physics",
+  "type": "F",
+  "year": 2004,
+  "page": "/feature/rigid-body-puzzle-physics/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Rigid-Body Puzzle Physics",
+   "Rigid-body puzzle physics",
+   "Rigid-Body Puzzle Physics (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_physics_tool",
+  "name": "Physics Manipulation Tool",
+  "type": "F",
+  "year": 2004,
+  "page": "/feature/physics-manipulation-tool/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Physics Manipulation Tool",
+   "Physics manipulation tool",
+   "Physics Manipulation Tool (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_destructible",
+  "name": "Destructible Geometry",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/destructible-geometry/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Destructible Geometry",
+   "Destructible geometry",
+   "Destructible Geometry (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_voxel_terrain",
+  "name": "Editable Voxel Terrain",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/editable-voxel-terrain/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Editable Voxel Terrain",
+   "Editable voxel terrain",
+   "Editable Voxel Terrain (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_soft_body",
+  "name": "Soft-Body Deformation",
+  "type": "F",
+  "year": 2013,
+  "page": "/feature/soft-body-deformation/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Soft-Body Deformation",
+   "Soft-body deformation",
+   "Soft-Body Deformation (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_vehicle_sim",
+  "name": "High-Fidelity Vehicle Physics",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/high-fidelity-vehicle-physics/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "High-Fidelity Vehicle Physics",
+   "High-fidelity vehicle physics",
+   "High-Fidelity Vehicle Physics (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_flight_sim",
+  "name": "Flight Simulation",
+  "type": "F",
+  "year": 1982,
+  "page": "/feature/flight-simulation/",
+  "reason": "not about video games",
+  "tried": [
+   "Flight Simulation",
+   "Flight simulation",
+   "Flight Simulation (video games)"
+  ],
+  "liveButRejected": [
+   "Flight simulator"
+  ]
+ },
+ {
+  "id": "f_propagation_sim",
+  "name": "Propagating Fire and Fluids",
+  "type": "F",
+  "year": 2008,
+  "page": "/feature/propagating-fire-and-fluids/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Propagating Fire and Fluids",
+   "Propagating fire and fluids",
+   "Propagating Fire and Fluids (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_chemistry_engine",
+  "name": "Systemic Elemental Chemistry",
+  "type": "F",
+  "year": 2017,
+  "page": "/feature/systemic-elemental-chemistry/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Systemic Elemental Chemistry",
+   "Systemic elemental chemistry",
+   "Systemic Elemental Chemistry (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_day_night",
+  "name": "Day/Night Cycle",
+  "type": "F",
+  "year": 1983,
+  "page": "/feature/day-night-cycle/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Day/Night Cycle",
+   "Day/night cycle",
+   "Day/Night Cycle (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_npc_schedules",
+  "name": "NPC Daily Schedules",
+  "type": "F",
+  "year": 1992,
+  "page": "/feature/npc-daily-schedules/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "NPC Daily Schedules",
+   "Npc daily schedules",
+   "NPC Daily Schedules (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_weather_sys",
+  "name": "Dynamic Weather",
+  "type": "F",
+  "year": 1999,
+  "page": "/feature/dynamic-weather/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Dynamic Weather",
+   "Dynamic weather",
+   "Dynamic Weather (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_survival_needs",
+  "name": "Survival Needs Clock",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/survival-needs-clock/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Survival Needs Clock",
+   "Survival needs clock",
+   "Survival Needs Clock (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_crafting",
+  "name": "Crafting From Gathered Materials",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/crafting-from-gathered-materials/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Crafting From Gathered Materials",
+   "Crafting from gathered materials",
+   "Crafting From Gathered Materials (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_base_building",
+  "name": "Free-Form Base Building",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/free-form-base-building/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Free-Form Base Building",
+   "Free-form base building",
+   "Free-Form Base Building (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_radiant_systems",
+  "name": "Radiant / Generated Activity",
+  "type": "F",
+  "year": 2006,
+  "page": "/feature/radiant-generated-activity/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Radiant / Generated Activity",
+   "Radiant / generated activity",
+   "Radiant / Generated Activity (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_ai_director",
+  "name": "Dynamic AI Director",
+  "type": "F",
+  "year": 2008,
+  "page": "/feature/dynamic-ai-director/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Dynamic AI Director",
+   "Dynamic ai director",
+   "Dynamic AI Director (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_ecology_sim",
+  "name": "Simulated Ecology",
+  "type": "F",
+  "year": 2018,
+  "page": "/feature/simulated-ecology/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Simulated Ecology",
+   "Simulated ecology",
+   "Simulated Ecology (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_nemesis_system",
+  "name": "Procedural Nemesis Hierarchy",
+  "type": "F",
+  "year": 2014,
+  "page": "/feature/procedural-nemesis-hierarchy/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Procedural Nemesis Hierarchy",
+   "Procedural nemesis hierarchy",
+   "Procedural Nemesis Hierarchy (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_hotseat",
+  "name": "Same-Screen Two-Player",
+  "type": "F",
+  "year": 1972,
+  "page": "/feature/same-screen-two-player/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Same-Screen Two-Player",
+   "Same-screen two-player",
+   "Same-Screen Two-Player (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_split_screen",
+  "name": "Split-Screen Simultaneous",
+  "type": "F",
+  "year": 1984,
+  "page": "/feature/split-screen-simultaneous/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Split-Screen Simultaneous",
+   "Split-screen simultaneous",
+   "Split-Screen Simultaneous (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_lan_deathmatch",
+  "name": "Networked Deathmatch",
+  "type": "F",
+  "year": 1993,
+  "page": "/feature/networked-deathmatch/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Networked Deathmatch",
+   "Networked deathmatch",
+   "Networked Deathmatch (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_online_cs",
+  "name": "Internet Client-Server Play",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/internet-client-server-play/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Internet Client-Server Play",
+   "Internet client-server play",
+   "Internet Client-Server Play (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_mmo_persistent",
+  "name": "Persistent Shared World",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/persistent-shared-world/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Persistent Shared World",
+   "Persistent shared world",
+   "Persistent Shared World (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_guilds",
+  "name": "Player Guilds and Clans",
+  "type": "F",
+  "year": 1997,
+  "page": "/feature/player-guilds-and-clans/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Player Guilds and Clans",
+   "Player guilds and clans",
+   "Player Guilds and Clans (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_raid_content",
+  "name": "Coordinated Raid Encounters",
+  "type": "F",
+  "year": 1999,
+  "page": "/feature/coordinated-raid-encounters/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Coordinated Raid Encounters",
+   "Coordinated raid encounters",
+   "Coordinated Raid Encounters (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_coop_campaign",
+  "name": "Drop-In Co-op Campaign",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/drop-in-co-op-campaign/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Drop-In Co-op Campaign",
+   "Drop-in co-op campaign",
+   "Drop-In Co-op Campaign (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_matchmaking",
+  "name": "Automated Skill Matchmaking",
+  "type": "F",
+  "year": 2004,
+  "page": "/feature/automated-skill-matchmaking/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Automated Skill Matchmaking",
+   "Automated skill matchmaking",
+   "Automated Skill Matchmaking (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_mp_progression",
+  "name": "Persistent Multiplayer Progression",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/persistent-multiplayer-progression/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Persistent Multiplayer Progression",
+   "Persistent multiplayer progression",
+   "Persistent Multiplayer Progression (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_async_invasion",
+  "name": "Asynchronous Invasion & Messages",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/asynchronous-invasion-and-messages/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Asynchronous Invasion & Messages",
+   "Asynchronous invasion & messages",
+   "Asynchronous Invasion & Messages (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_moba_lanes",
+  "name": "Lane-Push Objective Structure",
+  "type": "F",
+  "year": 2003,
+  "page": "/feature/lane-push-objective-structure/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Lane-Push Objective Structure",
+   "Lane-push objective structure",
+   "Lane-Push Objective Structure (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_battle_royale",
+  "name": "Shrinking-Circle Battle Royale",
+  "type": "F",
+  "year": 2017,
+  "page": "/feature/shrinking-circle-battle-royale/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Shrinking-Circle Battle Royale",
+   "Shrinking-circle battle royale",
+   "Shrinking-Circle Battle Royale (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_ping_system",
+  "name": "Non-Verbal Ping Communication",
+  "type": "F",
+  "year": 2019,
+  "page": "/feature/non-verbal-ping-communication/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Non-Verbal Ping Communication",
+   "Non-verbal ping communication",
+   "Non-Verbal Ping Communication (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_asymmetric_mp",
+  "name": "Asymmetric Multiplayer Roles",
+  "type": "F",
+  "year": 2016,
+  "page": "/feature/asymmetric-multiplayer-roles/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Asymmetric Multiplayer Roles",
+   "Asymmetric multiplayer roles",
+   "Asymmetric Multiplayer Roles (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_extraction_loop",
+  "name": "Extraction Risk/Reward Loop",
+  "type": "F",
+  "year": 2017,
+  "page": "/feature/extraction-risk-reward-loop/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Extraction Risk/Reward Loop",
+   "Extraction risk/reward loop",
+   "Extraction Risk/Reward Loop (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_automap",
+  "name": "In-Game Automap",
+  "type": "F",
+  "year": 1993,
+  "page": "/feature/in-game-automap/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "In-Game Automap",
+   "In-game automap",
+   "In-Game Automap (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_minimap_radar",
+  "name": "Persistent Minimap / Radar",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/persistent-minimap-radar/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Persistent Minimap / Radar",
+   "Persistent minimap / radar",
+   "Persistent Minimap / Radar (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_inventory_grid",
+  "name": "Spatial Inventory Grid",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/spatial-inventory-grid/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Spatial Inventory Grid",
+   "Spatial inventory grid",
+   "Spatial Inventory Grid (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_quest_log",
+  "name": "Quest Journal",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/quest-journal/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Quest Journal",
+   "Quest journal",
+   "Quest Journal (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_objective_marker",
+  "name": "Waypoint Objective Marker",
+  "type": "F",
+  "year": 2001,
+  "page": "/feature/waypoint-objective-marker/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Waypoint Objective Marker",
+   "Waypoint objective marker",
+   "Waypoint Objective Marker (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_difficulty_select",
+  "name": "Selectable Difficulty",
+  "type": "F",
+  "year": 1993,
+  "page": "/feature/selectable-difficulty/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Selectable Difficulty",
+   "Selectable difficulty",
+   "Selectable Difficulty (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_achievements",
+  "name": "Platform Achievements",
+  "type": "F",
+  "year": 2005,
+  "page": "/feature/platform-achievements/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Platform Achievements",
+   "Platform achievements",
+   "Platform Achievements (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_diegetic_ui",
+  "name": "Diegetic HUD-less Interface",
+  "type": "F",
+  "year": 2008,
+  "page": "/feature/diegetic-hud-less-interface/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Diegetic HUD-less Interface",
+   "Diegetic hud-less interface",
+   "Diegetic HUD-less Interface (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_accessibility_suite",
+  "name": "Comprehensive Accessibility Suite",
+  "type": "F",
+  "year": 2020,
+  "page": "/feature/comprehensive-accessibility-suite/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Comprehensive Accessibility Suite",
+   "Comprehensive accessibility suite",
+   "Comprehensive Accessibility Suite (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_procgen_dungeon",
+  "name": "Procedurally Generated Levels",
+  "type": "F",
+  "year": 1980,
+  "page": "/feature/procedurally-generated-levels/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Procedurally Generated Levels",
+   "Procedurally generated levels",
+   "Procedurally Generated Levels (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_seeded_universe",
+  "name": "Seeded Procedural Universe",
+  "type": "F",
+  "year": 1984,
+  "page": "/feature/seeded-procedural-universe/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Seeded Procedural Universe",
+   "Seeded procedural universe",
+   "Seeded Procedural Universe (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_procgen_loot",
+  "name": "Procedural Loot Tables",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/procedural-loot-tables/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Procedural Loot Tables",
+   "Procedural loot tables",
+   "Procedural Loot Tables (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_procgen_narrative",
+  "name": "Emergent Generated History",
+  "type": "F",
+  "year": 2006,
+  "page": "/feature/emergent-generated-history/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Emergent Generated History",
+   "Emergent generated history",
+   "Emergent Generated History (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_infinite_world",
+  "name": "Infinite Chunked World",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/infinite-chunked-world/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Infinite Chunked World",
+   "Infinite chunked world",
+   "Infinite Chunked World (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_coin_op",
+  "name": "Coin-Op Difficulty Economy",
+  "type": "F",
+  "year": 1978,
+  "page": "/feature/coin-op-difficulty-economy/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Coin-Op Difficulty Economy",
+   "Coin-op difficulty economy",
+   "Coin-Op Difficulty Economy (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_expansion_pack",
+  "name": "Retail Expansion Pack",
+  "type": "F",
+  "year": 1990,
+  "page": "/feature/retail-expansion-pack/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Retail Expansion Pack",
+   "Retail expansion pack",
+   "Retail Expansion Pack (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_season_pass",
+  "name": "Season Pass Bundle",
+  "type": "F",
+  "year": 2011,
+  "page": "/feature/season-pass-bundle/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Season Pass Bundle",
+   "Season pass bundle",
+   "Season Pass Bundle (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_f2p",
+  "name": "Free-to-Play Service Model",
+  "type": "F",
+  "year": 2003,
+  "page": "/feature/free-to-play-service-model/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Free-to-Play Service Model",
+   "Free-to-play service model",
+   "Free-to-Play Service Model (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_cosmetic_economy",
+  "name": "Cosmetic-Only Monetization",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/cosmetic-only-monetization/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Cosmetic-Only Monetization",
+   "Cosmetic-only monetization",
+   "Cosmetic-Only Monetization (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_lootbox",
+  "name": "Randomized Loot Box",
+  "type": "F",
+  "year": 2010,
+  "page": "/feature/randomized-loot-box/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Randomized Loot Box",
+   "Randomized loot box",
+   "Randomized Loot Box (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_battle_pass",
+  "name": "Seasonal Battle Pass",
+  "type": "F",
+  "year": 2013,
+  "page": "/feature/seasonal-battle-pass/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Seasonal Battle Pass",
+   "Seasonal battle pass",
+   "Seasonal Battle Pass (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_live_service",
+  "name": "Live-Service Seasonal Content",
+  "type": "F",
+  "year": 2014,
+  "page": "/feature/live-service-seasonal-content/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Live-Service Seasonal Content",
+   "Live-service seasonal content",
+   "Live-Service Seasonal Content (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_early_access",
+  "name": "Paid Early Access Development",
+  "type": "F",
+  "year": 2009,
+  "page": "/feature/paid-early-access-development/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Paid Early Access Development",
+   "Paid early access development",
+   "Paid Early Access Development (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_mobile_f2p",
+  "name": "Mobile Free-to-Play",
+  "type": "F",
+  "year": 2012,
+  "page": "/feature/mobile-free-to-play/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Mobile Free-to-Play",
+   "Mobile free-to-play",
+   "Mobile Free-to-Play (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_los_detection",
+  "name": "Line-of-Sight Detection",
+  "type": "F",
+  "year": 1981,
+  "page": "/feature/line-of-sight-detection/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Line-of-Sight Detection",
+   "Line-of-sight detection",
+   "Line-of-Sight Detection (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_alert_states",
+  "name": "Graduated Alert States",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/graduated-alert-states/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Graduated Alert States",
+   "Graduated alert states",
+   "Graduated Alert States (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_detection_meter",
+  "name": "Explicit Detection Feedback",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/explicit-detection-feedback/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Explicit Detection Feedback",
+   "Explicit detection feedback",
+   "Explicit Detection Feedback (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_light_shadow",
+  "name": "Light-and-Shadow Stealth",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/light-and-shadow-stealth/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Light-and-Shadow Stealth",
+   "Light-and-shadow stealth",
+   "Light-and-Shadow Stealth (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_immersive_sim",
+  "name": "Systemic Solution Space",
+  "type": "F",
+  "year": 1992,
+  "page": "/feature/systemic-solution-space/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Systemic Solution Space",
+   "Systemic solution space",
+   "Systemic Solution Space (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_social_stealth",
+  "name": "Social / Crowd Stealth",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/social-crowd-stealth/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Social / Crowd Stealth",
+   "Social / crowd stealth",
+   "Social / Crowd Stealth (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_3d_audio_stealth",
+  "name": "Diegetic 3D Audio Information",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/diegetic-3d-audio-information/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Diegetic 3D Audio Information",
+   "Diegetic 3d audio information",
+   "Diegetic 3D Audio Information (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_level_editor",
+  "name": "Bundled Level Editor",
+  "type": "F",
+  "year": 1983,
+  "page": "/feature/bundled-level-editor/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Bundled Level Editor",
+   "Bundled level editor",
+   "Bundled Level Editor (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_mod_sdk",
+  "name": "Open Data Formats and Mod SDK",
+  "type": "F",
+  "year": 1993,
+  "page": "/feature/open-data-formats-and-mod-sdk/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Open Data Formats and Mod SDK",
+   "Open data formats and mod sdk",
+   "Open Data Formats and Mod SDK (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_ugc_marketplace",
+  "name": "User-Content Marketplace",
+  "type": "F",
+  "year": 2006,
+  "page": "/feature/user-content-marketplace/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "User-Content Marketplace",
+   "User-content marketplace",
+   "User-Content Marketplace (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_ingame_creation",
+  "name": "In-Game Creation Suite",
+  "type": "F",
+  "year": 2008,
+  "page": "/feature/in-game-creation-suite/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "In-Game Creation Suite",
+   "In-game creation suite",
+   "In-Game Creation Suite (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_replay_share",
+  "name": "Replay Capture and Sharing",
+  "type": "F",
+  "year": 2007,
+  "page": "/feature/replay-capture-and-sharing/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Replay Capture and Sharing",
+   "Replay capture and sharing",
+   "Replay Capture and Sharing (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_rts_base",
+  "name": "Real-Time Base and Unit Production",
+  "type": "F",
+  "year": 1992,
+  "page": "/feature/real-time-base-and-unit-production/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Real-Time Base and Unit Production",
+   "Real-time base and unit production",
+   "Real-Time Base and Unit Production (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_turn_grid_tactics",
+  "name": "Turn-Based Grid Tactics",
+  "type": "F",
+  "year": 1990,
+  "page": "/feature/turn-based-grid-tactics/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Turn-Based Grid Tactics",
+   "Turn-based grid tactics",
+   "Turn-Based Grid Tactics (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_4x_empire",
+  "name": "Turn-Based 4X Empire",
+  "type": "F",
+  "year": 1991,
+  "page": "/feature/turn-based-4x-empire/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Turn-Based 4X Empire",
+   "Turn-based 4x empire",
+   "Turn-Based 4X Empire (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_tower_defense",
+  "name": "Tower Defense Lane Denial",
+  "type": "F",
+  "year": 2003,
+  "page": "/feature/tower-defense-lane-denial/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Tower Defense Lane Denial",
+   "Tower defense lane denial",
+   "Tower Defense Lane Denial (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_deck_progression",
+  "name": "Deck-Building Run Progression",
+  "type": "F",
+  "year": 2017,
+  "page": "/feature/deck-building-run-progression/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Deck-Building Run Progression",
+   "Deck-building run progression",
+   "Deck-Building Run Progression (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_dynamic_music",
+  "name": "Adaptive Dynamic Music",
+  "type": "F",
+  "year": 1991,
+  "page": "/feature/adaptive-dynamic-music/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Adaptive Dynamic Music",
+   "Adaptive dynamic music",
+   "Adaptive Dynamic Music (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_beat_match",
+  "name": "Beat-Matched Input",
+  "type": "F",
+  "year": 1996,
+  "page": "/feature/beat-matched-input/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Beat-Matched Input",
+   "Beat-matched input",
+   "Beat-Matched Input (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_note_highway",
+  "name": "Scrolling Note Highway",
+  "type": "F",
+  "year": 1998,
+  "page": "/feature/scrolling-note-highway/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Scrolling Note Highway",
+   "Scrolling note highway",
+   "Scrolling Note Highway (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_peripheral_instrument",
+  "name": "Instrument Peripheral",
+  "type": "F",
+  "year": 2005,
+  "page": "/feature/instrument-peripheral/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Instrument Peripheral",
+   "Instrument peripheral",
+   "Instrument Peripheral (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "f_rhythm_combat",
+  "name": "Rhythm-Locked Action",
+  "type": "F",
+  "year": 2015,
+  "page": "/feature/rhythm-locked-action/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Rhythm-Locked Action",
+   "Rhythm-locked action",
+   "Rhythm-Locked Action (video games)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "t_might_magic",
+  "name": "Might and Magic: Book One",
+  "type": "T",
+  "year": 1986,
+  "page": "/game/might-and-magic-book-one/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Might and Magic: Book One (1986 video game)",
+   "Might and Magic: Book One",
+   "Might and Magic: Book One (video game)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_disney",
+  "name": "Disney",
+  "type": "C",
+  "year": 1923,
+  "page": "/studio/disney/",
+  "reason": "not about video games",
+  "tried": [
+   "Disney",
+   "Disney (company)",
+   "Disney (video game company)"
+  ],
+  "liveButRejected": [
+   "The Walt Disney Company"
+  ]
+ },
+ {
+  "id": "c_midway",
+  "name": "Midway",
+  "type": "C",
+  "year": 1958,
+  "page": "/studio/midway/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Midway",
+   "Midway (company)",
+   "Midway (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_softdisk",
+  "name": "Softdisk",
+  "type": "C",
+  "year": 1981,
+  "page": "/studio/softdisk/",
+  "reason": "not about video games",
+  "tried": [
+   "Softdisk",
+   "Softdisk (company)",
+   "Softdisk (video game company)"
+  ],
+  "liveButRejected": [
+   "Softdisk"
+  ]
+ },
+ {
+  "id": "c_cs_authors",
+  "name": "Minh Le and Jess Cliffe",
+  "type": "C",
+  "year": null,
+  "page": "/studio/minh-le-and-jess-cliffe/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Minh Le and Jess Cliffe",
+   "Minh Le and Jess Cliffe (company)",
+   "Minh Le and Jess Cliffe (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_dota_authors",
+  "name": "Eul, Steve Feak, IceFrog",
+  "type": "C",
+  "year": null,
+  "page": "/studio/eul-steve-feak-icefrog/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Eul, Steve Feak, IceFrog",
+   "Eul, Steve Feak, IceFrog (company)",
+   "Eul, Steve Feak, IceFrog (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_dean_hall",
+  "name": "Dean Hall",
+  "type": "C",
+  "year": null,
+  "page": "/studio/dean-hall/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Dean Hall",
+   "Dean Hall (company)",
+   "Dean Hall (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_sculptured",
+  "name": "Sculptured Software",
+  "type": "C",
+  "year": 1984,
+  "page": "/studio/sculptured-software/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Sculptured Software",
+   "Sculptured Software (company)",
+   "Sculptured Software (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_flagship",
+  "name": "Flagship Studios",
+  "type": "C",
+  "year": 2003,
+  "page": "/studio/flagship-studios/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Flagship Studios",
+   "Flagship Studios (company)",
+   "Flagship Studios (video game company)"
+  ],
+  "liveButRejected": [
+   "Hellgate: London"
+  ]
+ },
+ {
+  "id": "c_2d_boy",
+  "name": "2D Boy",
+  "type": "C",
+  "year": 2006,
+  "page": "/studio/2d-boy/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "2D Boy",
+   "2D Boy (company)",
+   "2D Boy (video game company)"
+  ],
+  "liveButRejected": [
+   "World of Goo"
+  ]
+ },
+ {
+  "id": "c_ubisoft_paris",
+  "name": "Ubisoft Paris",
+  "type": "C",
+  "year": 1992,
+  "page": "/studio/ubisoft-paris/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Ubisoft Paris",
+   "Ubisoft Paris (company)",
+   "Ubisoft Paris (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_eidos_montreal",
+  "name": "Eidos-Montreal",
+  "type": "C",
+  "year": 2007,
+  "page": "/studio/eidos-montreal/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Eidos-Montreal",
+   "Eidos-Montreal (company)",
+   "Eidos-Montreal (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_cyan",
+  "name": "Cyan",
+  "type": "C",
+  "year": 1987,
+  "page": "/studio/cyan/",
+  "reason": "not about video games",
+  "tried": [
+   "Cyan",
+   "Cyan (company)",
+   "Cyan (video game company)"
+  ],
+  "liveButRejected": [
+   "Cyan"
+  ]
+ },
+ {
+  "id": "c_mtv_games",
+  "name": "MTV Games",
+  "type": "C",
+  "year": 2005,
+  "page": "/studio/mtv-games/",
+  "reason": "not about video games",
+  "tried": [
+   "MTV Games",
+   "MTV Games (company)",
+   "MTV Games (video game company)"
+  ],
+  "liveButRejected": [
+   "MTV"
+  ]
+ },
+ {
+  "id": "c_advanced_micro",
+  "name": "Advanced Microcomputer Systems",
+  "type": "C",
+  "year": null,
+  "page": "/studio/advanced-microcomputer-systems/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Advanced Microcomputer Systems",
+   "Advanced Microcomputer Systems (company)",
+   "Advanced Microcomputer Systems (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_quantum_link",
+  "name": "Quantum Link",
+  "type": "C",
+  "year": 1985,
+  "page": "/studio/quantum-link/",
+  "reason": "not about video games",
+  "tried": [
+   "Quantum Link",
+   "Quantum Link (company)",
+   "Quantum Link (video game company)"
+  ],
+  "liveButRejected": [
+   "Quantum Link"
+  ]
+ },
+ {
+  "id": "c_natsume",
+  "name": "Natsume",
+  "type": "C",
+  "year": 1987,
+  "page": "/studio/natsume/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Natsume",
+   "Natsume (company)",
+   "Natsume (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_amccus",
+  "name": "Amccus",
+  "type": "C",
+  "year": null,
+  "page": "/studio/amccus/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Amccus",
+   "Amccus (company)",
+   "Amccus (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_youthcat",
+  "name": "Youthcat Studio",
+  "type": "C",
+  "year": null,
+  "page": "/studio/youthcat-studio/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Youthcat Studio",
+   "Youthcat Studio (company)",
+   "Youthcat Studio (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_gamera",
+  "name": "Gamera Game",
+  "type": "C",
+  "year": 2018,
+  "page": "/studio/gamera-game/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Gamera Game",
+   "Gamera Game (company)",
+   "Gamera Game (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_round8",
+  "name": "Round8 Studio",
+  "type": "C",
+  "year": 2017,
+  "page": "/studio/round8-studio/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Round8 Studio",
+   "Round8 Studio (company)",
+   "Round8 Studio (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_superhot",
+  "name": "Superhot Team",
+  "type": "C",
+  "year": 2013,
+  "page": "/studio/superhot-team/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Superhot Team",
+   "Superhot Team (company)",
+   "Superhot Team (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_iron_gate",
+  "name": "Iron Gate Studio",
+  "type": "C",
+  "year": 2019,
+  "page": "/studio/iron-gate-studio/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Iron Gate Studio",
+   "Iron Gate Studio (company)",
+   "Iron Gate Studio (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_geometric",
+  "name": "Geometric Interactive",
+  "type": "C",
+  "year": 2016,
+  "page": "/studio/geometric-interactive/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Geometric Interactive",
+   "Geometric Interactive (company)",
+   "Geometric Interactive (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_nolla",
+  "name": "Nolla Games",
+  "type": "C",
+  "year": 2016,
+  "page": "/studio/nolla-games/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Nolla Games",
+   "Nolla Games (company)",
+   "Nolla Games (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_hempuli",
+  "name": "Hempuli",
+  "type": "C",
+  "year": null,
+  "page": "/studio/hempuli/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Hempuli",
+   "Hempuli (company)",
+   "Hempuli (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_beamng",
+  "name": "BeamNG GmbH",
+  "type": "C",
+  "year": 2013,
+  "page": "/studio/beamng-gmbh/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "BeamNG GmbH",
+   "BeamNG GmbH (company)",
+   "BeamNG GmbH (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_rundisc",
+  "name": "Rundisc",
+  "type": "C",
+  "year": null,
+  "page": "/studio/rundisc/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Rundisc",
+   "Rundisc (company)",
+   "Rundisc (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_game_kitchen",
+  "name": "The Game Kitchen",
+  "type": "C",
+  "year": 2010,
+  "page": "/studio/the-game-kitchen/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "The Game Kitchen",
+   "The Game Kitchen (company)",
+   "The Game Kitchen (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_battlestate",
+  "name": "Battlestate Games",
+  "type": "C",
+  "year": 2012,
+  "page": "/studio/battlestate-games/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Battlestate Games",
+   "Battlestate Games (company)",
+   "Battlestate Games (video game company)"
+  ],
+  "liveButRejected": [
+   "Escape from Tarkov"
+  ]
+ },
+ {
+  "id": "c_meta_publishing",
+  "name": "META Publishing",
+  "type": "C",
+  "year": 2019,
+  "page": "/studio/meta-publishing/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "META Publishing",
+   "META Publishing (company)",
+   "META Publishing (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_zaum",
+  "name": "ZA/UM",
+  "type": "C",
+  "year": 2016,
+  "page": "/studio/za-um/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "ZA/UM",
+   "ZA/UM (company)",
+   "ZA/UM (video game company)"
+  ],
+  "liveButRejected": [
+   "Disco Elysium"
+  ]
+ },
+ {
+  "id": "c_wube",
+  "name": "Wube Software",
+  "type": "C",
+  "year": 2014,
+  "page": "/studio/wube-software/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Wube Software",
+   "Wube Software (company)",
+   "Wube Software (video game company)"
+  ],
+  "liveButRejected": [
+   "Factorio"
+  ]
+ },
+ {
+  "id": "c_beat_games",
+  "name": "Beat Games",
+  "type": "C",
+  "year": 2018,
+  "page": "/studio/beat-games/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Beat Games",
+   "Beat Games (company)",
+   "Beat Games (video game company)"
+  ],
+  "liveButRejected": [
+   "Beat Saber"
+  ]
+ },
+ {
+  "id": "c_ustwo",
+  "name": "ustwo games",
+  "type": "C",
+  "year": 2004,
+  "page": "/studio/ustwo-games/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "ustwo games",
+   "ustwo games (company)",
+   "ustwo games (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_playstack",
+  "name": "Playstack",
+  "type": "C",
+  "year": 2017,
+  "page": "/studio/playstack/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Playstack",
+   "Playstack (company)",
+   "Playstack (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_kinetic",
+  "name": "Kinetic Games",
+  "type": "C",
+  "year": null,
+  "page": "/studio/kinetic-games/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Kinetic Games",
+   "Kinetic Games (company)",
+   "Kinetic Games (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_poncle",
+  "name": "poncle",
+  "type": "C",
+  "year": null,
+  "page": "/studio/poncle/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "poncle",
+   "poncle (company)",
+   "poncle (video game company)"
+  ],
+  "liveButRejected": [
+   "Vampire Survivors"
+  ]
+ },
+ {
+  "id": "c_galactic_cafe",
+  "name": "Galactic Cafe",
+  "type": "C",
+  "year": null,
+  "page": "/studio/galactic-cafe/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Galactic Cafe",
+   "Galactic Cafe (company)",
+   "Galactic Cafe (video game company)"
+  ],
+  "liveButRejected": [
+   "The Stanley Parable"
+  ]
+ },
+ {
+  "id": "c_shedworks",
+  "name": "Shedworks",
+  "type": "C",
+  "year": 2015,
+  "page": "/studio/shedworks/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Shedworks",
+   "Shedworks (company)",
+   "Shedworks (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_egmont",
+  "name": "Egmont Interactive",
+  "type": "C",
+  "year": null,
+  "page": "/studio/egmont-interactive/",
+  "reason": "not about video games",
+  "tried": [
+   "Egmont Interactive",
+   "Egmont Interactive (company)",
+   "Egmont Interactive (video game company)"
+  ],
+  "liveButRejected": [
+   "Egmont Group"
+  ]
+ },
+ {
+  "id": "c_red_barrels",
+  "name": "Red Barrels",
+  "type": "C",
+  "year": 2011,
+  "page": "/studio/red-barrels/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Red Barrels",
+   "Red Barrels (company)",
+   "Red Barrels (video game company)"
+  ],
+  "liveButRejected": [
+   "Outlast"
+  ]
+ },
+ {
+  "id": "c_cellar_door",
+  "name": "Cellar Door Games",
+  "type": "C",
+  "year": 2010,
+  "page": "/studio/cellar-door-games/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Cellar Door Games",
+   "Cellar Door Games (company)",
+   "Cellar Door Games (video game company)"
+  ],
+  "liveButRejected": [
+   "Rogue Legacy"
+  ]
+ },
+ {
+  "id": "c_trapdoor",
+  "name": "Trapdoor",
+  "type": "C",
+  "year": 2010,
+  "page": "/studio/trapdoor/",
+  "reason": "not about video games",
+  "tried": [
+   "Trapdoor",
+   "Trapdoor (company)",
+   "Trapdoor (video game company)"
+  ],
+  "liveButRejected": [
+   "Trapdoor"
+  ]
+ },
+ {
+  "id": "c_ludeon",
+  "name": "Ludeon Studios",
+  "type": "C",
+  "year": 2013,
+  "page": "/studio/ludeon-studios/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Ludeon Studios",
+   "Ludeon Studios (company)",
+   "Ludeon Studios (video game company)"
+  ],
+  "liveButRejected": [
+   "RimWorld"
+  ]
+ },
+ {
+  "id": "c_localthunk",
+  "name": "LocalThunk",
+  "type": "C",
+  "year": null,
+  "page": "/studio/localthunk/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "LocalThunk",
+   "LocalThunk (company)",
+   "LocalThunk (video game company)"
+  ],
+  "liveButRejected": [
+   "Balatro"
+  ]
+ },
+ {
+  "id": "c_andrew_shouldice",
+  "name": "Andrew Shouldice",
+  "type": "C",
+  "year": null,
+  "page": "/studio/andrew-shouldice/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Andrew Shouldice",
+   "Andrew Shouldice (company)",
+   "Andrew Shouldice (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_team_cherry",
+  "name": "Team Cherry",
+  "type": "C",
+  "year": 2014,
+  "page": "/studio/team-cherry/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Team Cherry",
+   "Team Cherry (company)",
+   "Team Cherry (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_alexander_bruce",
+  "name": "Alexander Bruce",
+  "type": "C",
+  "year": null,
+  "page": "/studio/alexander-bruce/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Alexander Bruce",
+   "Alexander Bruce (company)",
+   "Alexander Bruce (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_team_meat",
+  "name": "Team Meat",
+  "type": "C",
+  "year": 2009,
+  "page": "/studio/team-meat/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Team Meat",
+   "Team Meat (company)",
+   "Team Meat (video game company)"
+  ],
+  "liveButRejected": [
+   "Super Meat Boy"
+  ]
+ },
+ {
+  "id": "c_mossmouth",
+  "name": "Mossmouth",
+  "type": "C",
+  "year": null,
+  "page": "/studio/mossmouth/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Mossmouth",
+   "Mossmouth (company)",
+   "Mossmouth (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_subset",
+  "name": "Subset Games",
+  "type": "C",
+  "year": 2011,
+  "page": "/studio/subset-games/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Subset Games",
+   "Subset Games (company)",
+   "Subset Games (video game company)"
+  ],
+  "liveButRejected": [
+   "FTL: Faster Than Light"
+  ]
+ },
+ {
+  "id": "c_innersloth",
+  "name": "InnerSloth",
+  "type": "C",
+  "year": 2015,
+  "page": "/studio/innersloth/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "InnerSloth",
+   "InnerSloth (company)",
+   "InnerSloth (video game company)"
+  ],
+  "liveButRejected": [
+   "Among Us"
+  ]
+ },
+ {
+  "id": "c_mobius_digital",
+  "name": "Mobius Digital",
+  "type": "C",
+  "year": 2013,
+  "page": "/studio/mobius-digital/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Mobius Digital",
+   "Mobius Digital (company)",
+   "Mobius Digital (video game company)"
+  ],
+  "liveButRejected": [
+   "Outer Wilds"
+  ]
+ },
+ {
+  "id": "c_hopoo",
+  "name": "Hopoo Games",
+  "type": "C",
+  "year": 2012,
+  "page": "/studio/hopoo-games/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Hopoo Games",
+   "Hopoo Games (company)",
+   "Hopoo Games (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_mega_crit",
+  "name": "Mega Crit Games",
+  "type": "C",
+  "year": 2015,
+  "page": "/studio/mega-crit-games/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Mega Crit Games",
+   "Mega Crit Games (company)",
+   "Mega Crit Games (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_sirvo",
+  "name": "Sirvo",
+  "type": "C",
+  "year": 2013,
+  "page": "/studio/sirvo/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Sirvo",
+   "Sirvo (company)",
+   "Sirvo (video game company)"
+  ],
+  "liveButRejected": [
+   "Threes"
+  ]
+ },
+ {
+  "id": "c_freehold",
+  "name": "Freehold Games",
+  "type": "C",
+  "year": 2010,
+  "page": "/studio/freehold-games/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Freehold Games",
+   "Freehold Games (company)",
+   "Freehold Games (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_shining_rock",
+  "name": "Shining Rock Software",
+  "type": "C",
+  "year": 2011,
+  "page": "/studio/shining-rock-software/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Shining Rock Software",
+   "Shining Rock Software (company)",
+   "Shining Rock Software (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_parsec",
+  "name": "Parsec Productions",
+  "type": "C",
+  "year": null,
+  "page": "/studio/parsec-productions/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Parsec Productions",
+   "Parsec Productions (company)",
+   "Parsec Productions (video game company)"
+  ],
+  "liveButRejected": [
+   "Slender: The Eight Pages"
+  ]
+ },
+ {
+  "id": "c_videocult",
+  "name": "Videocult",
+  "type": "C",
+  "year": null,
+  "page": "/studio/videocult/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Videocult",
+   "Videocult (company)",
+   "Videocult (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_dogubomb",
+  "name": "Dogubomb",
+  "type": "C",
+  "year": null,
+  "page": "/studio/dogubomb/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Dogubomb",
+   "Dogubomb (company)",
+   "Dogubomb (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_billy_basso",
+  "name": "Billy Basso",
+  "type": "C",
+  "year": null,
+  "page": "/studio/billy-basso/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Billy Basso",
+   "Billy Basso (company)",
+   "Billy Basso (video game company)"
+  ],
+  "liveButRejected": [
+   "Animal Well"
+  ]
+ },
+ {
+  "id": "c_squad",
+  "name": "Squad",
+  "type": "C",
+  "year": 2008,
+  "page": "/studio/squad/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Squad",
+   "Squad (company)",
+   "Squad (video game company)"
+  ],
+  "liveButRejected": [
+   "Squad",
+   "Kerbal Space Program"
+  ]
+ },
+ {
+  "id": "c_terry_cavanagh",
+  "name": "Terry Cavanagh",
+  "type": "C",
+  "year": null,
+  "page": "/studio/terry-cavanagh/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Terry Cavanagh",
+   "Terry Cavanagh (company)",
+   "Terry Cavanagh (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_slavic_magic",
+  "name": "Slavic Magic",
+  "type": "C",
+  "year": null,
+  "page": "/studio/slavic-magic/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Slavic Magic",
+   "Slavic Magic (company)",
+   "Slavic Magic (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_dennaton",
+  "name": "Dennaton Games",
+  "type": "C",
+  "year": 2012,
+  "page": "/studio/dennaton-games/",
+  "reason": "article is about a game, not this company",
+  "tried": [
+   "Dennaton Games",
+   "Dennaton Games (company)",
+   "Dennaton Games (video game company)"
+  ],
+  "liveButRejected": [
+   "Hotline Miami"
+  ]
+ },
+ {
+  "id": "c_eleventh_hour",
+  "name": "Eleventh Hour Games",
+  "type": "C",
+  "year": 2016,
+  "page": "/studio/eleventh-hour-games/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Eleventh Hour Games",
+   "Eleventh Hour Games (company)",
+   "Eleventh Hour Games (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_academy_ussr",
+  "name": "Academy of Sciences of the USSR",
+  "type": "C",
+  "year": 1925,
+  "page": "/studio/academy-of-sciences-of-the-ussr/",
+  "reason": "not about video games",
+  "tried": [
+   "Academy of Sciences of the USSR",
+   "Academy of Sciences of the USSR (company)",
+   "Academy of Sciences of the USSR (video game company)"
+  ],
+  "liveButRejected": [
+   "Academy of Sciences of the Soviet Union"
+  ]
+ },
+ {
+  "id": "c_braben_bell",
+  "name": "David Braben and Ian Bell",
+  "type": "C",
+  "year": null,
+  "page": "/studio/david-braben-and-ian-bell/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "David Braben and Ian Bell",
+   "David Braben and Ian Bell (company)",
+   "David Braben and Ian Bell (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_rogue_authors",
+  "name": "Michael Toy, Glenn Wichman, Ken Arnold",
+  "type": "C",
+  "year": null,
+  "page": "/studio/michael-toy-glenn-wichman-ken-arnold/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Michael Toy, Glenn Wichman, Ken Arnold",
+   "Michael Toy, Glenn Wichman, Ken Arnold (company)",
+   "Michael Toy, Glenn Wichman, Ken Arnold (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_steve_russell_mit",
+  "name": "Steve Russell / MIT",
+  "type": "C",
+  "year": null,
+  "page": "/studio/steve-russell-mit/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Steve Russell / MIT",
+   "Steve Russell / MIT (company)",
+   "Steve Russell / MIT (video game company)"
+  ],
+  "liveButRejected": []
+ },
+ {
+  "id": "c_team_fortress_software",
+  "name": "Team Fortress Software",
+  "type": "C",
+  "year": 1998,
+  "page": "/studio/team-fortress-software/",
+  "reason": "no article under any candidate title",
+  "tried": [
+   "Team Fortress Software",
+   "Team Fortress Software (company)",
+   "Team Fortress Software (video game company)"
+  ],
+  "liveButRejected": []
+ }
+]

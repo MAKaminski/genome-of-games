@@ -82,7 +82,7 @@ ${S.crumbs(crumb)}
       S.chipList(descAll.sort((a, b) => N[a].y - N[b].y))) : ''}
 
   <div class="sec"><h2>Look this mechanic up elsewhere</h2>
-    ${S.externals(f.n, 'F')}
+    ${S.externals(f.id)}
     ${p.alsoKnownAs && p.alsoKnownAs.length ? `<p style="font-size:13px;color:var(--dim2);margin-top:10px">Also called: ${p.alsoKnownAs.map(esc).join(', ')}</p>` : ''}
     <h3>Cite this entry</h3>
     <div class="note" style="font-family:var(--serif);font-size:14px">
@@ -177,7 +177,7 @@ ${S.crumbs(crumb)}
   ${to.length ? S.section('Directly influenced', S.chipList(to)) : ''}
   ${seriesTl ? S.section(`The ${g.fr} series in this dataset`, seriesTl, 'series') : ''}
 
-  <div class="sec"><h2>Look this game up elsewhere</h2>${S.externals(g.n, 'T')}</div>
+  <div class="sec"><h2>Look this game up elsewhere</h2>${S.externals(g.id)}</div>
 
   ${S.prevNext(series[si - 1], series[si + 1], ['Previous in series', 'Next in series'])}
 </div>
@@ -259,7 +259,7 @@ ${S.crumbs(crumb)}
 
   ${published.length ? S.section(`Games published (${published.length})`, S.chipList(published)) : ''}
 
-  <div class="sec"><h2>Look this company up elsewhere</h2>${S.externals(c.n, 'C')}</div>
+  <div class="sec"><h2>Look this company up elsewhere</h2>${S.externals(c.id)}</div>
 </div>
 <aside class="side">
   <h3>Explore</h3>
@@ -358,7 +358,7 @@ function gamesIndex() {
   const crumb = [['Home', '/'], ['Games']];
   const innovators = T.games.filter(g => (g.intro || []).length).sort((a, b) => b.intro.length - a.intro.length || a.y - b.y);
   const body = `${S.crumbs(crumb)}
-<h1>All 619 games</h1>
+<h1>All ${num(T.games.length)} games</h1>
 <p class="lede">Every title in the dataset, from Spacewar! to the present. Games marked with a first are credited with
 introducing at least one mechanic to the medium.</p>
 <div class="chips" style="margin:22px 0 30px">${T.DECADES.map(d =>
@@ -378,8 +378,8 @@ ${T.DECADES.map(d => `
   <div class="chips">${(T.gamesByDecade[d] || []).map(S.gameChip).join('')}</div>
 </div>`).join('')}`;
   write('/games/', S.page({
-    title: 'All 619 games in the mechanic ontology — The Genome of Games',
-    desc: 'A complete index of 619 video games from 1962 to 2026, showing which mechanics each one introduced and which it inherited.',
+    title: `All ${num(T.games.length)} games in the mechanic ontology — The Genome of Games`,
+    desc: `A complete index of ${num(T.games.length)} video games from 1962 to 2026, showing which mechanics each one introduced and which it inherited.`,
     canonical: '/games/', active: '/games/',
     jsonld: { '@context': 'https://schema.org', '@graph': [S.breadcrumbLd(crumb)] }
   }, body), 0.9, 'weekly');
@@ -532,12 +532,17 @@ ${S.section('Dataset at a glance', `<table><tbody>
 <tr><td>Root mechanics</td><td class="n">${T.features.filter(f => !(f.par || []).length).length}</td><td>no recorded parent in this dataset</td></tr>
 <tr><td>Deepest lineage</td><td class="n">${Math.max(...T.features.map(f => T.ancestorChain(f.id).length))}</td><td>steps from a root to a leaf</td></tr>
 </tbody></table>`)}
+${S.section('Outbound links', `<div class="note">Every entity page links out so a claim can be checked against a second
+source. The Wikipedia links are verified permalinks rather than searches: all ${num(Object.keys(T.LINKS).length)} entities
+were resolved against the Wikipedia API, ${num(Object.values(T.LINKS).filter(v => v.wp).length)} of them landed on a
+confirmed article, and the rest carry no Wikipedia link at all — an empty search result is worse than an absent link.
+Most of the gap is mechanics: this ontology names concepts that Wikipedia does not have separate articles for.
+MobyGames and Giant Bomb links remain site searches; verifying those needs API keys this project does not have.</div>`)}
 ${S.section('Corrections', `<div class="note">This is a research artefact, not an authority. If a date, credit or lineage
-here is wrong, it is worth fixing. Every page links out to Wikipedia, MobyGames and Giant Bomb so a claim can be checked
-against a second source in one click.</div>`)}`;
+here is wrong, it is worth fixing. The whole dataset is JSON in the repository.</div>`)}`;
   write('/methodology/', S.page({
     title: 'Methodology and limits — how the game mechanic ontology was built',
-    desc: 'How mechanic origins are assigned, what derives/introduces/adopts mean, and the known biases and gaps in a dataset of 168 mechanics, 619 games and 394 companies.',
+    desc: `How mechanic origins are assigned, what derives/introduces/adopts mean, and the known biases and gaps in a dataset of ${num(T.features.length)} mechanics, ${num(T.games.length)} games and ${num(T.studios.length)} companies.`,
     canonical: '/methodology/', active: '/methodology/',
     jsonld: { '@context': 'https://schema.org', '@graph': [S.breadcrumbLd(crumb)] }
   }, body), 0.7);
@@ -576,9 +581,9 @@ function home() {
  </div>
 </div>
 <div class="stats">
-  <div class="stat"><b>168</b><span>Mechanics</span></div>
-  <div class="stat"><b>619</b><span>Games</span></div>
-  <div class="stat"><b>394</b><span>Studios</span></div>
+  <div class="stat"><b>${num(T.features.length)}</b><span>Mechanics</span></div>
+  <div class="stat"><b>${num(T.games.length)}</b><span>Games</span></div>
+  <div class="stat"><b>${num(T.studios.length)}</b><span>Studios</span></div>
   <div class="stat"><b>${num(T.G.edges.length)}</b><span>Recorded links</span></div>
   <div class="stat"><b>1962</b><span>Earliest root</span></div>
 </div></div>
@@ -612,7 +617,7 @@ ${innovators.slice(0, 15).map(g => `<tr>
   <td>${g.dev ? `<a href="${url(g.dev)}">${esc(g.devN)}</a>` : esc(g.devN)}</td>
   <td class="n" style="color:var(--gold)">${g.intro.length}</td></tr>`).join('')}
 </tbody></table>
-<p style="margin-top:14px"><a href="/games/">See all 619 games →</a></p>`)}
+<p style="margin-top:14px"><a href="/games/">See all ${num(T.games.length)} games →</a></p>`)}
 
 ${S.section('Browse by era', `<div class="chips">${T.ERAS.map(e =>
     `<a class="chip" href="/era/${e.slug}/">${esc(e.name)} <s>${e.a}–${e.b}</s></a>`).join('')}</div>`)}
@@ -630,7 +635,7 @@ mean <b>first notable shipped implementation</b>, not invention, and contested c
           '@type': 'WebSite', name: 'The Genome of Games', url: SITE, description: c.hero,
           potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: SITE + '/features/?q={search_term_string}' }, 'query-input': 'required name=search_term_string' }
         },
-        { '@type': 'Dataset', name: 'The Genome of Games mechanic ontology', description: 'An ontology of 168 video game mechanics with origin games, ancestry links and adoption records across 619 games and 394 companies, 1962–2026.', url: SITE, creator: { '@type': 'Organization', name: 'The Genome of Games' }, license: 'https://creativecommons.org/licenses/by/4.0/' }
+        { '@type': 'Dataset', name: 'The Genome of Games mechanic ontology', description: `An ontology of ${num(T.features.length)} video game mechanics with origin games, ancestry links and adoption records across ${num(T.games.length)} games and ${num(T.studios.length)} companies, 1962–2026.`, url: SITE, creator: { '@type': 'Organization', name: 'The Genome of Games' }, license: 'https://creativecommons.org/licenses/by/4.0/' }
       ]
     }
   }, body), 1.0, 'weekly');
@@ -672,7 +677,7 @@ function assets() {
 
   // 404
   const b = `${S.crumbs([['Home', '/']])}<h1>Not found</h1>
-<p class="lede">That page does not exist. The dataset has 168 mechanics, 619 games and 394 studios — try one of these.</p>
+<p class="lede">That page does not exist. The dataset has ${num(T.features.length)} mechanics, ${num(T.games.length)} games and ${num(T.studios.length)} studios — try one of these.</p>
 <div class="chips">${['/features/', '/games/', '/studios/', '/eras/', '/graph/', '/methodology/'].map(h =>
     `<a class="chip" href="${h}">${h}</a>`).join('')}</div>`;
   fs.writeFileSync(path.join(OUT, '404.html'), S.page({
