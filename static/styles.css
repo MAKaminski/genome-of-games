@@ -160,3 +160,19 @@ footer a:hover{color:var(--ink)}
   nav.main a{font-size:12.5px;padding:5px 8px}
   .rail>*{flex:0 0 200px}
 }
+
+/* ---- account, sign-in and newsletter ---- */
+.acct{margin-left:14px;font-size:13px;color:var(--dim);border:1px solid var(--line);
+  border-radius:8px;padding:7px 12px;white-space:nowrap}
+.acct:hover{color:var(--ink);border-color:var(--line2);text-decoration:none}
+.gog-panel{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel)}
+.gog-btn{font:600 14px/1 var(--sans);color:#06070d;background:var(--gold);border:0;border-radius:9px;
+  padding:12px 18px;cursor:pointer}
+.gog-btn:hover{filter:brightness(1.08)}
+.gog-btn:disabled{opacity:.6;cursor:default}
+.gog-btn.ghost{background:transparent;color:var(--ink2);border:1px solid var(--line2)}
+.gog-note{font-size:13.5px;color:var(--dim);line-height:1.7;margin:10px 0 0;max-width:44em}
+.gog-ok{font-size:14px;color:#34d399;margin:0 0 12px}
+.gog-warn{font-size:14px;color:var(--gold);margin:0 0 12px}
+.gog-err{font-size:13px;color:#f87171;margin-top:10px}
+@media(max-width:760px){.acct{display:none}}

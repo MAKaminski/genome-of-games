@@ -510,6 +510,61 @@ ${studios.length ? S.section(`Studios founded (${studios.length})`, S.chipList(s
   }, body), 0.8);
 }
 
+/* ============================== NEWSLETTER ============================== */
+function newsletterPage() {
+  const crumb = [['Home', '/'], ['Newsletter']];
+  const body = `${S.crumbs(crumb)}
+<div class="cols"><div>
+  <div class="eyebrow" style="color:var(--gold)">Stay with the project</div>
+  <h1>Updates and the monthly newsletter</h1>
+  <p class="lede">This dataset changes. Mechanics get added, origins get contested and corrected, and the
+  lineage shifts when they do. Two ways to follow that — one free, one paid.</p>
+
+  <div class="sec"><h2>Sign in</h2>
+    <div id="gog-panel" class="gog-panel">
+      <p class="gog-note">Loading…</p>
+    </div>
+  </div>
+
+  ${S.section('What each one gets you', `<table><thead><tr><th>&nbsp;</th><th>Free updates</th><th>Newsletter · $10/mo</th></tr></thead><tbody>
+<tr><td>New mechanics added to the ontology</td><td>✓</td><td>✓</td></tr>
+<tr><td>Corrections to contested origins</td><td>✓</td><td>✓</td></tr>
+<tr><td>A monthly essay on what the graph shows</td><td>—</td><td>✓</td></tr>
+<tr><td>The reasoning behind each disputed attribution</td><td>—</td><td>✓</td></tr>
+<tr><td>Early access to dataset revisions</td><td>—</td><td>✓</td></tr>
+<tr><td>The full dataset, free forever, CC BY 4.0</td><td>✓</td><td>✓</td></tr>
+</tbody></table>`)}
+
+  ${S.section('What the paid tier is not', `<div class="note">It is not a paywall. Every one of the
+  ${num(T.G.nodes.length)} pages here stays free and open, the dataset stays CC BY 4.0, and
+  <a href="${T.GITHUB}" rel="noopener">the whole repository</a> stays public. Paying supports the
+  research and gets you the monthly write-up — the argument, not the access.</div>`)}
+
+  ${S.section('Privacy', `<div class="note">Google sign-in gives this site your email address and nothing
+  else. Payments are handled entirely by Stripe; no card details touch this server. Cancel any time from
+  the billing portal on this page — no email required.</div>`)}
+</div>
+<aside class="side">
+  <h3>The dataset is open</h3>
+  <div class="note">${num(T.features.length)} mechanics, ${num(T.games.length)} games and
+  ${num(T.studios.length)} companies as JSON, under CC BY 4.0.
+  <br><br><a href="${T.GITHUB}" rel="noopener">Read or fork it on GitHub →</a></div>
+  <h3>Start here instead</h3>
+  <div class="chips">
+    <a class="chip" href="/methodology/">How origins are assigned</a>
+    <a class="chip" href="/graph/">The interactive graph</a>
+    <a class="chip" href="/features/">All ${num(T.features.length)} mechanics</a>
+  </div>
+</aside></div>`;
+
+  write('/newsletter/', S.page({
+    title: 'Newsletter and updates — The Genome of Games',
+    desc: `Follow changes to an ontology of ${num(T.features.length)} game mechanics: free updates when mechanics are added or origins corrected, or a $10/month newsletter on what the lineage graph reveals.`,
+    canonical: '/newsletter/', active: '/newsletter/',
+    jsonld: { '@context': 'https://schema.org', '@graph': [S.breadcrumbLd(crumb)] }
+  }, body), 0.8);
+}
+
 function methodology() {
   const crumb = [['Home', '/'], ['Methodology']];
   const body = `${S.crumbs(crumb)}
@@ -635,7 +690,10 @@ mean <b>first notable shipped implementation</b>, not invention, and contested c
           '@type': 'WebSite', name: 'The Genome of Games', url: SITE, description: c.hero,
           potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: SITE + '/features/?q={search_term_string}' }, 'query-input': 'required name=search_term_string' }
         },
-        { '@type': 'Dataset', name: 'The Genome of Games mechanic ontology', description: `An ontology of ${num(T.features.length)} video game mechanics with origin games, ancestry links and adoption records across ${num(T.games.length)} games and ${num(T.studios.length)} companies, 1962–2026.`, url: SITE, creator: { '@type': 'Organization', name: 'The Genome of Games' }, license: 'https://creativecommons.org/licenses/by/4.0/' }
+        { '@type': 'Dataset', name: 'The Genome of Games mechanic ontology', description: `An ontology of ${num(T.features.length)} video game mechanics with origin games, ancestry links and adoption records across ${num(T.games.length)} games and ${num(T.studios.length)} companies, 1962–2026.`, url: SITE, creator: { '@type': 'Organization', name: 'The Genome of Games' }, license: 'https://creativecommons.org/licenses/by/4.0/',
+          isAccessibleForFree: true, keywords: ['video game mechanics', 'game design history', 'game ontology', 'mechanic lineage'],
+          codeRepository: T.GITHUB, sameAs: [T.GITHUB],
+          distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `${T.GITHUB}/tree/main/data` }] }
       ]
     }
   }, body), 1.0, 'weekly');
@@ -645,6 +703,7 @@ mean <b>first notable shipped implementation</b>, not invention, and contested c
 function assets() {
   writeRaw('styles.css', fs.readFileSync(path.join(__dirname, 'static', 'styles.css'), 'utf8'));
   writeRaw('app.js', fs.readFileSync(path.join(__dirname, 'static', 'app.js'), 'utf8'));
+  writeRaw('gog.js', fs.readFileSync(path.join(__dirname, 'static', 'gog.js'), 'utf8'));
   writeRaw('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#06070d"/><circle cx="8" cy="16" r="3.2" fill="#4cc9f0"/><circle cx="19" cy="9" r="2.6" fill="#ffd166"/><circle cx="19" cy="23" r="2.6" fill="#f472b6"/><circle cx="27" cy="16" r="2.2" fill="#22c55e"/><g stroke="#3c4f7d" stroke-width="1.5" fill="none"><path d="M11 16 Q15 16 17 10"/><path d="M11 16 Q15 16 17 22"/><path d="M21.5 9.6 Q25 12 26 14"/></g></svg>`);
 
   const idx = T.G.nodes.map(n => ({
@@ -670,7 +729,59 @@ function assets() {
     for (const f of fs.readdirSync(ogDir)) fs.copyFileSync(path.join(ogDir, f), path.join(OUT, 'og', f));
   }
 
-  writeRaw('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+  /* Answer engines are a real referral source for a reference dataset, and
+     several of them read a separate opt-in signal. Name the ones that matter
+     explicitly rather than relying on the wildcard, and point them at llms.txt. */
+  const AI_AGENTS = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-User', 'Claude-SearchBot',
+    'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'CCBot',
+    'meta-externalagent', 'Amazonbot', 'DuckAssistBot', 'cohere-ai', 'MistralAI-User', 'YouBot'];
+  writeRaw('robots.txt',
+    `User-agent: *\nAllow: /\n\n` +
+    AI_AGENTS.map(a => `User-agent: ${a}\nAllow: /\n`).join('\n') +
+    `\n# Machine-readable summary of this dataset\n# ${SITE}/llms.txt\n\nSitemap: ${SITE}/sitemap.xml\n`);
+
+  /* llms.txt — the emerging convention for handing a model a compact, correct
+     description of a site instead of making it infer one from 1,200 pages. */
+  const famLines = T.famOrder.map(f => {
+    const list = T.featuresByFam[f] || [];
+    return `- [${T.FAM[f].name}](${SITE}/features/${T.famSlug[f]}/): ${list.length} mechanics. ${T.FAM[f].blurb}`;
+  }).join('\n');
+  /* Span the whole dataset, not just the mechanics — the newest mechanic
+     predates the newest game by several years. */
+  const oldest = T.games[0], newest = T.games[T.games.length - 1];
+  writeRaw('llms.txt', `# The Genome of Games
+
+> An ontology of video game mechanics. ${num(T.features.length)} mechanics, ${num(T.games.length)} games and ${num(T.studios.length)} companies from ${oldest.y} to ${newest.y}, with ${num(T.G.edges.length)} recorded links. Every mechanic has one credited origin game and a traceable chain of ancestors reaching back to a root.
+
+Built and maintained as an independent research project. Data and prose are CC BY 4.0; attribution with a link is required. Source and raw JSON: ${T.GITHUB}
+
+## What "origin" means here
+
+Origin means the first notable *shipped* implementation, not invention, and not the version that popularised it. Contested cases are flagged on the page rather than asserted — kill.switch (2003) shipped over-the-shoulder aim two years before Resident Evil 4, and this dataset credits the earlier date while saying so. Read ${SITE}/methodology/ before citing anything.
+
+## Known limits
+
+- Coverage skews to Western PC and Japanese console history; arcade-era Japan, PC strategy and mobile interaction design are thinner than they should be.
+- \`adopts\` links are illustrative and deliberately incomplete: they show an idea spread, not everywhere it spread.
+- Wikipedia links are verified permalinks; MobyGames and Giant Bomb links are site searches.
+
+## Core pages
+
+- [Methodology and limits](${SITE}/methodology/): how origins are assigned, what each link type means, where the data is weakest. Read this first.
+- [All mechanics](${SITE}/features/): the ${num(T.features.length)} mechanics, grouped into ${T.famOrder.length} families.
+- [All games](${SITE}/games/): ${num(T.games.length)} titles, ${oldest.y}–${newest.y}, each showing what it introduced and what it inherited.
+- [All studios](${SITE}/studios/): ${num(T.studios.length)} developers and publishers with spinoffs, renames and acquisitions.
+- [Interactive graph](${SITE}/graph/): pan and zoom the full lineage; deep-linkable as /graph/?node=<id>&trace=1.
+- [Newsletter](${SITE}/newsletter/): free updates, or a $10/month newsletter.
+
+## Mechanic families
+
+${famLines}
+
+## Citation
+
+"<Mechanic name>." The Genome of Games, an ontology of game mechanics. ${SITE}/feature/<slug>/
+`);
   writeRaw('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     urls.map(u => `<url><loc>${SITE}${u.loc}</loc><changefreq>${u.changefreq || 'monthly'}</changefreq><priority>${u.priority.toFixed(1)}</priority></url>`).join('\n') +
     `\n</urlset>\n`);
@@ -702,6 +813,7 @@ T.studios.forEach(studioPage);
 erasIndex();
 T.ERAS.forEach(eraPage);
 methodology();
+newsletterPage();
 assets();
 
 console.log(`built ${pages} pages · ${num(links)} internal links · ${urls.length} sitemap entries`);
