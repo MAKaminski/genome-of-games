@@ -60,9 +60,9 @@ ${S.crumbs(crumb)}
     <span>Introduced <b>${f.y}</b></span>
     <span>Origin <b><a href="${url(f.origin)}">${esc(origin ? origin.n : '—')}</a></b></span>
     ${origin && origin.dev ? `<span>Developer <b><a href="${url(origin.dev)}">${esc(N[origin.dev].n)}</a></b></span>` : ''}
-    <span>Direct forks <b>${kids.length}</b></span>
-    <span>All descendants <b>${descAll.length}</b></span>
-    <span>Later adopters <b>${adopters.length}</b></span>
+    ${kids.length ? `<span>Direct forks <b>${kids.length}</b></span>` : ''}
+    ${descAll.length > kids.length ? `<span>All descendants <b>${descAll.length}</b></span>` : ''}
+    ${adopters.length ? `<span>Later adopters <b>${adopters.length}</b></span>` : ''}
   </div>
   <div class="prose">${(p.body || [f.d]).map(x => `<p>${esc(x)}</p>`).join('')}</div>
 
@@ -237,7 +237,7 @@ ${S.crumbs(crumb)}
     ${c.y ? `<span>Founded <b>${c.y}</b></span>` : ''}
     ${c.end ? `<span>Closed <b>${c.end}</b></span>` : ''}
     ${c.ctry ? `<span>Country <b>${esc(c.ctry)}</b></span>` : ''}
-    <span>Titles here <b>${titles.length}</b></span>
+    ${titles.length ? `<span>Titles here <b>${titles.length}</b></span>` : ''}
     ${feats.length ? `<span>Mechanics credited <b>${feats.length}</b></span>` : ''}
   </div>
 
@@ -269,7 +269,7 @@ ${S.crumbs(crumb)}
     <a class="chip" href="/graph/?node=${c.id}&lens=3">Lineage graph</a>
   </div>
   ${c.own ? `<h3>Part of</h3>${S.studioCard(c.own)}` : ''}
-  ${c.spun ? `<h3>Spun out of</h3>${S.studioCard(c.spun)}` : ''}
+  ${c.spun ? `<h3>Founders came from</h3>${S.studioCard(c.spun)}` : ''}
 </aside></div>`;
 
   const jsonld = {
@@ -329,7 +329,7 @@ function familyPage(fam) {
   <span>Mechanics <b>${list.length}</b></span>
   <span>Earliest <b>${N[list[0]].y}</b></span>
   <span>Latest <b>${N[list[list.length - 1]].y}</b></span>
-  <span>Roots in this family <b>${roots.length}</b></span>
+  ${roots.length ? `<span>Roots in this family <b>${roots.length}</b></span>` : ''}
 </div>
 <div class="prose">${(c.essay || '').split(/\n\n+/).map(x => `<p>${esc(x)}</p>`).join('')}</div>
 
