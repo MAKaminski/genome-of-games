@@ -1,0 +1,1948 @@
+{
+ "families": {
+  "SPACE": {
+   "name": "Space & Locomotion",
+   "color": "#4cc9f0",
+   "blurb": "How the playable world is shaped and how you move through it."
+  },
+  "CAM": {
+   "name": "Camera & Input",
+   "color": "#a78bfa",
+   "blurb": "Where the eye sits and how intent reaches the character."
+  },
+  "PROG": {
+   "name": "Progression & Persistence",
+   "color": "#ffd166",
+   "blurb": "What the game remembers about you between deaths and sessions."
+  },
+  "NARR": {
+   "name": "Narrative",
+   "color": "#f4a261",
+   "blurb": "How fiction is delivered and how much of it the player authors."
+  },
+  "CBT": {
+   "name": "Combat & Conflict",
+   "color": "#ef476f",
+   "blurb": "The grammar of hitting, blocking, aiming, and dying."
+  },
+  "SIM": {
+   "name": "Physics & Simulation",
+   "color": "#b5179e",
+   "blurb": "When the world obeys rules instead of scripts."
+  },
+  "WORLD": {
+   "name": "World Systems",
+   "color": "#22c55e",
+   "blurb": "Time, weather, ecology, and NPCs that live without you."
+  },
+  "MP": {
+   "name": "Multiplayer & Social",
+   "color": "#6366f1",
+   "blurb": "Other humans, from the same couch to the same shard."
+  },
+  "UI": {
+   "name": "Interface & Meta",
+   "color": "#e2e8f0",
+   "blurb": "Maps, markers, logs, and the scaffolding around play."
+  },
+  "PROC": {
+   "name": "Procedural Generation",
+   "color": "#2dd4bf",
+   "blurb": "Content authored by algorithm rather than by hand."
+  },
+  "ECON": {
+   "name": "Economy & Business Model",
+   "color": "#eab308",
+   "blurb": "How the game asks to be paid, and what that does to design."
+  },
+  "STLTH": {
+   "name": "Stealth & Perception",
+   "color": "#7c8aa0",
+   "blurb": "Enemies that can fail to notice you — and the systems that model it."
+  },
+  "CREATE": {
+   "name": "Creation & Modding",
+   "color": "#a3e635",
+   "blurb": "Handing the authoring tools to the player."
+  },
+  "STRAT": {
+   "name": "Strategy & Tactics",
+   "color": "#60a5fa",
+   "blurb": "Commanding many things at once, in real time or in turns."
+  },
+  "RHYTHM": {
+   "name": "Rhythm & Audio",
+   "color": "#e879f9",
+   "blurb": "Sound as a mechanic rather than a garnish."
+  }
+ },
+ "features": [
+  {
+   "id": "f_collision",
+   "name": "Object Collision As Verb",
+   "family": "SPACE",
+   "year": 1962,
+   "origin": "t_spacewar",
+   "parents": [],
+   "desc": "Two things occupy the same space and something happens. Every act of hitting, landing, blocking, or dying in the medium descends from this single primitive."
+  },
+  {
+   "id": "f_single_screen",
+   "name": "Single-Screen Arena",
+   "family": "SPACE",
+   "year": 1972,
+   "origin": "t_pong",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "The whole world fits in one frame. Constraint, not limitation: it forces every element on screen to matter."
+  },
+  {
+   "id": "f_screen_wrap",
+   "name": "Wraparound Topology",
+   "family": "SPACE",
+   "year": 1979,
+   "origin": "t_asteroids",
+   "parents": [
+    "f_single_screen"
+   ],
+   "desc": "Exit the right edge, enter the left. The first non-Euclidean playspace, and the ancestor of every looping world."
+  },
+  {
+   "id": "f_flip_screen",
+   "name": "Flip-Screen Room Graph",
+   "family": "SPACE",
+   "year": 1980,
+   "origin": "t_adventure",
+   "parents": [
+    "f_single_screen"
+   ],
+   "desc": "The world becomes a graph of discrete rooms rather than one arena. Dungeon design, level design, and the map screen all start here."
+  },
+  {
+   "id": "f_side_scroll",
+   "name": "Continuous Scrolling Playfield",
+   "family": "SPACE",
+   "year": 1980,
+   "origin": "t_defender",
+   "parents": [
+    "f_single_screen"
+   ],
+   "desc": "The camera decouples from the world and the world becomes larger than the screen. Arguably the single most consequential spatial idea before 3D."
+  },
+  {
+   "id": "f_parallax",
+   "name": "Parallax Depth Layers",
+   "family": "SPACE",
+   "year": 1982,
+   "origin": "t_moon_patrol",
+   "parents": [
+    "f_side_scroll"
+   ],
+   "desc": "Background layers scroll at different rates, faking depth on hardware with none. The first cheap illusion of a third dimension."
+  },
+  {
+   "id": "f_iso_view",
+   "name": "Isometric Projection",
+   "family": "SPACE",
+   "year": 1982,
+   "origin": "t_zaxxon",
+   "parents": [
+    "f_single_screen"
+   ],
+   "desc": "A fixed oblique angle that reads as 3D while remaining 2D data. Survives today in tactics games and ARPGs."
+  },
+  {
+   "id": "f_scaling_pseudo3d",
+   "name": "Sprite-Scaling Pseudo-3D",
+   "family": "SPACE",
+   "year": 1982,
+   "origin": "t_pole_position",
+   "parents": [
+    "f_single_screen"
+   ],
+   "desc": "Sprites grow as they approach. Depth without polygons — the road-racer and rail-shooter lineage."
+  },
+  {
+   "id": "f_maze_fp",
+   "name": "First-Person Vector Space",
+   "family": "SPACE",
+   "year": 1980,
+   "origin": "t_battlezone",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "The camera enters the world at eye level. Wireframe, monochrome, and the direct ancestor of every FPS."
+  },
+  {
+   "id": "f_precision_platform",
+   "name": "Momentum-Based Platform Control",
+   "family": "SPACE",
+   "year": 1985,
+   "origin": "t_smb",
+   "parents": [
+    "f_side_scroll"
+   ],
+   "desc": "Acceleration, skid, variable jump arc. The player learns a physical vocabulary rather than a binary one."
+  },
+  {
+   "id": "f_metroidvania",
+   "name": "Ability-Gated Interlocked Map",
+   "family": "SPACE",
+   "year": 1986,
+   "origin": "t_metroid",
+   "parents": [
+    "f_flip_screen",
+    "f_precision_platform"
+   ],
+   "desc": "The map is one connected space locked by capabilities, not doors. Progression becomes spatial rather than linear."
+  },
+  {
+   "id": "f_mode7_plane",
+   "name": "Rotating Ground Plane",
+   "family": "SPACE",
+   "year": 1990,
+   "origin": "t_fzero",
+   "parents": [
+    "f_scaling_pseudo3d"
+   ],
+   "desc": "A texture-mapped floor that rotates and scales in hardware. The bridge between sprite tricks and real 3D."
+  },
+  {
+   "id": "f_raycast_3d",
+   "name": "Raycast Corridor 3D",
+   "family": "SPACE",
+   "year": 1992,
+   "origin": "t_wolf3d",
+   "parents": [
+    "f_maze_fp"
+   ],
+   "desc": "Textured walls at speed on consumer hardware. First-person space stops being a novelty and becomes a genre."
+  },
+  {
+   "id": "f_true_3d_poly",
+   "name": "True Polygonal Free-Look Space",
+   "family": "SPACE",
+   "year": 1996,
+   "origin": "t_quake",
+   "parents": [
+    "f_raycast_3d"
+   ],
+   "desc": "Real geometry, real rooms above rooms, and a camera free on all axes. The 3D world stops lying about itself."
+  },
+  {
+   "id": "f_free_roam_3d",
+   "name": "Analog Free-Roam 3D Movement",
+   "family": "SPACE",
+   "year": 1996,
+   "origin": "t_mario64",
+   "parents": [
+    "f_precision_platform",
+    "f_maze_fp"
+   ],
+   "desc": "360 degrees of graded movement in third person, with a camera that must be solved as a design problem. The grammar nearly all 3D action games still use."
+  },
+  {
+   "id": "f_hub_world",
+   "name": "Hub-and-Spoke World Access",
+   "family": "SPACE",
+   "year": 1996,
+   "origin": "t_mario64",
+   "parents": [
+    "f_flip_screen"
+   ],
+   "desc": "A central space that fans out into levels, letting the player choose order and revisit. The seed of nonlinear campaign structure."
+  },
+  {
+   "id": "f_portal_space",
+   "name": "Non-Euclidean Portal Space",
+   "family": "SPACE",
+   "year": 2007,
+   "origin": "t_portal",
+   "parents": [
+    "f_true_3d_poly",
+    "f_screen_wrap"
+   ],
+   "desc": "Player-authored topology: two surfaces become one. Space itself becomes the puzzle object."
+  },
+  {
+   "id": "f_seamless_open_world",
+   "name": "Seamless Streaming Open World",
+   "family": "SPACE",
+   "year": 2001,
+   "origin": "t_gta3",
+   "parents": [
+    "f_free_roam_3d",
+    "f_hub_world"
+   ],
+   "desc": "A contiguous city with no loading seams, traversable at will. Converts 'levels' into 'places' and makes the map the content."
+  },
+  {
+   "id": "f_verticality_climb",
+   "name": "Systemic Climbable Surfaces",
+   "family": "SPACE",
+   "year": 2007,
+   "origin": "t_assassins_creed",
+   "parents": [
+    "f_free_roam_3d"
+   ],
+   "desc": "Architecture annotated as a climbing grid, so the whole skyline becomes navigable. Open worlds gain a Z axis."
+  },
+  {
+   "id": "f_grapple_traversal",
+   "name": "Grapple & Tether Traversal",
+   "family": "SPACE",
+   "year": 2004,
+   "origin": "t_spiderman2",
+   "parents": [
+    "f_free_roam_3d"
+   ],
+   "desc": "Momentum-preserving swing or tether movement that makes crossing the map its own reward loop."
+  },
+  {
+   "id": "f_parkour_traversal",
+   "name": "First-Person Parkour Flow",
+   "family": "SPACE",
+   "year": 2008,
+   "origin": "t_mirrors_edge",
+   "parents": [
+    "f_verticality_climb",
+    "f_true_3d_poly"
+   ],
+   "desc": "Traversal as the primary verb, read through a first-person body with visible limbs and momentum."
+  },
+  {
+   "id": "f_climb_anywhere",
+   "name": "Climb-Anything Stamina Traversal",
+   "family": "SPACE",
+   "year": 2017,
+   "origin": "t_botw",
+   "parents": [
+    "f_verticality_climb",
+    "f_stamina"
+   ],
+   "desc": "Every surface is climbable and the only limit is a resource. Removes the designer's invisible walls and returns route-finding to the player."
+  },
+  {
+   "id": "f_vast_streaming",
+   "name": "Planetary-Scale Streaming",
+   "family": "SPACE",
+   "year": 2016,
+   "origin": "t_nms",
+   "parents": [
+    "f_seamless_open_world",
+    "f_seeded_universe"
+   ],
+   "desc": "Surface to orbit to interstellar with no cut. Scale itself becomes the spectacle."
+  },
+  {
+   "id": "f_fixed_cam",
+   "name": "Fixed Cinematic Camera",
+   "family": "CAM",
+   "year": 1996,
+   "origin": "t_re1",
+   "parents": [
+    "f_iso_view"
+   ],
+   "desc": "Pre-authored camera angles in a 3D space. Cheap on hardware, expensive on nerves — the horror lineage runs through it."
+  },
+  {
+   "id": "f_follow_cam",
+   "name": "Trailing Follow Camera",
+   "family": "CAM",
+   "year": 1996,
+   "origin": "t_mario64",
+   "parents": [
+    "f_free_roam_3d"
+   ],
+   "desc": "A camera that is itself a character with collision and intent. The first serious attempt to solve 3D viewing as a system."
+  },
+  {
+   "id": "f_analog_input",
+   "name": "Graded Analog Input",
+   "family": "CAM",
+   "year": 1996,
+   "origin": "t_mario64",
+   "parents": [
+    "f_free_roam_3d"
+   ],
+   "desc": "Input stops being on/off. Walk, jog, sprint, and precise aim become expressible with one thumb."
+  },
+  {
+   "id": "f_dual_analog",
+   "name": "Dual-Analog Move + Look",
+   "family": "CAM",
+   "year": 2000,
+   "origin": "t_alien_resurrection",
+   "parents": [
+    "f_analog_input",
+    "f_true_3d_poly"
+   ],
+   "desc": "Left stick moves, right stick looks. Ridiculed on arrival, canonized by Halo, and now the default control scheme of the medium."
+  },
+  {
+   "id": "f_lock_on",
+   "name": "Contextual Lock-On Targeting",
+   "family": "CAM",
+   "year": 1998,
+   "origin": "t_oot",
+   "parents": [
+    "f_follow_cam"
+   ],
+   "desc": "Z-targeting fused camera and combat: the system decides what matters and orbits it. Made 3D melee legible."
+  },
+  {
+   "id": "f_over_shoulder",
+   "name": "Over-the-Shoulder Aim",
+   "family": "CAM",
+   "year": 2003,
+   "origin": "t_killswitch",
+   "parents": [
+    "f_fixed_cam",
+    "f_dual_analog"
+   ],
+   "desc": "Camera pinned behind the shoulder with the crosshair in the world. Introduced alongside cover in kill.switch, then canonized by Resident Evil 4 two years later."
+  },
+  {
+   "id": "f_ads",
+   "name": "Iron-Sight Aim-Down-Sights",
+   "family": "CAM",
+   "year": 1998,
+   "origin": "t_rainbow_six",
+   "parents": [
+    "f_true_3d_poly"
+   ],
+   "desc": "A second aiming mode trading mobility and view for accuracy. The core risk/reward toggle of the modern shooter."
+  },
+  {
+   "id": "f_cinematic_direction",
+   "name": "Directed In-Engine Camera Language",
+   "family": "CAM",
+   "year": 1998,
+   "origin": "t_mgs",
+   "parents": [
+    "f_follow_cam",
+    "f_cutscene"
+   ],
+   "desc": "Film grammar — cuts, dollies, framing — applied to a live engine, so gameplay and cinema share one camera."
+  },
+  {
+   "id": "f_photo_mode",
+   "name": "Photo Mode",
+   "family": "CAM",
+   "year": 1997,
+   "origin": "t_gran_turismo",
+   "parents": [
+    "f_follow_cam"
+   ],
+   "desc": "A camera the player owns. Turns the world into a subject and the audience into cinematographers."
+  },
+  {
+   "id": "f_haptic_feedback",
+   "name": "Haptic Force Feedback",
+   "family": "CAM",
+   "year": 1997,
+   "origin": "t_starfox64",
+   "parents": [
+    "f_analog_input"
+   ],
+   "desc": "Information delivered through the hands. A channel with no screen budget and no localization cost."
+  },
+  {
+   "id": "f_motion_control",
+   "name": "Spatial Motion Input",
+   "family": "CAM",
+   "year": 2006,
+   "origin": "t_wii_sports",
+   "parents": [
+    "f_analog_input",
+    "f_haptic_feedback"
+   ],
+   "desc": "The controller's position in the room becomes the input. Briefly made the medium legible to people who had never held a gamepad."
+  },
+  {
+   "id": "f_touch_input",
+   "name": "Direct Touch Manipulation",
+   "family": "CAM",
+   "year": 2005,
+   "origin": "t_nintendogs",
+   "parents": [
+    "f_analog_input"
+   ],
+   "desc": "No cursor, no avatar — the finger is the input device. The control scheme that made a billion-player market possible."
+  },
+  {
+   "id": "f_vr_presence",
+   "name": "Room-Scale VR Presence",
+   "family": "CAM",
+   "year": 2020,
+   "origin": "t_alyx",
+   "parents": [
+    "f_motion_control",
+    "f_dual_analog"
+   ],
+   "desc": "Head and hands tracked in real space, so the camera is the player's neck. The most radical revision of the camera problem since 1996."
+  },
+  {
+   "id": "f_score",
+   "name": "Numeric Score",
+   "family": "PROG",
+   "year": 1972,
+   "origin": "t_pong",
+   "parents": [],
+   "desc": "The first thing a game ever remembered. Every progression system is a descendant of the impulse to keep a number."
+  },
+  {
+   "id": "f_lives_continues",
+   "name": "Lives and Continues",
+   "family": "PROG",
+   "year": 1978,
+   "origin": "t_space_invaders",
+   "parents": [
+    "f_score"
+   ],
+   "desc": "Failure becomes a budget rather than an ending. Introduces the tension between challenge and access that arcades monetized."
+  },
+  {
+   "id": "f_high_score_table",
+   "name": "Persistent High-Score Table",
+   "family": "PROG",
+   "year": 1979,
+   "origin": "t_asteroids",
+   "parents": [
+    "f_score"
+   ],
+   "desc": "Three initials in battery-backed RAM: the first persistent player identity and the first leaderboard."
+  },
+  {
+   "id": "f_permadeath",
+   "name": "Permadeath Run Structure",
+   "family": "PROG",
+   "year": 1980,
+   "origin": "t_rogue",
+   "parents": [
+    "f_lives_continues"
+   ],
+   "desc": "Death erases the save. Makes every decision load-bearing and turns a session into a story."
+  },
+  {
+   "id": "f_xp_levels",
+   "name": "Experience Points and Levels",
+   "family": "PROG",
+   "year": 1980,
+   "origin": "t_rogue",
+   "parents": [],
+   "desc": "Ported from tabletop: repeated action converts into permanent capability. The economic engine of the RPG and, eventually, of nearly everything else."
+  },
+  {
+   "id": "f_class_system",
+   "name": "Character Classes",
+   "family": "PROG",
+   "year": 1981,
+   "origin": "t_wizardry",
+   "parents": [
+    "f_xp_levels"
+   ],
+   "desc": "Pre-bundled capability sets that trade breadth for identity. Reappears as the shooter's 'loadout' and the MOBA's 'champion'."
+  },
+  {
+   "id": "f_checkpoint",
+   "name": "Checkpoint Respawn",
+   "family": "PROG",
+   "year": 1984,
+   "origin": "t_pitfall2",
+   "parents": [
+    "f_lives_continues"
+   ],
+   "desc": "Failure rewinds to a marker instead of the start. The single biggest lever on a game's felt difficulty."
+  },
+  {
+   "id": "f_password_save",
+   "name": "Password Continuation",
+   "family": "PROG",
+   "year": 1986,
+   "origin": "t_metroid",
+   "parents": [
+    "f_lives_continues"
+   ],
+   "desc": "State encoded as a string the player carries. Persistence without hardware — and an accidental early modding surface."
+  },
+  {
+   "id": "f_battery_save",
+   "name": "Battery-Backed Save File",
+   "family": "PROG",
+   "year": 1986,
+   "origin": "t_zelda1",
+   "parents": [
+    "f_password_save"
+   ],
+   "desc": "The cartridge remembers. Games can now be longer than one sitting, which invents the modern campaign."
+  },
+  {
+   "id": "f_ng_plus",
+   "name": "New Game Plus",
+   "family": "PROG",
+   "year": 1995,
+   "origin": "t_chrono_trigger",
+   "parents": [
+    "f_battery_save"
+   ],
+   "desc": "Carry your power into a fresh run. Replay stops being repetition and becomes a different game."
+  },
+  {
+   "id": "f_skill_tree",
+   "name": "Branching Skill Tree",
+   "family": "PROG",
+   "year": 1996,
+   "origin": "t_diablo",
+   "parents": [
+    "f_xp_levels",
+    "f_class_system"
+   ],
+   "desc": "Progression as a spatial choice with opportunity cost. Now standard equipment in genres that have nothing else in common."
+  },
+  {
+   "id": "f_loot_rarity",
+   "name": "Colour-Coded Loot Rarity",
+   "family": "PROG",
+   "year": 1996,
+   "origin": "t_diablo",
+   "parents": [
+    "f_xp_levels"
+   ],
+   "desc": "White, blue, gold. A one-glance value language that became the medium's most portable UI convention — and its most exploitable."
+  },
+  {
+   "id": "f_gear_score",
+   "name": "Numeric Gear Power Treadmill",
+   "family": "PROG",
+   "year": 2004,
+   "origin": "t_wow",
+   "parents": [
+    "f_loot_rarity"
+   ],
+   "desc": "Items reduced to a single ascending number, enabling endless content tiers and endless obsolescence."
+  },
+  {
+   "id": "f_perk_loadout",
+   "name": "Perk-Based Loadout Customization",
+   "family": "PROG",
+   "year": 2007,
+   "origin": "t_cod4",
+   "parents": [
+    "f_class_system",
+    "f_skill_tree"
+   ],
+   "desc": "Players build their own class from unlockable modifiers. RPG progression injected into the competitive shooter."
+  },
+  {
+   "id": "f_prestige",
+   "name": "Prestige Reset-for-Status",
+   "family": "PROG",
+   "year": 2007,
+   "origin": "t_cod4",
+   "parents": [
+    "f_perk_loadout",
+    "f_high_score_table"
+   ],
+   "desc": "Voluntarily surrender your progress for a symbol. Progression becomes theatre, and the treadmill becomes infinite."
+  },
+  {
+   "id": "f_meta_progression",
+   "name": "Run-Persistent Meta-Progression",
+   "family": "PROG",
+   "year": 2013,
+   "origin": "t_rogue_legacy",
+   "parents": [
+    "f_permadeath",
+    "f_xp_levels"
+   ],
+   "desc": "You lose the run but keep something. The compromise that made roguelikes mass-market and created the roguelite."
+  },
+  {
+   "id": "f_soulslike_loop",
+   "name": "Bonfire Checkpoint & Currency Risk",
+   "family": "PROG",
+   "year": 2011,
+   "origin": "t_dark_souls",
+   "parents": [
+    "f_checkpoint",
+    "f_stamina"
+   ],
+   "desc": "Rest resets the world; death drops your currency where you fell and gives you one chance to retrieve it. Risk expressed entirely through save design."
+  },
+  {
+   "id": "f_attract_premise",
+   "name": "Attract-Mode Premise",
+   "family": "NARR",
+   "year": 1980,
+   "origin": "t_pacman",
+   "parents": [],
+   "desc": "Interstitial vignettes with no interaction, purely to establish character. Fiction enters the arcade sideways."
+  },
+  {
+   "id": "f_cutscene",
+   "name": "In-Engine Cutscene",
+   "family": "NARR",
+   "year": 1984,
+   "origin": "t_karateka",
+   "parents": [
+    "f_attract_premise"
+   ],
+   "desc": "The engine takes the controller away to tell you something. Contested ever since, and never abandoned."
+  },
+  {
+   "id": "f_qte",
+   "name": "Quick-Time Event",
+   "family": "NARR",
+   "year": 1983,
+   "origin": "t_dragons_lair",
+   "parents": [
+    "f_attract_premise"
+   ],
+   "desc": "Interaction reduced to a timed prompt over authored spectacle. The cheapest possible bridge between cinema and play."
+  },
+  {
+   "id": "f_branching_dialogue",
+   "name": "Branching Dialogue Trees",
+   "family": "NARR",
+   "year": 1985,
+   "origin": "t_ultima4",
+   "parents": [],
+   "desc": "Conversation as a navigable structure. Makes the player a participant in the fiction rather than its audience."
+  },
+  {
+   "id": "f_morality_axis",
+   "name": "Explicit Morality Axis",
+   "family": "NARR",
+   "year": 1985,
+   "origin": "t_ultima4",
+   "parents": [
+    "f_branching_dialogue"
+   ],
+   "desc": "The game scores your ethics. Radical in 1985, reduced to a blue/red button by 2007, and still unsolved."
+  },
+  {
+   "id": "f_fmv",
+   "name": "Full-Motion Video",
+   "family": "NARR",
+   "year": 1992,
+   "origin": "t_night_trap",
+   "parents": [
+    "f_cutscene"
+   ],
+   "desc": "Filmed actors on optical media. A commercial dead end that permanently raised production-value expectations."
+  },
+  {
+   "id": "f_env_storytelling",
+   "name": "Environmental Storytelling",
+   "family": "NARR",
+   "year": 1994,
+   "origin": "t_system_shock",
+   "parents": [
+    "f_attract_premise"
+   ],
+   "desc": "The level is the narrator. Corpses, graffiti, and arrangement carry plot without stopping play."
+  },
+  {
+   "id": "f_audio_log",
+   "name": "Found Audio Log",
+   "family": "NARR",
+   "year": 1994,
+   "origin": "t_system_shock",
+   "parents": [
+    "f_env_storytelling"
+   ],
+   "desc": "Recorded voices from the dead, consumed while moving. Solved the 'story without cutscenes' problem so well it became a cliché."
+  },
+  {
+   "id": "f_voice_acting",
+   "name": "Full Voice Performance",
+   "family": "NARR",
+   "year": 1994,
+   "origin": "t_wing_commander3",
+   "parents": [
+    "f_cutscene",
+    "f_fmv"
+   ],
+   "desc": "Every line performed. Doubles the emotional bandwidth and permanently multiplies the cost of narrative iteration."
+  },
+  {
+   "id": "f_companion_approval",
+   "name": "Companion Approval",
+   "family": "NARR",
+   "year": 2000,
+   "origin": "t_bg2",
+   "parents": [
+    "f_branching_dialogue"
+   ],
+   "desc": "NPCs keep a private opinion of you that gates content and affection. The mechanic that turned party members into the reason people replay."
+  },
+  {
+   "id": "f_faction_rep",
+   "name": "Faction Reputation",
+   "family": "NARR",
+   "year": 1997,
+   "origin": "t_fallout",
+   "parents": [
+    "f_morality_axis"
+   ],
+   "desc": "Not good or evil but 'whose side'. Converts moral choice into a systems-legible resource with real world-state consequences."
+  },
+  {
+   "id": "f_karma_consequence",
+   "name": "Consequential Branching Endgame",
+   "family": "NARR",
+   "year": 2003,
+   "origin": "t_kotor",
+   "parents": [
+    "f_morality_axis",
+    "f_companion_approval"
+   ],
+   "desc": "Accumulated choices reshape the final act rather than a slide at the end. Makes the morality axis mechanically honest."
+  },
+  {
+   "id": "f_dialogue_wheel",
+   "name": "Cinematic Dialogue Wheel",
+   "family": "NARR",
+   "year": 2007,
+   "origin": "t_mass_effect",
+   "parents": [
+    "f_branching_dialogue",
+    "f_voice_acting"
+   ],
+   "desc": "Paraphrased intent selected radially so the camera never has to stop moving. Traded precision for cinematic continuity."
+  },
+  {
+   "id": "f_agency_twist",
+   "name": "Player-Agency Narrative Twist",
+   "family": "NARR",
+   "year": 2007,
+   "origin": "t_bioshock",
+   "parents": [
+    "f_env_storytelling",
+    "f_branching_dialogue"
+   ],
+   "desc": "The story's subject is the player's own compliance. The medium turning its one unique property — interactivity — into theme."
+  },
+  {
+   "id": "f_hitpoints",
+   "name": "Hit Points",
+   "family": "CBT",
+   "year": 1980,
+   "origin": "t_rogue",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Damage as a depleting pool rather than instant death. Makes combat a negotiation instead of a coin flip."
+  },
+  {
+   "id": "f_combo_string",
+   "name": "Chained Combo Strings",
+   "family": "CBT",
+   "year": 1991,
+   "origin": "t_sf2",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Inputs that link into uninterruptible sequences — discovered in a bug, kept because it created a depth ceiling nobody had designed."
+  },
+  {
+   "id": "f_cancel_meter",
+   "name": "Cancels and Super Meter",
+   "family": "CBT",
+   "year": 1993,
+   "origin": "t_ssf2t",
+   "parents": [
+    "f_combo_string"
+   ],
+   "desc": "A resource earned by fighting well and spent on decisive moments. Gives the fighting game its comeback drama."
+  },
+  {
+   "id": "f_parry_riposte",
+   "name": "Parry and Riposte Window",
+   "family": "CBT",
+   "year": 1997,
+   "origin": "t_sf3",
+   "parents": [
+    "f_combo_string"
+   ],
+   "desc": "Defense as an aggressive, high-risk timing act. Migrates out of fighting games into action, Souls, and eventually everything."
+  },
+  {
+   "id": "f_directional_block",
+   "name": "Directional Attack and Block",
+   "family": "CBT",
+   "year": 1997,
+   "origin": "t_bushido_blade",
+   "parents": [
+    "f_combo_string"
+   ],
+   "desc": "Attacks and guards have geometry. The root of the modern 'melee as reading' school."
+  },
+  {
+   "id": "f_weapon_durability",
+   "name": "Weapon Durability Decay",
+   "family": "CBT",
+   "year": 1990,
+   "origin": "t_fire_emblem1",
+   "parents": [
+    "f_hitpoints"
+   ],
+   "desc": "Tools are consumables. Converts inventory from hoard to budget and forces improvisation."
+  },
+  {
+   "id": "f_ability_cooldown",
+   "name": "Ability Cooldown Economy",
+   "family": "CBT",
+   "year": 1999,
+   "origin": "t_everquest",
+   "parents": [
+    "f_class_system"
+   ],
+   "desc": "Power gated by time rather than resource. The clock that MOBAs, hero shooters, and action-RPGs all now run on."
+  },
+  {
+   "id": "f_bullet_time",
+   "name": "Player-Controlled Bullet Time",
+   "family": "CBT",
+   "year": 2001,
+   "origin": "t_max_payne",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Time as a spendable resource for aiming. Gives the player directorial control over their own action scene."
+  },
+  {
+   "id": "f_regen_health",
+   "name": "Regenerating Health",
+   "family": "CBT",
+   "year": 2001,
+   "origin": "t_halo",
+   "parents": [
+    "f_hitpoints"
+   ],
+   "desc": "Disengage and recover. Replaces the health-pack scavenger hunt with a rhythm of pressure and retreat — and quietly reshapes level design."
+  },
+  {
+   "id": "f_two_weapon_limit",
+   "name": "Constrained Weapon Loadout",
+   "family": "CBT",
+   "year": 2001,
+   "origin": "t_halo",
+   "parents": [
+    "f_hitpoints"
+   ],
+   "desc": "Carry two, choose deliberately. Turns pickups into decisions and makes the sandbox readable."
+  },
+  {
+   "id": "f_cover_system",
+   "name": "Snap-to-Cover Combat",
+   "family": "CBT",
+   "year": 2003,
+   "origin": "t_killswitch",
+   "parents": [
+    "f_over_shoulder"
+   ],
+   "desc": "Geometry becomes a verb. Perfected by Gears of War and imitated for a decade, for better and worse."
+  },
+  {
+   "id": "f_recoil_pattern",
+   "name": "Learnable Recoil Patterns",
+   "family": "CBT",
+   "year": 1999,
+   "origin": "t_counterstrike",
+   "parents": [
+    "f_ads"
+   ],
+   "desc": "Weapon spray is deterministic, so mastery is memorizable. The invisible skill curve underneath competitive FPS."
+  },
+  {
+   "id": "f_stamina",
+   "name": "Stamina Action Economy",
+   "family": "CBT",
+   "year": 2009,
+   "origin": "t_demons_souls",
+   "parents": [
+    "f_hitpoints"
+   ],
+   "desc": "Every offensive and defensive act costs from one shared bar. Makes deliberateness a mechanic and panic a punishable state."
+  },
+  {
+   "id": "f_poise_stagger",
+   "name": "Poise and Stagger Break",
+   "family": "CBT",
+   "year": 2009,
+   "origin": "t_demons_souls",
+   "parents": [
+    "f_stamina"
+   ],
+   "desc": "A second hidden health bar for balance. Creates the aggression/patience dilemma at the heart of the soulslike."
+  },
+  {
+   "id": "f_execution_finisher",
+   "name": "Contextual Execution",
+   "family": "CBT",
+   "year": 2006,
+   "origin": "t_gears",
+   "parents": [
+    "f_cover_system"
+   ],
+   "desc": "A close-quarters kill that costs vulnerability and buys spectacle. Risk purchased with time, paid in theatre."
+  },
+  {
+   "id": "f_gear_swap_combat",
+   "name": "Deflect-Focused Posture Combat",
+   "family": "CBT",
+   "year": 2019,
+   "origin": "t_sekiro",
+   "parents": [
+    "f_parry_riposte",
+    "f_poise_stagger"
+   ],
+   "desc": "Deflection replaces dodging as the core defensive verb, converting combat from spacing into rhythm."
+  },
+  {
+   "id": "f_ragdoll",
+   "name": "Ragdoll Physics",
+   "family": "SIM",
+   "year": 1998,
+   "origin": "t_trespasser",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Bodies simulated rather than animated on death. The first widely visible sign the world had a physics engine underneath it."
+  },
+  {
+   "id": "f_rigid_body_puzzle",
+   "name": "Rigid-Body Puzzle Physics",
+   "family": "SIM",
+   "year": 2004,
+   "origin": "t_hl2",
+   "parents": [
+    "f_ragdoll"
+   ],
+   "desc": "Mass, buoyancy, and leverage as puzzle vocabulary. Physics stops being decoration and becomes the solution space."
+  },
+  {
+   "id": "f_physics_tool",
+   "name": "Physics Manipulation Tool",
+   "family": "SIM",
+   "year": 2004,
+   "origin": "t_hl2",
+   "parents": [
+    "f_rigid_body_puzzle"
+   ],
+   "desc": "A device that grants the player direct control over the simulation. One object that teaches an entire system."
+  },
+  {
+   "id": "f_destructible",
+   "name": "Destructible Geometry",
+   "family": "SIM",
+   "year": 2001,
+   "origin": "t_red_faction",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Level geometry that can be removed. Undermines the designer's assumption of a fixed floor plan, which is precisely the appeal."
+  },
+  {
+   "id": "f_voxel_terrain",
+   "name": "Editable Voxel Terrain",
+   "family": "SIM",
+   "year": 2009,
+   "origin": "t_minecraft",
+   "parents": [
+    "f_destructible"
+   ],
+   "desc": "The world as a uniform grid of removable, placeable matter. The simplest possible world model, and the most generative."
+  },
+  {
+   "id": "f_soft_body",
+   "name": "Soft-Body Deformation",
+   "family": "SIM",
+   "year": 2013,
+   "origin": "t_beamng",
+   "parents": [
+    "f_ragdoll"
+   ],
+   "desc": "Structures that bend and crumple rather than swapping to a damage model. Simulation fidelity as spectacle."
+  },
+  {
+   "id": "f_vehicle_sim",
+   "name": "High-Fidelity Vehicle Physics",
+   "family": "SIM",
+   "year": 1997,
+   "origin": "t_gran_turismo",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Tyre load, weight transfer, and drivetrain modelled seriously. Turned racing games into an equipment hobby."
+  },
+  {
+   "id": "f_flight_sim",
+   "name": "Flight Simulation",
+   "family": "SIM",
+   "year": 1982,
+   "origin": "t_msfs1",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Aerodynamics modelled for their own sake, with no score. The earliest commercial argument that simulation is itself the entertainment."
+  },
+  {
+   "id": "f_propagation_sim",
+   "name": "Propagating Fire and Fluids",
+   "family": "SIM",
+   "year": 2008,
+   "origin": "t_farcry2",
+   "parents": [
+    "f_destructible"
+   ],
+   "desc": "Fire that spreads with wind and terrain. An emergent hazard the designer cannot fully script and the player can weaponize."
+  },
+  {
+   "id": "f_chemistry_engine",
+   "name": "Systemic Elemental Chemistry",
+   "family": "SIM",
+   "year": 2017,
+   "origin": "t_botw",
+   "parents": [
+    "f_propagation_sim",
+    "f_rigid_body_puzzle"
+   ],
+   "desc": "Fire, wind, water, metal, and electricity interacting by rule everywhere. Puzzle solutions the designers never enumerated."
+  },
+  {
+   "id": "f_day_night",
+   "name": "Day/Night Cycle",
+   "family": "WORLD",
+   "year": 1983,
+   "origin": "t_ultima3",
+   "parents": [],
+   "desc": "The world keeps time whether or not you act. The first hint that a game world exists independently of the player."
+  },
+  {
+   "id": "f_npc_schedules",
+   "name": "NPC Daily Schedules",
+   "family": "WORLD",
+   "year": 1992,
+   "origin": "t_ultima7",
+   "parents": [
+    "f_day_night"
+   ],
+   "desc": "Characters sleep, work, and eat on their own clocks. Creates the illusion of a society rather than a set of quest dispensers."
+  },
+  {
+   "id": "f_weather_sys",
+   "name": "Dynamic Weather",
+   "family": "WORLD",
+   "year": 1999,
+   "origin": "t_shenmue",
+   "parents": [
+    "f_day_night"
+   ],
+   "desc": "Simulated, sometimes forecast-driven weather. Atmosphere that the player cannot predict and the designer cannot stage."
+  },
+  {
+   "id": "f_survival_needs",
+   "name": "Survival Needs Clock",
+   "family": "WORLD",
+   "year": 1980,
+   "origin": "t_rogue",
+   "parents": [
+    "f_permadeath"
+   ],
+   "desc": "The food clock: standing still is itself a losing move. Pressure without an enemy on screen."
+  },
+  {
+   "id": "f_crafting",
+   "name": "Crafting From Gathered Materials",
+   "family": "WORLD",
+   "year": 1997,
+   "origin": "t_ultima_online",
+   "parents": [
+    "f_inventory_grid"
+   ],
+   "desc": "Players manufacture goods from raw inputs. Gives non-combat play an economy and the world a supply chain."
+  },
+  {
+   "id": "f_base_building",
+   "name": "Free-Form Base Building",
+   "family": "WORLD",
+   "year": 2009,
+   "origin": "t_minecraft",
+   "parents": [
+    "f_voxel_terrain",
+    "f_crafting"
+   ],
+   "desc": "Permanent player-authored structures inside the play space. Turns a level into property."
+  },
+  {
+   "id": "f_radiant_systems",
+   "name": "Radiant / Generated Activity",
+   "family": "WORLD",
+   "year": 2006,
+   "origin": "t_oblivion",
+   "parents": [
+    "f_npc_schedules"
+   ],
+   "desc": "The world generates its own low-level content and incidents. Infinite filler, and occasionally something no writer would have dared."
+  },
+  {
+   "id": "f_ai_director",
+   "name": "Dynamic AI Director",
+   "family": "WORLD",
+   "year": 2008,
+   "origin": "t_l4d",
+   "parents": [
+    "f_radiant_systems"
+   ],
+   "desc": "An invisible system pacing tension by spawning against your emotional state. Difficulty becomes dramaturgy."
+  },
+  {
+   "id": "f_ecology_sim",
+   "name": "Simulated Ecology",
+   "family": "WORLD",
+   "year": 2018,
+   "origin": "t_rdr2",
+   "parents": [
+    "f_npc_schedules",
+    "f_weather_sys"
+   ],
+   "desc": "Animals and townsfolk with territory, routine, and memory. Fidelity spent on things the player may never notice — which is the point."
+  },
+  {
+   "id": "f_nemesis_system",
+   "name": "Procedural Nemesis Hierarchy",
+   "family": "WORLD",
+   "year": 2014,
+   "origin": "t_shadow_mordor",
+   "parents": [
+    "f_radiant_systems",
+    "f_faction_rep"
+   ],
+   "desc": "Enemies who remember, get promoted, and taunt you about last time. The strongest case yet that character can be generated."
+  },
+  {
+   "id": "f_hotseat",
+   "name": "Same-Screen Two-Player",
+   "family": "MP",
+   "year": 1972,
+   "origin": "t_pong",
+   "parents": [
+    "f_single_screen"
+   ],
+   "desc": "The original multiplayer: one screen, two humans, immediate social consequence. Still undefeated for pure legibility."
+  },
+  {
+   "id": "f_split_screen",
+   "name": "Split-Screen Simultaneous",
+   "family": "MP",
+   "year": 1984,
+   "origin": "t_spy_vs_spy",
+   "parents": [
+    "f_hotseat"
+   ],
+   "desc": "Two independent viewports, one room. Enables asymmetric information between people sitting next to each other."
+  },
+  {
+   "id": "f_lan_deathmatch",
+   "name": "Networked Deathmatch",
+   "family": "MP",
+   "year": 1993,
+   "origin": "t_doom",
+   "parents": [
+    "f_hotseat"
+   ],
+   "desc": "Four players, one network, no rules. Invented competitive PC gaming and, incidentally, a great deal of IT policy."
+  },
+  {
+   "id": "f_online_cs",
+   "name": "Internet Client-Server Play",
+   "family": "MP",
+   "year": 1996,
+   "origin": "t_quake",
+   "parents": [
+    "f_lan_deathmatch"
+   ],
+   "desc": "Authoritative servers and client prediction over unreliable links. The engineering that makes everything after it possible."
+  },
+  {
+   "id": "f_mmo_persistent",
+   "name": "Persistent Shared World",
+   "family": "MP",
+   "year": 1997,
+   "origin": "t_ultima_online",
+   "parents": [
+    "f_online_cs"
+   ],
+   "desc": "A world that continues without you, with an economy and a society. The most ambitious idea the medium has attempted."
+  },
+  {
+   "id": "f_guilds",
+   "name": "Player Guilds and Clans",
+   "family": "MP",
+   "year": 1997,
+   "origin": "t_ultima_online",
+   "parents": [
+    "f_mmo_persistent"
+   ],
+   "desc": "Formal in-game institutions with membership and hierarchy. Retention through obligation to other people."
+  },
+  {
+   "id": "f_raid_content",
+   "name": "Coordinated Raid Encounters",
+   "family": "MP",
+   "year": 1999,
+   "origin": "t_everquest",
+   "parents": [
+    "f_mmo_persistent",
+    "f_ability_cooldown"
+   ],
+   "desc": "Choreographed fights requiring dozens of synchronized players. The medium's only real orchestra."
+  },
+  {
+   "id": "f_coop_campaign",
+   "name": "Drop-In Co-op Campaign",
+   "family": "MP",
+   "year": 2001,
+   "origin": "t_halo",
+   "parents": [
+    "f_split_screen"
+   ],
+   "desc": "The story mode, but with a friend and no ceremony. Quietly one of the most requested features in the medium."
+  },
+  {
+   "id": "f_matchmaking",
+   "name": "Automated Skill Matchmaking",
+   "family": "MP",
+   "year": 2004,
+   "origin": "t_halo2",
+   "parents": [
+    "f_online_cs"
+   ],
+   "desc": "Party, rank, playlist, go. Removed server browsers and made competitive play a console-scale product."
+  },
+  {
+   "id": "f_mp_progression",
+   "name": "Persistent Multiplayer Progression",
+   "family": "MP",
+   "year": 2007,
+   "origin": "t_cod4",
+   "parents": [
+    "f_matchmaking",
+    "f_xp_levels"
+   ],
+   "desc": "Losing still pays. The single most consequential monetization-adjacent design decision of the last twenty years."
+  },
+  {
+   "id": "f_async_invasion",
+   "name": "Asynchronous Invasion & Messages",
+   "family": "MP",
+   "year": 2009,
+   "origin": "t_demons_souls",
+   "parents": [
+    "f_online_cs"
+   ],
+   "desc": "Other players appear as bloodstains, scrawled warnings, and sudden hostile intrusions. Multiplayer as weather."
+  },
+  {
+   "id": "f_moba_lanes",
+   "name": "Lane-Push Objective Structure",
+   "family": "MP",
+   "year": 2003,
+   "origin": "t_dota",
+   "parents": [
+    "f_rts_base",
+    "f_ability_cooldown"
+   ],
+   "desc": "Fixed lanes, creep waves, towers, a base to destroy. A mod's map layout became one of the largest genres on earth."
+  },
+  {
+   "id": "f_battle_royale",
+   "name": "Shrinking-Circle Battle Royale",
+   "family": "MP",
+   "year": 2017,
+   "origin": "t_pubg",
+   "parents": [
+    "f_matchmaking",
+    "f_survival_needs"
+   ],
+   "desc": "Scavenge, avoid, and let a closing boundary force the endgame. Solves the deathmatch pacing problem with geometry."
+  },
+  {
+   "id": "f_crossplay",
+   "name": "Cross-Platform Play",
+   "family": "MP",
+   "year": 2018,
+   "origin": "t_fortnite",
+   "parents": [
+    "f_matchmaking"
+   ],
+   "desc": "Platform walls fall so the friend list can stay whole. A business achievement more than a technical one."
+  },
+  {
+   "id": "f_ping_system",
+   "name": "Non-Verbal Ping Communication",
+   "family": "MP",
+   "year": 2019,
+   "origin": "t_apex",
+   "parents": [
+    "f_battle_royale"
+   ],
+   "desc": "A contextual pointing grammar that conveys intent without voice. Accessibility, localization, and harassment reduction in one feature."
+  },
+  {
+   "id": "f_asymmetric_mp",
+   "name": "Asymmetric Multiplayer Roles",
+   "family": "MP",
+   "year": 2016,
+   "origin": "t_dbd",
+   "parents": [
+    "f_matchmaking",
+    "f_los_detection"
+   ],
+   "desc": "Sides with entirely different rulesets, goals, and cameras. Balance becomes an ongoing negotiation rather than a state."
+  },
+  {
+   "id": "f_extraction_loop",
+   "name": "Extraction Risk/Reward Loop",
+   "family": "MP",
+   "year": 2017,
+   "origin": "t_tarkov",
+   "parents": [
+    "f_battle_royale",
+    "f_permadeath"
+   ],
+   "desc": "Bring gear in, lose it if you die, keep it if you leave. Reintroduces stakes to online shooters."
+  },
+  {
+   "id": "f_automap",
+   "name": "In-Game Automap",
+   "family": "UI",
+   "year": 1993,
+   "origin": "t_doom",
+   "parents": [
+    "f_flip_screen"
+   ],
+   "desc": "The game draws the map as you explore it. Externalizes spatial memory and makes large levels tractable."
+  },
+  {
+   "id": "f_fog_of_war",
+   "name": "Fog of War",
+   "family": "UI",
+   "year": 1992,
+   "origin": "t_dune2",
+   "parents": [],
+   "desc": "Information itself becomes a resource to contest. The foundation of every strategy game's scouting layer."
+  },
+  {
+   "id": "f_minimap_radar",
+   "name": "Persistent Minimap / Radar",
+   "family": "UI",
+   "year": 2001,
+   "origin": "t_halo",
+   "parents": [
+    "f_automap"
+   ],
+   "desc": "A live corner map of threats and space. Reduces cognitive load and, in competitive play, becomes the primary display."
+  },
+  {
+   "id": "f_inventory_grid",
+   "name": "Spatial Inventory Grid",
+   "family": "UI",
+   "year": 1996,
+   "origin": "t_diablo",
+   "parents": [
+    "f_xp_levels"
+   ],
+   "desc": "Carrying capacity as a packing puzzle. Makes 'what do I leave behind' a real decision."
+  },
+  {
+   "id": "f_quest_log",
+   "name": "Quest Journal",
+   "family": "UI",
+   "year": 1998,
+   "origin": "t_baldurs_gate",
+   "parents": [
+    "f_branching_dialogue"
+   ],
+   "desc": "The game tracks what you were told. Enables nonlinear questing without a notepad next to the keyboard."
+  },
+  {
+   "id": "f_objective_marker",
+   "name": "Waypoint Objective Marker",
+   "family": "UI",
+   "year": 2001,
+   "origin": "t_gta3",
+   "parents": [
+    "f_quest_log",
+    "f_automap"
+   ],
+   "desc": "A dot that says go here. Made open worlds navigable and, arguably, made exploring them unnecessary."
+  },
+  {
+   "id": "f_difficulty_select",
+   "name": "Selectable Difficulty",
+   "family": "UI",
+   "year": 1993,
+   "origin": "t_doom",
+   "parents": [
+    "f_lives_continues"
+   ],
+   "desc": "The player declares their own contract with the game up front. Access and challenge stop being the same axis."
+  },
+  {
+   "id": "f_achievements",
+   "name": "Platform Achievements",
+   "family": "UI",
+   "year": 2005,
+   "origin": "t_perfect_dark_zero",
+   "parents": [
+    "f_high_score_table"
+   ],
+   "desc": "A cross-game persistent score attached to an account. The arcade high-score table rebuilt as a platform-wide identity."
+  },
+  {
+   "id": "f_diegetic_ui",
+   "name": "Diegetic HUD-less Interface",
+   "family": "UI",
+   "year": 2008,
+   "origin": "t_dead_space",
+   "parents": [
+    "f_minimap_radar"
+   ],
+   "desc": "Health on the spine, ammo on the gun. Information without breaking the frame — immersion as an interface constraint."
+  },
+  {
+   "id": "f_accessibility_suite",
+   "name": "Comprehensive Accessibility Suite",
+   "family": "UI",
+   "year": 2020,
+   "origin": "t_tlou2",
+   "parents": [
+    "f_difficulty_select"
+   ],
+   "desc": "Granular remapping, audio cues, high contrast, aim assist tiers. Difficulty reframed as one of many access axes."
+  },
+  {
+   "id": "f_procgen_dungeon",
+   "name": "Procedurally Generated Levels",
+   "family": "PROC",
+   "year": 1980,
+   "origin": "t_rogue",
+   "parents": [],
+   "desc": "The level is generated at runtime, so no one — including the designer — has played it. Infinite content from finite rules."
+  },
+  {
+   "id": "f_seeded_universe",
+   "name": "Seeded Procedural Universe",
+   "family": "PROC",
+   "year": 1984,
+   "origin": "t_elite",
+   "parents": [
+    "f_procgen_dungeon"
+   ],
+   "desc": "Eight galaxies from a few bytes of seed. Establishes that scale can be computed rather than stored."
+  },
+  {
+   "id": "f_procgen_loot",
+   "name": "Procedural Loot Tables",
+   "family": "PROC",
+   "year": 1996,
+   "origin": "t_diablo",
+   "parents": [
+    "f_procgen_dungeon",
+    "f_loot_rarity"
+   ],
+   "desc": "Randomized affixes on generated items. The slot-machine core of the entire ARPG genre."
+  },
+  {
+   "id": "f_procgen_narrative",
+   "name": "Emergent Generated History",
+   "family": "PROC",
+   "year": 2006,
+   "origin": "t_dwarf_fortress",
+   "parents": [
+    "f_procgen_dungeon",
+    "f_npc_schedules"
+   ],
+   "desc": "Centuries of simulated world history before you place a single tile. Story as a simulation output."
+  },
+  {
+   "id": "f_infinite_world",
+   "name": "Infinite Chunked World",
+   "family": "PROC",
+   "year": 2009,
+   "origin": "t_minecraft",
+   "parents": [
+    "f_seeded_universe",
+    "f_voxel_terrain"
+   ],
+   "desc": "The world generates ahead of you forever. Exploration without an edge, and a shareable seed as a social object."
+  },
+  {
+   "id": "f_coin_op",
+   "name": "Coin-Op Difficulty Economy",
+   "family": "ECON",
+   "year": 1978,
+   "origin": "t_space_invaders",
+   "parents": [
+    "f_lives_continues"
+   ],
+   "desc": "Difficulty tuned to extract another quarter. The first time monetization directly authored the difficulty curve — and not the last."
+  },
+  {
+   "id": "f_expansion_pack",
+   "name": "Retail Expansion Pack",
+   "family": "ECON",
+   "year": 1990,
+   "origin": "t_wc_secret_missions",
+   "parents": [],
+   "desc": "More content for an owned game, sold separately. Establishes the game as an ongoing product rather than a finished object."
+  },
+  {
+   "id": "f_dlc",
+   "name": "Downloadable Content",
+   "family": "ECON",
+   "year": 2006,
+   "origin": "t_oblivion",
+   "parents": [
+    "f_expansion_pack"
+   ],
+   "desc": "Content delivered post-launch over the network, at any size. Horse armour taught the industry exactly how small a unit could be sold."
+  },
+  {
+   "id": "f_season_pass",
+   "name": "Season Pass Bundle",
+   "family": "ECON",
+   "year": 2011,
+   "origin": "t_la_noire",
+   "parents": [
+    "f_dlc"
+   ],
+   "desc": "Pre-purchase of unspecified future content. Revenue moved before the content exists."
+  },
+  {
+   "id": "f_f2p",
+   "name": "Free-to-Play Service Model",
+   "family": "ECON",
+   "year": 2003,
+   "origin": "t_maplestory",
+   "parents": [
+    "f_coin_op"
+   ],
+   "desc": "Zero price at the door, revenue from a minority of players. The arcade model with an unlimited coin slot."
+  },
+  {
+   "id": "f_cosmetic_economy",
+   "name": "Cosmetic-Only Monetization",
+   "family": "ECON",
+   "year": 2009,
+   "origin": "t_lol",
+   "parents": [
+    "f_f2p"
+   ],
+   "desc": "Sell identity, not power. The compromise that made free-to-play acceptable to competitive players."
+  },
+  {
+   "id": "f_lootbox",
+   "name": "Randomized Loot Box",
+   "family": "ECON",
+   "year": 2010,
+   "origin": "t_tf2",
+   "parents": [
+    "f_procgen_loot",
+    "f_f2p"
+   ],
+   "desc": "Paid randomized rewards. The most profitable and most regulated idea in the medium's commercial history."
+  },
+  {
+   "id": "f_battle_pass",
+   "name": "Seasonal Battle Pass",
+   "family": "ECON",
+   "year": 2013,
+   "origin": "t_dota2",
+   "parents": [
+    "f_prestige",
+    "f_cosmetic_economy"
+   ],
+   "desc": "A time-limited progression track bought up front. Replaced the loot box as the industry's default by trading randomness for obligation."
+  },
+  {
+   "id": "f_live_service",
+   "name": "Live-Service Seasonal Content",
+   "family": "ECON",
+   "year": 2014,
+   "origin": "t_destiny",
+   "parents": [
+    "f_mmo_persistent",
+    "f_season_pass"
+   ],
+   "desc": "The game is a schedule. Content, narrative, and economy all arrive on a calendar and expire on one."
+  },
+  {
+   "id": "f_early_access",
+   "name": "Paid Early Access Development",
+   "family": "ECON",
+   "year": 2009,
+   "origin": "t_minecraft",
+   "parents": [
+    "f_expansion_pack"
+   ],
+   "desc": "Sell the unfinished game and develop with the audience inside the tent. Financing and playtesting merged into one act."
+  },
+  {
+   "id": "f_mobile_f2p",
+   "name": "Mobile Free-to-Play",
+   "family": "ECON",
+   "year": 2012,
+   "origin": "t_candy_crush",
+   "parents": [
+    "f_f2p",
+    "f_touch_input"
+   ],
+   "desc": "Session-length design around energy timers and in-app purchase. By revenue, the dominant form of the medium."
+  },
+  {
+   "id": "f_los_detection",
+   "name": "Line-of-Sight Detection",
+   "family": "STLTH",
+   "year": 1981,
+   "origin": "t_castle_wolfenstein",
+   "parents": [
+    "f_collision"
+   ],
+   "desc": "Enemies that can fail to see you. Introduces the idea that the AI has a state of knowledge distinct from the game's."
+  },
+  {
+   "id": "f_alert_states",
+   "name": "Graduated Alert States",
+   "family": "STLTH",
+   "year": 1998,
+   "origin": "t_mgs",
+   "parents": [
+    "f_los_detection"
+   ],
+   "desc": "Unaware, suspicious, alerted, searching, resolved. Failure becomes a recoverable state instead of a restart."
+  },
+  {
+   "id": "f_detection_meter",
+   "name": "Explicit Detection Feedback",
+   "family": "STLTH",
+   "year": 1998,
+   "origin": "t_mgs",
+   "parents": [
+    "f_alert_states"
+   ],
+   "desc": "The player is shown what the AI knows. Makes an invisible system fair, and stealth teachable."
+  },
+  {
+   "id": "f_light_shadow",
+   "name": "Light-and-Shadow Stealth",
+   "family": "STLTH",
+   "year": 1998,
+   "origin": "t_thief",
+   "parents": [
+    "f_los_detection"
+   ],
+   "desc": "Illumination and sound as measured, readable resources. Turns lighting from art direction into level design."
+  },
+  {
+   "id": "f_immersive_sim",
+   "name": "Systemic Solution Space",
+   "family": "STLTH",
+   "year": 1992,
+   "origin": "t_ultima_underworld",
+   "parents": [
+    "f_los_detection",
+    "f_branching_dialogue"
+   ],
+   "desc": "Consistent interacting systems instead of authored solutions, so problems have answers the designers never listed. The immersive sim's founding contract."
+  },
+  {
+   "id": "f_social_stealth",
+   "name": "Social / Crowd Stealth",
+   "family": "STLTH",
+   "year": 2007,
+   "origin": "t_assassins_creed",
+   "parents": [
+    "f_alert_states"
+   ],
+   "desc": "Hiding in plain sight through behaviour rather than geometry. Stealth moves from the shadows into the daylight."
+  },
+  {
+   "id": "f_3d_audio_stealth",
+   "name": "Diegetic 3D Audio Information",
+   "family": "STLTH",
+   "year": 1998,
+   "origin": "t_thief",
+   "parents": [
+    "f_light_shadow"
+   ],
+   "desc": "Footstep material, distance, and occlusion carry real tactical data. The ear as a primary sensor."
+  },
+  {
+   "id": "f_level_editor",
+   "name": "Bundled Level Editor",
+   "family": "CREATE",
+   "year": 1983,
+   "origin": "t_lode_runner",
+   "parents": [],
+   "desc": "The authoring tool ships in the box. The player becomes a designer without asking permission."
+  },
+  {
+   "id": "f_mod_sdk",
+   "name": "Open Data Formats and Mod SDK",
+   "family": "CREATE",
+   "year": 1993,
+   "origin": "t_doom",
+   "parents": [
+    "f_level_editor"
+   ],
+   "desc": "WADs, then source. Created an unpaid apprenticeship pipeline that produced Counter-Strike, DotA, PUBG, and a generation of studios."
+  },
+  {
+   "id": "f_ugc_marketplace",
+   "name": "User-Content Marketplace",
+   "family": "CREATE",
+   "year": 2006,
+   "origin": "t_roblox",
+   "parents": [
+    "f_mod_sdk"
+   ],
+   "desc": "Players build, publish, and get paid inside the platform. The game becomes an economy of games."
+  },
+  {
+   "id": "f_ingame_creation",
+   "name": "In-Game Creation Suite",
+   "family": "CREATE",
+   "year": 2008,
+   "origin": "t_lbp",
+   "parents": [
+    "f_level_editor"
+   ],
+   "desc": "Authoring with a gamepad, from inside the fiction. Creation as play rather than as a separate tool."
+  },
+  {
+   "id": "f_replay_share",
+   "name": "Replay Capture and Sharing",
+   "family": "CREATE",
+   "year": 2007,
+   "origin": "t_halo3",
+   "parents": [
+    "f_photo_mode"
+   ],
+   "desc": "The match is recorded as data and re-cameraable. Turns play into shareable media and seeds the clip economy."
+  },
+  {
+   "id": "f_rts_base",
+   "name": "Real-Time Base and Unit Production",
+   "family": "STRAT",
+   "year": 1992,
+   "origin": "t_dune2",
+   "parents": [],
+   "desc": "Harvest, build, produce, attack — under continuous time pressure. The template every RTS since has argued with."
+  },
+  {
+   "id": "f_turn_grid_tactics",
+   "name": "Turn-Based Grid Tactics",
+   "family": "STRAT",
+   "year": 1990,
+   "origin": "t_fire_emblem1",
+   "parents": [
+    "f_xp_levels"
+   ],
+   "desc": "Positioning on a grid with persistent, levelling units. Consequence measured in squares."
+  },
+  {
+   "id": "f_4x_empire",
+   "name": "Turn-Based 4X Empire",
+   "family": "STRAT",
+   "year": 1991,
+   "origin": "t_civ1",
+   "parents": [
+    "f_turn_grid_tactics"
+   ],
+   "desc": "Explore, expand, exploit, exterminate across millennia. The strategy game as historical argument."
+  },
+  {
+   "id": "f_tower_defense",
+   "name": "Tower Defense Lane Denial",
+   "family": "STRAT",
+   "year": 2003,
+   "origin": "t_wc3",
+   "parents": [
+    "f_rts_base"
+   ],
+   "desc": "Static defenses against pathing waves — born as a custom map, spun out into a genre of its own."
+  },
+  {
+   "id": "f_deck_progression",
+   "name": "Deck-Building Run Progression",
+   "family": "STRAT",
+   "year": 2017,
+   "origin": "t_slay_the_spire",
+   "parents": [
+    "f_meta_progression",
+    "f_procgen_dungeon"
+   ],
+   "desc": "Your build is a deck assembled during the run. Merged the card game with the roguelike and created a decade of imitators."
+  },
+  {
+   "id": "f_dynamic_music",
+   "name": "Adaptive Dynamic Music",
+   "family": "RHYTHM",
+   "year": 1991,
+   "origin": "t_monkey_island2",
+   "parents": [],
+   "desc": "Score that transitions on the beat to follow player action. Music becomes responsive rather than looped."
+  },
+  {
+   "id": "f_beat_match",
+   "name": "Beat-Matched Input",
+   "family": "RHYTHM",
+   "year": 1996,
+   "origin": "t_parappa",
+   "parents": [
+    "f_score"
+   ],
+   "desc": "Scoring judged against a musical grid. Time itself becomes the difficulty axis."
+  },
+  {
+   "id": "f_note_highway",
+   "name": "Scrolling Note Highway",
+   "family": "RHYTHM",
+   "year": 1998,
+   "origin": "t_guitar_freaks",
+   "parents": [
+    "f_beat_match"
+   ],
+   "desc": "Future input rendered as approaching geometry. A sight-reading interface anyone can learn in ten seconds."
+  },
+  {
+   "id": "f_peripheral_instrument",
+   "name": "Instrument Peripheral",
+   "family": "RHYTHM",
+   "year": 2005,
+   "origin": "t_guitar_hero",
+   "parents": [
+    "f_note_highway"
+   ],
+   "desc": "A dedicated physical object that makes the fantasy tactile. Hardware as the whole pitch."
+  },
+  {
+   "id": "f_rhythm_combat",
+   "name": "Rhythm-Locked Action",
+   "family": "RHYTHM",
+   "year": 2015,
+   "origin": "t_necrodancer",
+   "parents": [
+    "f_beat_match",
+    "f_procgen_dungeon"
+   ],
+   "desc": "Every action must land on the beat, fusing a music game with a dungeon crawl. Two genres solving each other's pacing problems."
+  }
+ ]
+}

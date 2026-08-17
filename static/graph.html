@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Interactive graph — The Genome of Games</title>
+<meta name="description" content="Pan and zoom an interactive graph of 168 game mechanics, 619 games and 394 studios. Trace any mechanic back to its root, or follow a studio lineage across four decades.">
+<link rel="canonical" href="https://genome-of-games.vercel.app/graph/">
+<meta property="og:title" content="Interactive graph — The Genome of Games">
+<meta property="og:description" content="168 mechanics, 619 games, 394 studios and 4,371 links you can pan, zoom and trace.">
+<meta property="og:image" content="https://genome-of-games.vercel.app/og/default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --bg:#06070d; --bg2:#0b0e18; --ink:#e8edf7; --dim:#8b98b0; --dim2:#5d6a80;
+  --line:#1b2233; --accent:#4cc9f0; --hot:#f472b6; --panel:rgba(10,13,22,.93);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);
+  font-family:ui-sans-serif,-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+canvas{display:block;position:absolute;inset:0;touch-action:none}
+
+/* ---------- top bar ---------- */
+#top{position:relative;z-index:20;display:flex;align-items:center;gap:10px;padding:9px 12px;
+  background:linear-gradient(180deg,rgba(6,7,13,.97),rgba(6,7,13,.72));
+  border-bottom:1px solid var(--line);backdrop-filter:blur(14px);flex-wrap:wrap}
+#brand{display:flex;flex-direction:column;line-height:1.12;margin-right:4px}
+#brand b{font-size:14.5px;letter-spacing:.2px;font-weight:650}
+#brand span{font-size:10.5px;color:var(--dim2);letter-spacing:.28px;text-transform:uppercase}
+.tabs{display:flex;gap:3px;background:#0d1220;border:1px solid var(--line);border-radius:9px;padding:3px}
+.tab{border:0;background:transparent;color:var(--dim);font:inherit;font-size:12px;font-weight:560;
+  padding:6px 11px;border-radius:7px;cursor:pointer;white-space:nowrap;transition:.15s}
+.tab:hover{color:var(--ink)}
+.tab.on{background:linear-gradient(180deg,#1d2740,#151d31);color:#fff;box-shadow:0 0 0 1px #2b3a5c inset,0 0 18px -6px var(--accent)}
+.sp{flex:1}
+.sm{display:none}
+@media (max-width:860px){.lg{display:none}.sm{display:inline}}
+.btn{border:1px solid var(--line);background:#0d1220;color:var(--dim);font:inherit;font-size:11.5px;
+  font-weight:550;padding:7px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:.15s}
+.btn:hover{color:var(--ink);border-color:#2b3a5c}
+.btn.on{color:#06070d;background:var(--accent);border-color:var(--accent);font-weight:650}
+#searchwrap{position:relative}
+#q{width:190px;background:#0d1220;border:1px solid var(--line);border-radius:8px;color:var(--ink);
+  font:inherit;font-size:12.5px;padding:7px 10px 7px 28px;outline:none}
+#q:focus{border-color:#2b3a5c;box-shadow:0 0 0 3px rgba(76,201,240,.09)}
+#searchwrap svg{position:absolute;left:8px;top:7px;opacity:.45}
+#res{position:absolute;top:38px;left:0;width:330px;max-height:52vh;overflow:auto;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;display:none;box-shadow:0 18px 50px rgba(0,0,0,.6);z-index:40}
+#res div{padding:8px 11px;font-size:12.5px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:8px;align-items:baseline}
+#res div:hover{background:#141b2d}
+#res .ty{font-size:9px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim2);flex:0 0 42px}
+#res .yr{margin-left:auto;color:var(--dim2);font-size:11px;font-variant-numeric:tabular-nums}
+
+/* ---------- stage ---------- */
+#stage{position:relative;flex:1;overflow:hidden}
+#hint{position:absolute;right:14px;bottom:14px;z-index:8;font-size:11.5px;
+  color:var(--dim2);background:rgba(8,10,18,.8);border:1px solid var(--line);padding:6px 13px;
+  border-radius:99px;pointer-events:none;transition:opacity .6s;backdrop-filter:blur(8px);text-align:center}
+
+/* ---------- legend ---------- */
+#legend{position:absolute;left:12px;top:12px;z-index:9;width:212px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;padding:10px 11px;backdrop-filter:blur(12px);
+  max-height:calc(100% - 24px);overflow:auto;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+#legend h4{margin:0 0 7px;font-size:10px;letter-spacing:.7px;text-transform:uppercase;color:var(--dim2);font-weight:600}
+#legend .row{display:flex;align-items:center;gap:7px;font-size:11.5px;padding:3px 4px;border-radius:6px;cursor:pointer;color:var(--dim)}
+#legend .row:hover{background:#141b2d;color:var(--ink)}
+#legend .row.off{opacity:.32}
+#legend .sw{width:9px;height:9px;border-radius:3px;flex:0 0 9px}
+#legend .ln{width:16px;height:0;border-top:2px solid;flex:0 0 16px}
+#legend hr{border:0;border-top:1px solid var(--line);margin:9px 0}
+#legend .mini{font-size:10.5px;color:var(--dim2);line-height:1.45}
+
+/* ---------- detail panel ---------- */
+#panel{position:absolute;right:12px;top:12px;bottom:12px;width:352px;z-index:12;background:var(--panel);
+  border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(16px);display:none;
+  flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.65)}
+#panel.on{display:flex}
+#phead{padding:14px 15px 11px;border-bottom:1px solid var(--line)}
+#pkind{font-size:9.5px;letter-spacing:1.1px;text-transform:uppercase;font-weight:700;margin-bottom:5px}
+#pname{font-size:19px;font-weight:660;line-height:1.2;margin-bottom:5px;letter-spacing:-.2px}
+#pmeta{font-size:11.5px;color:var(--dim);line-height:1.5}
+#pbody{flex:1;overflow:auto;padding:12px 15px 16px}
+#pbody h5{margin:15px 0 6px;font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--dim2);font-weight:650}
+#pbody h5:first-child{margin-top:0}
+#pbody p{margin:0 0 8px;font-size:13px;line-height:1.55;color:#cfd8e8}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;padding:4px 9px;border-radius:7px;
+  background:#131a2b;border:1px solid #1f2942;margin:0 4px 4px 0;cursor:pointer;transition:.14s;color:var(--dim)}
+.chip:hover{background:#1b2440;color:var(--ink);border-color:#33436b}
+.chip i{width:7px;height:7px;border-radius:2px;display:block}
+.chip b{font-weight:600;color:#dbe4f3}
+.ladder{border-left:2px solid #243050;margin-left:5px;padding-left:12px}
+.lrow{position:relative;padding:6px 0;font-size:12px;line-height:1.4;cursor:pointer}
+.lrow:hover .ln1{color:#fff}
+.lrow:before{content:"";position:absolute;left:-17px;top:12px;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:2px solid #3c4f7d}
+.lrow.hi:before{border-color:var(--hot);box-shadow:0 0 12px var(--hot)}
+.ln1{color:#cfd8e8;font-weight:560}
+.ln2{color:var(--dim2);font-size:11px}
+#pclose{position:absolute;right:9px;top:9px;width:26px;height:26px;border-radius:7px;border:1px solid var(--line);
+  background:#0d1220;color:var(--dim);cursor:pointer;font-size:15px;line-height:1;z-index:2}
+#pclose:hover{color:#fff}
+#pacts{display:flex;gap:6px;padding:10px 15px;border-top:1px solid var(--line)}
+#pacts .btn{flex:1;text-align:center}
+
+/* ---------- tour ---------- */
+#tour{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:14;width:min(620px,calc(100% - 24px));
+  background:var(--panel);border:1px solid #24314f;border-radius:14px;padding:13px 15px;display:none;
+  backdrop-filter:blur(16px);box-shadow:0 20px 60px rgba(0,0,0,.7)}
+#tour.on{display:block}
+#tstep{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:4px}
+#ttitle{font-size:15.5px;font-weight:640;margin-bottom:5px}
+#ttext{font-size:12.5px;line-height:1.55;color:#c3cddd;margin-bottom:10px}
+#tnav{display:flex;gap:7px;align-items:center}
+#tdots{display:flex;gap:4px;margin-left:auto}
+#tdots i{width:6px;height:6px;border-radius:50%;background:#26314c;display:block}
+#tdots i.on{background:var(--accent)}
+
+@media (max-width:860px){
+  #legend{display:none}
+  #legend.show{display:block;left:8px;top:8px;width:calc(100% - 16px);max-height:60%}
+  #panel{left:0;right:0;bottom:0;top:auto;width:auto;height:56%;border-radius:16px 16px 0 0;border-bottom:0}
+  #q{width:120px}
+  #brand span{display:none}
+  #top{gap:7px;padding:7px 9px}
+  .tab{padding:6px 9px;font-size:11.5px}
+  #res{width:min(330px,calc(100vw - 20px))}
+  #tour{bottom:8px;padding:11px 13px}
+}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#1d2537;border-radius:9px}
+::-webkit-scrollbar-track{background:transparent}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="top">
+    <a id="brand" href="/" style="text-decoration:none;color:inherit"><b>← The Genome of Games</b><span>Interactive graph</span></a>
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-l="1"><span class="lg">Feature ontology</span><span class="sm">Features</span></button>
+      <button class="tab" data-l="2"><span class="lg">Franchise trees</span><span class="sm">Series</span></button>
+      <button class="tab" data-l="3"><span class="lg">Studio lineage</span><span class="sm">Studios</span></button>
+    </div>
+    <div id="searchwrap">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8b98b0" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="q" placeholder="Search games, features, studios…" autocomplete="off" spellcheck="false">
+      <div id="res"></div>
+    </div>
+    <div class="sp"></div>
+    <button class="btn" id="btour">▶<span class="lg"> Guided tour</span><span class="sm"> Tour</span></button>
+    <button class="btn" id="brand2">🎲</button>
+    <button class="btn" id="bfit">Fit</button>
+    <button class="btn" id="blegend" style="display:none">Key</button>
+  </div>
+
+  <div id="stage">
+    <canvas id="cv"></canvas>
+    <div id="legend"></div>
+    <div id="panel">
+      <button id="pclose">×</button>
+      <div id="phead"><div id="pkind"></div><div id="pname"></div><div id="pmeta"></div></div>
+      <div id="pbody"></div>
+      <div id="pacts"></div>
+    </div>
+    <div id="tour">
+      <div id="tstep"></div><div id="ttitle"></div><div id="ttext"></div>
+      <div id="tnav">
+        <button class="btn" id="tprev">← Back</button>
+        <button class="btn on" id="tnext">Next →</button>
+        <button class="btn" id="tend">Exit tour</button>
+        <div id="tdots"></div>
+      </div>
+    </div>
+    <div id="hint">Drag to pan · scroll or pinch to zoom · tap any node</div>
+  </div>
+</div>
+
+<script id="gdata" type="application/json">__DATA__</script>
+<script id="gurls" type="application/json">__URLS__</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById('gdata').textContent);
+const URLS = JSON.parse(document.getElementById('gurls').textContent);
+const N = Object.fromEntries(D.nodes.map(n => [n.id, n]));
+const FAM = D.families, Y0 = D.meta.Y0;
+const XSL = () => D.meta.xs[lens];
+const X = y => (y - Y0) * XSL();
+const LP = () => (innerWidth > 860 ? 236 : 14);
+let showAllCo = false;
+
+/* ---------------- indexes ---------------- */
+const inc = {}, out = {};                       // adjacency by kind
+for (const e of D.edges) {
+  (out[e.s] ||= []).push(e); (inc[e.t] ||= []).push(e);
+}
+const adoptersOf = {};                          // feature -> [titleIds]
+const introOf = {};
+for (const e of D.edges) {
+  if (e.k === 'adopts') (adoptersOf[e.t] ||= []).push(e.s);
+  if (e.k === 'introduces') (introOf[e.t] ||= []).push(e.s);
+}
+const kidsOf = {};                              // feature -> child features
+for (const e of D.edges) if (e.k === 'derives') (kidsOf[e.s] ||= []).push(e.t);
+const titlesOfCo = {};
+for (const e of D.edges) if (e.k === 'developed') (titlesOfCo[e.s] ||= []).push(e.t);
+
+const LENS_EDGES = {
+  1: new Set(['derives']),
+  2: new Set(['sequel', 'descends']),
+  3: new Set(['spinoff', 'rename', 'acquired'])
+};
+const EK = {
+  derives:   { c: null,      w: 1.1, a: .30, d: 0 },
+  sequel:    { c: '#5b6b8a', w: 1.3, a: .34, d: 0 },
+  descends:  { c: '#f472b6', w: 1.5, a: .55, d: 0 },
+  spinoff:   { c: '#34d399', w: 1.5, a: .55, d: 0 },
+  rename:    { c: '#93a4c4', w: 1.4, a: .45, d: 0 },
+  acquired:  { c: '#f59e0b', w: 1.2, a: .40, d: 1 }
+};
+
+/* ---------------- state ---------------- */
+let lens = 1, sel = null, hov = null, trace = null;
+const off = new Set();                 // hidden families
+let satellites = [];                   // dynamic adopter nodes in lens 1
+
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+const cam = { x: 0, y: 0, k: .5, tx: 0, ty: 0, tk: .5 };
+let anim = false;
+
+function pos(n) {
+  if (lens === 1) return n.l1;
+  if (lens === 2) return n.l2;
+  return n.l3;
+}
+function visible(n) {
+  if (lens === 1) return n.l1 && (n.t !== 'F' || !off.has(n.fam));
+  if (lens === 2) return n.t === 'T' && n.l2;
+  return n.t === 'C' && n.l3 && (showAllCo || n.sig);
+}
+let VIS = [];
+function rebuild() {
+  VIS = D.nodes.filter(visible);
+  satellites = [];
+  if (lens === 1 && sel && N[sel] && N[sel].t === 'F') {
+    const p = N[sel].l1, list = (adoptersOf[sel] || []).map(id => N[id]).filter(Boolean)
+      .sort((a, b) => a.y - b.y);
+    const lanes = [];
+    list.forEach(t => {
+      const x = X(t.y); let r = 0;
+      while (lanes[r] != null && lanes[r] > x - 26) r++;
+      lanes[r] = x + 26;
+      satellites.push({ id: t.id, node: t, x, y: p.y + 42 + r * 17 });
+    });
+  }
+}
+
+/* ---------------- camera ---------------- */
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+  const r = document.getElementById('stage').getBoundingClientRect();
+  W = r.width; H = r.height;
+  cv.width = W * DPR; cv.height = H * DPR;
+  cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  draw();
+}
+const s2w = (sx, sy) => ({ x: (sx - W / 2) / cam.k + cam.x, y: (sy - H / 2) / cam.k + cam.y });
+const w2s = (wx, wy) => [(wx - cam.x) * cam.k + W / 2, (wy - cam.y) * cam.k + H / 2];
+
+function flyTo(x, y, k, instant) {
+  cam.tx = x; cam.ty = y; cam.tk = Math.max(.09, Math.min(4, k));
+  if (instant) { cam.x = x; cam.y = y; cam.k = cam.tk; draw(); }
+  else startAnim();
+}
+function startAnim() { if (!anim) { anim = true; requestAnimationFrame(tick); } }
+function tick() {
+  const dx = cam.tx - cam.x, dy = cam.ty - cam.y, dk = cam.tk - cam.k;
+  if (Math.abs(dx) < .4 && Math.abs(dy) < .4 && Math.abs(dk) < .0009) {
+    cam.x = cam.tx; cam.y = cam.ty; cam.k = cam.tk; anim = false; draw(); return;
+  }
+  cam.x += dx * .2; cam.y += dy * .2; cam.k += dk * .2;
+  draw(); requestAnimationFrame(tick);
+}
+function fitTo(ids) {
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9, n = 0;
+  for (const id of ids) {
+    const nd = N[id]; if (!nd) continue; const p = pos(nd); if (!p) continue;
+    x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x); y0 = Math.min(y0, p.y); y1 = Math.max(y1, p.y); n++;
+  }
+  if (!n) return;
+  const padR = innerWidth > 860 ? 400 : 40, padL = innerWidth > 860 ? 260 : 30;
+  const k = Math.min((W - padR - padL) / (x1 - x0 + 320), (H - 120) / (y1 - y0 + 200), 1.2);
+  flyTo((x0 + x1) / 2 + (padR - padL) / 2 / Math.max(k, .05), (y0 + y1) / 2, Math.max(.1, k));
+}
+function homeView() {
+  if (lens === 2) { fit(); return; }
+  const b0 = lens === 1 ? D.layout.l1.bands[0] : D.layout.l3.bands[0];
+  const k = lens === 1 ? (W < 760 ? .40 : .55) : (W < 760 ? .30 : .40);
+  flyTo(X(lens === 1 ? (W < 760 ? 1996 : 1993) : (W < 760 ? 2000 : 1997)),
+        (b0 ? b0.y0 : 0) + (H / 2) / k - 34, k);
+}
+function fit() {
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (const n of VIS) { const p = pos(n); if (!p) continue; x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x); y0 = Math.min(y0, p.y); y1 = Math.max(y1, p.y); }
+  if (x0 > x1) return;
+  const k = Math.min((W - 90) / (x1 - x0 + 240), (H - 90) / (y1 - y0 + 140));
+  flyTo((x0 + x1) / 2 + 40, (y0 + y1) / 2, k);
+}
+
+/* ---------------- drawing ---------------- */
+const ERAS = [
+  [1958, 1977, 'Laboratory & coin-op'], [1977, 1985, 'The home cartridge'],
+  [1985, 1994, '8- and 16-bit'], [1994, 2001, 'The 3D rupture'],
+  [2001, 2008, 'Broadband & the console shooter'], [2008, 2015, 'Digital storefronts & indie'],
+  [2015, 2027, 'Live service & the long tail']
+];
+function nodeR(n) {
+  if (n.t === 'F') return 5 + Math.min(9, Math.sqrt(n.desc) * 2.0);
+  if (n.t === 'T') return 3.2 + Math.min(7, (n.intro ? n.intro.length : 0) * 2.1);
+  return 3.6 + Math.min(8, Math.sqrt(n.nt || 0) * 1.7);
+}
+function nodeColor(n) {
+  if (n.t === 'F') return FAM[n.fam].color;
+  if (n.t === 'T') return (n.intro && n.intro.length) ? '#ffe08a' : '#7f8ca6';
+  return n.kind === 'publisher' ? '#f59e0b' : n.kind === 'platform' ? '#a78bfa' : '#34d399';
+}
+function dimmed(id) {
+  if (trace) return !trace.set.has(id);
+  if (!sel) return false;
+  return !(id === sel || relSet.has(id));
+}
+let relSet = new Set();
+function computeRel() {
+  relSet = new Set();
+  if (!sel) return;
+  for (const e of (out[sel] || [])) relSet.add(e.t);
+  for (const e of (inc[sel] || [])) relSet.add(e.s);
+}
+
+let LABELS = [];
+function draw() {
+  LABELS = [];
+  ctx.clearRect(0, 0, W, H);
+  // backdrop
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#080a12'); g.addColorStop(1, '#04050a');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+  drawEraBands();
+  if (lens === 1) drawFamilyBands();
+  if (lens === 2) drawLanes();
+  if (lens === 3) drawClusters();
+  drawEdges();
+  drawNodes();
+  for (const L of LABELS) stickyLabel(L[0], L[1], L[2], L[3], L[4]);
+  drawRuler();
+}
+
+function drawEraBands() {
+  let lastEraX = -1e9;
+  for (let i = 0; i < ERAS.length; i++) {
+    const [a, b, nm] = ERAS[i];
+    const [x0] = w2s(X(a), 0), [x1] = w2s(X(b), 0);
+    if (x1 < 0 || x0 > W) continue;
+    ctx.fillStyle = i % 2 ? 'rgba(255,255,255,.016)' : 'rgba(255,255,255,.005)';
+    ctx.fillRect(x0, 0, x1 - x0, H);
+    ctx.strokeStyle = 'rgba(255,255,255,.045)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x0, 0); ctx.lineTo(x0, H); ctx.stroke();
+    ctx.font = '600 9.5px ui-sans-serif,sans-serif';
+    const tw = ctx.measureText(nm.toUpperCase()).width;
+    const lx = Math.max(x0 + 10, 10);
+    if (x1 - lx > tw + 16 && lx > lastEraX) {
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = 'rgba(139,152,176,.40)';
+      ctx.fillText(nm.toUpperCase(), lx, H - 12);
+      lastEraX = lx + tw + 22;
+    }
+  }
+}
+function drawFamilyBands() {
+  for (const b of D.layout.l1.bands) {
+    if (off.has(b.fam)) continue;
+    const [, y0] = w2s(0, b.y0), [, y1] = w2s(0, b.y1);
+    if (y1 < -30 || y0 > H + 30) continue;
+    ctx.fillStyle = hex2rgba(b.color, .028); ctx.fillRect(0, y0, W, y1 - y0);
+    ctx.strokeStyle = hex2rgba(b.color, .13); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke();
+    LABELS.push([b.name.toUpperCase(), LP(), y0 + 15, hex2rgba(b.color, .88), '700 11px ui-sans-serif,sans-serif']);
+  }
+}
+function drawLanes() {
+  ctx.font = '500 10.5px ui-sans-serif,sans-serif';
+  for (const l of D.layout.l2.lanes) {
+    const [x0, y] = w2s(l.x0, l.y), [x1] = w2s(l.x1, 0);
+    if (y < -20 || y > H + 20) continue;
+    ctx.strokeStyle = 'rgba(255,255,255,.05)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+    if (cam.k > .62) LABELS.push([l.name, LP(), y + 3.5, 'rgba(186,199,219,.9)', '560 10.5px ui-sans-serif,sans-serif']);
+  }
+  const sb = D.layout.l2.singlesBand;
+  const [, sy] = w2s(0, sb.y0);
+  if (sy > -40 && sy < H) {
+    ctx.strokeStyle = 'rgba(255,255,255,.09)'; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(0, sy); ctx.lineTo(W, sy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(139,152,176,.5)'; ctx.font = '700 10px ui-sans-serif,sans-serif';
+    ctx.fillText('STANDALONE TITLES & ONE-OFFS', 12, sy + 15);
+  }
+}
+function drawClusters() {
+  ctx.font = '700 10.5px ui-sans-serif,sans-serif';
+  for (const b of D.layout.l3.bands) {
+    const [, y0] = w2s(0, b.y0), [, y1] = w2s(0, b.y1);
+    if (y1 < -20 || y0 > H + 20) continue;
+    ctx.fillStyle = b.solo ? 'rgba(255,255,255,.006)' : 'rgba(52,211,153,.022)';
+    ctx.fillRect(0, y0, W, y1 - y0);
+    ctx.strokeStyle = 'rgba(255,255,255,.05)';
+    ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke();
+    if (cam.k > .2) {
+      LABELS.push([(b.solo ? b.name : b.name + '  ·  ' + b.n + ' entities').toUpperCase(), LP(), y0 + 14,
+        b.solo ? 'rgba(150,163,186,.7)' : 'rgba(52,211,153,.82)', '700 10.5px ui-sans-serif,sans-serif']);
+    }
+  }
+}
+
+function drawEdges() {
+  const keep = LENS_EDGES[lens];
+  ctx.lineCap = 'round';
+  for (const e of D.edges) {
+    if (!keep.has(e.k)) continue;
+    const a = N[e.s], b = N[e.t]; if (!a || !b) continue;
+    const pa = pos(a), pb = pos(b); if (!pa || !pb) continue;
+    if (lens === 1 && (off.has(a.fam) || off.has(b.fam))) continue;
+    const [x0, y0] = w2s(pa.x, pa.y), [x1, y1] = w2s(pb.x, pb.y);
+    if (Math.max(x0, x1) < -60 || Math.min(x0, x1) > W + 60) continue;
+    if (Math.max(y0, y1) < -60 || Math.min(y0, y1) > H + 60) continue;
+    const st = EK[e.k];
+    const lit = (sel && (e.s === sel || e.t === sel)) ||
+                (trace && trace.set.has(e.s) && trace.set.has(e.t));
+    const dim = dimmed(e.s) && dimmed(e.t);
+    let alpha = st.a * (dim ? .13 : 1) * (lit ? 2.4 : 1);
+    if (alpha < .012) continue;
+    let col = st.c || FAM[a.fam || 'SPACE'].color;
+    if (lit) col = '#ffffff';
+    ctx.strokeStyle = hex2rgba(col, Math.min(.95, alpha));
+    ctx.lineWidth = st.w * (lit ? 2.1 : 1) * Math.max(.55, Math.min(1.6, cam.k * 1.4));
+    if (st.d) ctx.setLineDash([3, 4]);
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    const mx = (x0 + x1) / 2;
+    if (Math.abs(y1 - y0) < 1.5) ctx.lineTo(x1, y1);
+    else ctx.bezierCurveTo(mx, y0, mx, y1, x1, y1);
+    ctx.stroke();
+    if (st.d) ctx.setLineDash([]);
+  }
+  // lens-1 satellite links
+  if (satellites.length && sel) {
+    const p = N[sel].l1, [sx, sy] = w2s(p.x, p.y);
+    ctx.strokeStyle = 'rgba(255,224,138,.22)'; ctx.lineWidth = 1;
+    for (const s of satellites) {
+      const [x, y] = w2s(s.x, s.y);
+      if (x < -40 || x > W + 40) continue;
+      ctx.beginPath(); ctx.moveTo(sx, sy); ctx.bezierCurveTo(sx, (sy + y) / 2, x, (sy + y) / 2, x, y); ctx.stroke();
+    }
+  }
+}
+
+function drawNodes() {
+  const showLabel = cam.k > (lens === 1 ? .30 : lens === 2 ? .50 : .34);
+  ctx.textBaseline = 'middle';
+  // satellites first (behind)
+  for (const s of satellites) {
+    const [x, y] = w2s(s.x, s.y);
+    if (x < -80 || x > W + 200 || y < -20 || y > H + 20) continue;
+    ctx.fillStyle = 'rgba(255,224,138,.85)';
+    ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 6.284); ctx.fill();
+    if (cam.k > .5) {
+      ctx.fillStyle = 'rgba(226,232,240,.72)'; ctx.font = '500 9.5px ui-sans-serif,sans-serif';
+      ctx.fillText(s.node.n + '  ' + s.node.y, x + 5, y);
+    }
+  }
+  for (const n of VIS) {
+    const p = pos(n); if (!p) continue;
+    const [x, y] = w2s(p.x, p.y);
+    if (x < -160 || x > W + 260 || y < -30 || y > H + 30) continue;
+    const dim = dimmed(n.id);
+    const isSel = n.id === sel, isHov = n.id === hov;
+    const r = nodeR(n) * Math.max(.62, Math.min(1.35, cam.k * 1.1));
+    const col = nodeColor(n);
+    if (isSel || isHov || (trace && trace.set.has(n.id))) {
+      ctx.shadowColor = col; ctx.shadowBlur = isSel ? 22 : 13;
+    }
+    ctx.globalAlpha = dim ? .16 : 1;
+    ctx.fillStyle = col;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.284); ctx.fill();
+    ctx.shadowBlur = 0;
+    if (n.t === 'T' && n.intro && n.intro.length) {          // innovator ring
+      ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 1.1;
+      ctx.beginPath(); ctx.arc(x, y, r + 2.6, 0, 6.284); ctx.stroke();
+    }
+    if (isSel) {
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.8;
+      ctx.beginPath(); ctx.arc(x, y, r + 5, 0, 6.284); ctx.stroke();
+    }
+    if (showLabel || isSel || isHov || (trace && trace.set.has(n.id))) {
+      const big = n.t === 'F' || isSel || isHov;
+      ctx.font = (isSel ? '650 ' : big ? '560 ' : '500 ') + (n.t === 'F' ? 11.5 : 10.5) + 'px ui-sans-serif,sans-serif';
+      ctx.globalAlpha = dim ? .13 : (n.t === 'F' ? .96 : .8);
+      ctx.fillStyle = n.t === 'F' ? '#eef3fb' : '#c4cfe1';
+      const lbl = n.t === 'F' ? n.n : (n.n.length > 34 ? n.n.slice(0, 33) + '…' : n.n);
+      ctx.fillText(lbl, x + r + 5, y);
+      if (n.t === 'F' && cam.k > .55) {
+        ctx.globalAlpha = dim ? .1 : .4; ctx.fillStyle = '#8b98b0';
+        ctx.font = '500 9.5px ui-sans-serif,sans-serif';
+        ctx.fillText(n.y + '  ·  ' + (N[n.origin] ? N[n.origin].n : ''), x + r + 5, y + 12);
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+function drawRuler() {
+  ctx.fillStyle = 'rgba(6,7,13,.86)'; ctx.fillRect(0, 0, W, 22);
+  ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.beginPath(); ctx.moveTo(0, 22); ctx.lineTo(W, 22); ctx.stroke();
+  const ppy = XSL() * cam.k;
+  const step = ppy > 40 ? 1 : ppy > 15 ? 5 : ppy > 7 ? 10 : 20;
+  ctx.font = '600 9.5px ui-sans-serif,sans-serif'; ctx.textBaseline = 'middle';
+  for (let yr = 1960; yr <= 2026; yr++) {
+    if (yr % step) continue;
+    const [x] = w2s(X(yr), 0);
+    if (x < -20 || x > W + 20) continue;
+    ctx.fillStyle = 'rgba(139,152,176,.62)';
+    ctx.fillText(String(yr), x - 11, 11);
+    ctx.strokeStyle = 'rgba(255,255,255,.06)';
+    ctx.beginPath(); ctx.moveTo(x, 22); ctx.lineTo(x, H); ctx.stroke();
+  }
+}
+function stickyLabel(txt, x, y, col, font) {
+  ctx.font = font; ctx.textBaseline = 'middle';
+  const w = ctx.measureText(txt).width;
+  ctx.fillStyle = 'rgba(6,7,13,.9)';
+  roundRect(x - 7, y - 9, w + 14, 18, 5); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,.055)'; ctx.lineWidth = 1;
+  roundRect(x - 7, y - 9, w + 14, 18, 5); ctx.stroke();
+  ctx.fillStyle = col; ctx.fillText(txt, x, y);
+}
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+function hex2rgba(h, a) {
+  if (h[0] !== '#') return h;
+  const v = parseInt(h.slice(1), 16);
+  return `rgba(${(v >> 16) & 255},${(v >> 8) & 255},${v & 255},${a})`;
+}
+
+/* ---------------- hit test ---------------- */
+function hit(sx, sy) {
+  let best = null, bd = 20 * 20;
+  for (const s of satellites) {
+    const [x, y] = w2s(s.x, s.y); const d = (x - sx) ** 2 + (y - sy) ** 2;
+    if (d < bd) { bd = d; best = s.id; }
+  }
+  for (const n of VIS) {
+    const p = pos(n); if (!p) continue;
+    const [x, y] = w2s(p.x, p.y);
+    const r = Math.max(9, nodeR(n) * cam.k + 6);
+    const d = (x - sx) ** 2 + (y - sy) ** 2;
+    if (d < r * r && d < bd) { bd = d; best = n.id; }
+  }
+  return best;
+}
+
+/* ---------------- interaction ---------------- */
+let drag = null, moved = 0, pinch = null;
+cv.addEventListener('pointerdown', e => {
+  cv.setPointerCapture(e.pointerId);
+  drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y }; moved = 0;
+});
+cv.addEventListener('pointermove', e => {
+  if (drag) {
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
+    cam.x = drag.cx - dx / cam.k; cam.y = drag.cy - dy / cam.k;
+    cam.tx = cam.x; cam.ty = cam.y; draw();
+  } else {
+    const r = cv.getBoundingClientRect();
+    const h = hit(e.clientX - r.left, e.clientY - r.top);
+    if (h !== hov) { hov = h; cv.style.cursor = h ? 'pointer' : 'grab'; draw(); }
+  }
+});
+function endDrag(e) {
+  if (drag && moved < 6) {
+    const r = cv.getBoundingClientRect();
+    const h = hit(e.clientX - r.left, e.clientY - r.top);
+    select(h);
+  }
+  drag = null;
+}
+cv.addEventListener('pointerup', endDrag);
+cv.addEventListener('pointercancel', () => drag = null);
+cv.addEventListener('wheel', e => {
+  e.preventDefault();
+  const r = cv.getBoundingClientRect();
+  zoomAt(e.clientX - r.left, e.clientY - r.top, Math.exp(-e.deltaY * (e.deltaMode === 1 ? .05 : .0016)));
+}, { passive: false });
+function zoomAt(sx, sy, f) {
+  const before = s2w(sx, sy);
+  cam.k = Math.max(.09, Math.min(4, cam.k * f));
+  const after = s2w(sx, sy);
+  cam.x += before.x - after.x; cam.y += before.y - after.y;
+  cam.tx = cam.x; cam.ty = cam.y; cam.tk = cam.k;
+  draw();
+}
+// pinch
+const pts = new Map();
+cv.addEventListener('pointerdown', e => pts.set(e.pointerId, e));
+cv.addEventListener('pointermove', e => {
+  if (!pts.has(e.pointerId)) return;
+  pts.set(e.pointerId, e);
+  if (pts.size === 2) {
+    drag = null;
+    const [a, b] = [...pts.values()];
+    const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+    const r = cv.getBoundingClientRect();
+    const mx = (a.clientX + b.clientX) / 2 - r.left, my = (a.clientY + b.clientY) / 2 - r.top;
+    if (pinch) zoomAt(mx, my, d / pinch);
+    pinch = d;
+  }
+});
+const clr = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; };
+cv.addEventListener('pointerup', clr); cv.addEventListener('pointercancel', clr);
+cv.addEventListener('dblclick', e => {
+  const r = cv.getBoundingClientRect();
+  zoomAt(e.clientX - r.left, e.clientY - r.top, 1.9);
+});
+
+/* ---------------- selection & panel ---------------- */
+function syncURL() {
+  const p = new URLSearchParams();
+  if (sel) p.set('node', sel);
+  if (lens !== 1) p.set('lens', String(lens));
+  if (trace) p.set('trace', '1');
+  const s = p.toString();
+  history.replaceState(null, '', s ? '?' + s : location.pathname);
+}
+function select(id, keepTrace) {
+  sel = id; if (!keepTrace) trace = null;
+  computeRel(); rebuild(); renderPanel(); draw(); syncURL();
+  document.getElementById('hint').style.opacity = 0;
+}
+function focusNode(id, lensWanted) {
+  const n = N[id]; if (!n) return;
+  const want = lensWanted || (n.t === 'C' ? 3 : n.t === 'F' ? 1 : (n.l1 ? 1 : 2));
+  if (want !== lens) setLens(want, true);
+  const p = pos(n);
+  if (p) flyTo(p.x + 90, p.y, Math.max(cam.k, 1.05));
+  select(id);
+}
+document.getElementById('pclose').onclick = () => { select(null); document.getElementById('panel').classList.remove('on'); };
+
+function chip(id, label, color) {
+  return `<span class="chip" data-go="${id}">${color ? `<i style="background:${color}"></i>` : ''}<b>${esc(label)}</b></span>`;
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function renderPanel() {
+  const P = document.getElementById('panel');
+  if (!sel || !N[sel]) { P.classList.remove('on'); return; }
+  const n = N[sel]; P.classList.add('on');
+  const K = document.getElementById('pkind'), NM = document.getElementById('pname'),
+        M = document.getElementById('pmeta'), B = document.getElementById('pbody'),
+        A = document.getElementById('pacts');
+  let kind, col, meta = '', body = '';
+
+  if (n.t === 'F') {
+    kind = 'Feature · ' + FAM[n.fam].name; col = FAM[n.fam].color;
+    const o = N[n.origin];
+    meta = `Originates <b style="color:#e8edf7">${n.y}</b> in <b style="color:#e8edf7">${o ? esc(o.n) : '—'}</b>
+            &nbsp;·&nbsp; ${n.desc} descendant${n.desc === 1 ? '' : 's'} &nbsp;·&nbsp; ${n.adopt} later titles`;
+    body += `<p>${esc(n.d)}</p>`;
+    body += `<h5>Descends from</h5>` + (n.par.length
+      ? n.par.map(p => chip(p, N[p].n + ' · ' + N[p].y, FAM[N[p].fam].color)).join('')
+      : `<p style="color:#5d6a80;font-size:12px">Nothing — this is a root of the ontology.</p>`);
+    const kids = kidsOf[n.id] || [];
+    if (kids.length) body += `<h5>Forked into</h5>` + kids.sort((a, b) => N[a].y - N[b].y)
+      .map(k => chip(k, N[k].n + ' · ' + N[k].y, FAM[N[k].fam].color)).join('');
+    const ad = (adoptersOf[n.id] || []).map(i => N[i]).sort((a, b) => a.y - b.y);
+    if (ad.length) body += `<h5>Carried forward by ${ad.length} titles</h5>` +
+      ad.map(t => chip(t.id, t.n + ' · ' + t.y)).join('');
+  } else if (n.t === 'T') {
+    kind = 'Game' + (n.fr ? ' · ' + esc(n.fr) + (n.en ? ' ' + esc(n.en) : '') : ''); col = nodeColor(n);
+    meta = `<b style="color:#e8edf7">${n.y}</b> · ${esc(n.g || '')} · ${esc(n.pf || '')}<br>
+            ${n.dev ? chipInline(n.dev) : esc(n.devN)}${n.pub && n.pub !== n.dev ? ' &nbsp;/&nbsp; ' + chipInline(n.pub) : ''}`;
+    body += `<p>${esc(n.d)}</p>`;
+    if (n.intro && n.intro.length) body += `<h5>Introduced to the medium</h5>` +
+      n.intro.map(f => chip(f, N[f].n, FAM[N[f].fam].color)).join('');
+    if (n.ad && n.ad.length) body += `<h5>Built on</h5>` +
+      n.ad.map(f => chip(f, N[f].n, FAM[N[f].fam].color)).join('');
+    const anc = (inc[n.id] || []).filter(e => e.k === 'sequel' || e.k === 'descends');
+    const dec = (out[n.id] || []).filter(e => e.k === 'sequel' || e.k === 'descends');
+    if (anc.length) body += `<h5>Follows</h5>` + anc.map(e => chip(e.s, N[e.s].n + ' · ' + N[e.s].y)).join('');
+    if (dec.length) body += `<h5>Leads to</h5>` + dec.map(e => chip(e.t, N[e.t].n + ' · ' + N[e.t].y)).join('');
+  } else {
+    kind = 'Studio · ' + esc(n.kind); col = nodeColor(n);
+    meta = `${n.y ? 'Founded <b style="color:#e8edf7">' + n.y + '</b>' : 'Founded —'}${n.end ? ' · closed <b style="color:#e8edf7">' + n.end + '</b>' : ''} · ${esc(n.ctry || '')} · ${n.nt} titles here`;
+    body += `<p>${esc(n.d)}</p>`;
+    if (n.spun) body += `<h5>Spun out of</h5>` + chip(n.spun, N[n.spun].n);
+    if (n.ren) body += `<h5>Renamed from</h5>` + chip(n.ren, N[n.ren].n);
+    if (n.own) body += `<h5>Owned by</h5>` + chip(n.own, N[n.own].n + (n.ownY ? ' · ' + n.ownY : ''));
+    const sp = (out[n.id] || []).filter(e => e.k === 'spinoff' || e.k === 'rename');
+    if (sp.length) body += `<h5>Gave rise to</h5>` + sp.map(e => chip(e.t, N[e.t].n)).join('');
+    const acq = (inc[n.id] || []).filter(e => e.k === 'acquired');
+    if (acq.length) body += `<h5>Acquired</h5>` + acq.map(e => chip(e.s, N[e.s].n + (e.y ? ' · ' + e.y : ''))).join('');
+    const ts = (titlesOfCo[n.id] || []).map(i => N[i]).sort((a, b) => a.y - b.y);
+    if (ts.length) body += `<h5>Titles in this dataset</h5>` + ts.map(t => chip(t.id, t.n + ' · ' + t.y)).join('');
+  }
+
+  if (trace && trace.root === sel) body = traceHTML() + body;
+
+  K.textContent = kind; K.style.color = col;
+  NM.textContent = n.n; M.innerHTML = meta; B.innerHTML = body; B.scrollTop = 0;
+  const readBtn = URLS[n.id] ? `<a class="btn" href="${URLS[n.id]}" style="text-align:center;text-decoration:none">Read the full page →</a>` : '';
+  A.innerHTML = ((n.t === 'F' || (n.t === 'T' && n.intro && n.intro.length))
+    ? `<button class="btn ${trace ? 'on' : ''}" id="btrace">${trace ? '✕ Clear trace' : '⟲ Trace to origin'}</button>`
+    : `<button class="btn" id="bneigh">Show connections</button>`) + readBtn;
+  const bt = document.getElementById('btrace');
+  if (bt) bt.onclick = () => { trace ? (trace = null) : doTrace(sel); renderPanel(); draw(); };
+  const bn = document.getElementById('bneigh');
+  if (bn) bn.onclick = () => { const p = pos(n); flyTo(p.x, p.y, 1.3); };
+  B.querySelectorAll('[data-go]').forEach(el => el.onclick = () => focusNode(el.dataset.go));
+}
+function chipInline(id) {
+  return `<span class="chip" data-go="${id}" style="padding:2px 7px;font-size:11px">${esc(N[id] ? N[id].n : id)}</span>`;
+}
+
+/* ---------------- trace to origin ---------------- */
+function doTrace(id) {
+  const n = N[id]; if (!n) return;
+  let seeds = n.t === 'F' ? [id] : (n.intro || []);
+  if (!seeds.length) return;
+  const set = new Set(); const chains = [];
+  for (const s of seeds) {
+    set.add(s); (D.featAnc[s] || []).forEach(a => set.add(a));
+    // longest ancestral path for the ladder
+    const path = [];
+    let cur = s;
+    while (cur) {
+      path.push(cur);
+      const ps = N[cur].par || [];
+      cur = ps.length ? ps.slice().sort((a, b) => (N[a].depth || 0) - (N[b].depth || 0)).pop() : null;
+    }
+    chains.push(path.reverse());
+  }
+  for (const s of set) { const o = N[s] && N[s].origin; if (o) set.add(o); }
+  set.add(id);
+  trace = { root: id, set, chains };
+  if (lens !== 1) { setLens(1, true); }
+  fitTo([...set]);
+}
+function traceHTML() {
+  let h = `<h5>Lineage — root to here</h5><div class="ladder">`;
+  const seen = new Set();
+  for (const ch of trace.chains) {
+    for (const f of ch) {
+      if (seen.has(f)) continue; seen.add(f);
+      const n = N[f], o = N[n.origin];
+      h += `<div class="lrow ${f === trace.root ? 'hi' : ''}" data-go="${f}">
+        <div class="ln1" style="color:${FAM[n.fam].color}">${esc(n.n)}</div>
+        <div class="ln2">${n.y} · ${o ? esc(o.n) : ''}</div></div>`;
+    }
+  }
+  h += `</div><p style="font-size:11.5px;color:#5d6a80;margin-top:8px">
+    ${seen.size} step${seen.size === 1 ? '' : 's'} from a root idea to this one. Everything physical in the medium eventually reaches <b style="color:#8b98b0">Spacewar!, 1962</b>.</p>`;
+  return h;
+}
+
+/* ---------------- lens switching ---------------- */
+function setLens(l, quiet) {
+  lens = l;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', +t.dataset.l === l));
+  rebuild(); buildLegend();
+  if (!quiet) { sel = null; trace = null; renderPanel(); homeView(); }
+  else draw();
+}
+document.getElementById('tabs').onclick = e => {
+  const t = e.target.closest('.tab'); if (t) setLens(+t.dataset.l);
+};
+
+/* ---------------- legend ---------------- */
+function buildLegend() {
+  const L = document.getElementById('legend');
+  let h = '';
+  if (lens === 1) {
+    h += `<h4>Feature families — tap to filter</h4>`;
+    for (const f of D.famOrder) h += `<div class="row ${off.has(f) ? 'off' : ''}" data-fam="${f}">
+      <span class="sw" style="background:${FAM[f].color}"></span>${esc(FAM[f].name)}</div>`;
+    h += `<hr><div class="mini"><b style="color:#cfd8e8">Circle</b> = a mechanic, sized by how many later
+      mechanics descend from it. The small dot beneath is the game that introduced it.
+      Curves run parent → child. Select any node to fan out every later game that used it.</div>`;
+  } else if (lens === 2) {
+    h += `<h4>Edges</h4>
+      <div class="row"><span class="ln" style="border-color:#5b6b8a"></span>Sequel / same series</div>
+      <div class="row"><span class="ln" style="border-color:#f472b6"></span>Descends from another game</div>
+      <hr><h4>Nodes</h4>
+      <div class="row"><span class="sw" style="background:#ffe08a;border-radius:50%"></span>Introduced a new feature</div>
+      <div class="row"><span class="sw" style="background:#7f8ca6;border-radius:50%"></span>Refined existing ones</div>
+      <hr><div class="mini">Each row is one series, ordered by first release. Pink curves are the interesting
+      ones: a mod becoming a genre, a spiritual successor, a studio carrying an idea to a new franchise.</div>`;
+  } else {
+    h += `<h4>Edges</h4>
+      <div class="row"><span class="ln" style="border-color:#34d399"></span>Spun out of (staff left to found)</div>
+      <div class="row"><span class="ln" style="border-color:#93a4c4"></span>Renamed / continued as</div>
+      <div class="row"><span class="ln" style="border-color:#f59e0b;border-top-style:dashed"></span>Acquired by</div>
+      <hr><h4>Nodes</h4>
+      <div class="row"><span class="sw" style="background:#34d399;border-radius:50%"></span>Developer</div>
+      <div class="row"><span class="sw" style="background:#f59e0b;border-radius:50%"></span>Publisher</div>
+      <div class="row"><span class="sw" style="background:#a78bfa;border-radius:50%"></span>Platform holder</div>
+      <hr><div class="row" id="allco"><span class="sw" style="background:${showAllCo ? '#4cc9f0' : '#2a3550'}"></span>${showAllCo ? 'Showing all 394 studios' : 'Show all 394 studios'}</div>
+      <hr><div class="mini">Bands group companies that share an ancestor. Size reflects how many titles
+      in this dataset the studio made. Hidden by default: one-title studios with no recorded lineage.</div>`;
+  }
+  h += `<hr><div class="mini">${D.meta.nF} features · ${D.meta.nT} games · ${D.meta.nC} companies · ${D.meta.nE} links</div>`;
+  L.innerHTML = h;
+  const ac = document.getElementById('allco');
+  if (ac) ac.onclick = () => { showAllCo = !showAllCo; buildLegend(); rebuild(); draw(); };
+  L.querySelectorAll('[data-fam]').forEach(el => el.onclick = () => {
+    const f = el.dataset.fam;
+    off.has(f) ? off.delete(f) : off.add(f);
+    buildLegend(); rebuild(); draw();
+  });
+}
+
+/* ---------------- search ---------------- */
+const q = document.getElementById('q'), res = document.getElementById('res');
+q.oninput = () => {
+  const v = q.value.trim().toLowerCase();
+  if (v.length < 2) { res.style.display = 'none'; return; }
+  const hits = D.nodes.filter(n => n.n.toLowerCase().includes(v))
+    .sort((a, b) => {
+      const ai = a.n.toLowerCase().indexOf(v), bi = b.n.toLowerCase().indexOf(v);
+      return ai - bi || (a.y || 9999) - (b.y || 9999);
+    }).slice(0, 40);
+  res.innerHTML = hits.length ? hits.map(n =>
+    `<div data-go="${n.id}"><span class="ty">${n.t === 'F' ? 'Feature' : n.t === 'T' ? 'Game' : 'Studio'}</span>
+     <span>${esc(n.n)}</span><span class="yr">${n.y || ''}</span></div>`).join('')
+    : `<div style="color:#5d6a80">No match</div>`;
+  res.style.display = 'block';
+  res.querySelectorAll('[data-go]').forEach(el => el.onclick = () => {
+    res.style.display = 'none'; q.value = ''; focusNode(el.dataset.go);
+  });
+};
+document.addEventListener('click', e => { if (!e.target.closest('#searchwrap')) res.style.display = 'none'; });
+
+/* ---------------- tour ---------------- */
+const TOUR = [
+  { id: 'f_collision', l: 1, t: 'Everything starts here', x: 'Two objects occupy the same space and something happens. <b>Spacewar!</b> (1962) put that primitive on a screen, and every act of hitting, landing, blocking or dying since is downstream of it. Follow the curves rightward — that is the whole graph.' },
+  { id: 'f_side_scroll', l: 1, t: 'The world outgrows the screen', x: '<b>Defender</b> (1980) decoupled the camera from the world. That one move creates the platformer, the run-and-gun, the metroidvania, and eventually the idea that a level is a <i>place</i> rather than a picture.' },
+  { id: 'f_free_roam_3d', l: 1, t: 'The 1996 rupture', x: '<b>Super Mario 64</b> had to solve analog movement and a camera-with-opinions at the same time. Almost every 3D action game still runs on the grammar it settled. Tap the node to see 60+ later games carrying it.' },
+  { id: 'f_mod_sdk', l: 2, t: 'When the tools escape', x: 'id shipped Doom with open data formats. Switch to <b>Franchise trees</b> and follow the pink curves: Half-Life → Counter-Strike, Warcraft III → DotA → League of Legends and Dota 2, ARMA 2 → DayZ → PUBG → Fortnite. Four of the largest games on earth began as unpaid mods.' },
+  { id: 'f_regen_health', l: 1, t: 'One decision, a decade of level design', x: '<b>Halo</b> replaced the health-pack scavenger hunt with a recharging shield. That changes encounter pacing, then arena layout, then the entire look of the 2000s shooter. Small mechanics have large blast radii.' },
+  { id: 'f_soulslike_loop', l: 1, t: 'Risk expressed purely as save design', x: 'Demon\'s Souls and <b>Dark Souls</b> put the difficulty in the checkpoint rather than the enemy: rest resets the world, death drops your currency where you fell. Trace it back — it is just <i>checkpoint</i> and <i>stamina</i> crossed.' },
+  { id: 'f_battle_royale', l: 1, t: 'A genre assembled from parts', x: '<b>PUBG</b> is survival needs plus matchmaking plus a closing circle. Nothing in it is new; the arrangement is. Use <b>Trace back to origin</b> on this node to watch it decompose into 1970s ideas.' },
+  { id: 'f_procgen_dungeon', l: 1, t: 'The longest single thread', x: '<b>Rogue</b> (1980) generated its own levels. Follow it forward: Elite\'s seeded galaxies, Diablo\'s loot tables, Minecraft\'s infinite chunks, Slay the Spire\'s runs. Forty-five years, one idea, no sign of exhaustion.' },
+  { id: 'c_activision', l: 3, t: 'Studios fork like features do', x: 'In 1979 four Atari programmers walked out and founded <b>Activision</b> — the first third-party publisher. Switch to <b>Studio lineage</b> and follow the green lines: Softdisk → id, Microsoft → Valve, Infinity Ward → Respawn. Talent moving is how ideas move.' },
+  { id: 'f_lootbox', l: 1, t: 'Business models are features too', x: 'The coin-op difficulty curve of 1978 leads, through free-to-play and procedural loot, to the loot box and then the battle pass. Monetization sits in the same ontology as combat, because it authors design the same way.' }
+];
+let ti = -1;
+function showTour(i) {
+  ti = (i + TOUR.length) % TOUR.length;
+  const s = TOUR[ti];
+  document.getElementById('tour').classList.add('on');
+  document.getElementById('tstep').textContent = `Stop ${ti + 1} of ${TOUR.length}`;
+  document.getElementById('ttitle').textContent = s.t;
+  document.getElementById('ttext').innerHTML = s.x;
+  document.getElementById('tdots').innerHTML = TOUR.map((_, j) => `<i class="${j === ti ? 'on' : ''}"></i>`).join('');
+  if (s.l !== lens) setLens(s.l, true);
+  const n = N[s.id];
+  if (n) { const p = pos(n); if (p) flyTo(p.x + 120, p.y, 1.15); select(s.id); }
+}
+document.getElementById('btour').onclick = () => showTour(0);
+document.getElementById('tnext').onclick = () => showTour(ti + 1);
+document.getElementById('tprev').onclick = () => showTour(ti - 1);
+document.getElementById('tend').onclick = () => { document.getElementById('tour').classList.remove('on'); ti = -1; };
+document.getElementById('bfit').onclick = () => fit();
+document.getElementById('brand2').onclick = () => {
+  const pool = D.nodes.filter(n => n.t === 'F' || (n.t === 'T' && n.intro && n.intro.length));
+  focusNode(pool[Math.floor(Math.random() * pool.length)].id);
+};
+document.getElementById('blegend').onclick = () => document.getElementById('legend').classList.toggle('show');
+
+/* ---------------- keyboard ---------------- */
+addEventListener('keydown', e => {
+  if (e.target === q) { if (e.key === 'Escape') { q.blur(); res.style.display = 'none'; } return; }
+  if (e.key === '1' || e.key === '2' || e.key === '3') setLens(+e.key);
+  if (e.key === 'f') fit();
+  if (e.key === 'Escape') { select(null); trace = null; draw(); }
+  if (e.key === 'ArrowRight' && ti >= 0) showTour(ti + 1);
+  if (e.key === 'ArrowLeft' && ti >= 0) showTour(ti - 1);
+});
+
+/* ---------------- boot ---------------- */
+addEventListener('resize', resize);
+function boot() {
+  if (innerWidth <= 860) document.getElementById('blegend').style.display = '';
+  setLens(1, true); resize(); rebuild();
+  const b0 = D.layout.l1.bands[0];
+  cam.k = cam.tk = W < 760 ? .40 : .55;
+  cam.x = cam.tx = X(W < 760 ? 1996 : 1993);
+  cam.y = cam.ty = b0.y0 + (H / 2) / cam.k - 34;
+  draw();
+  const P = new URLSearchParams(location.search);
+  const wantLens = parseInt(P.get('lens') || '0', 10);
+  const wantNode = P.get('node') || (location.hash.length > 1 ? location.hash.slice(1) : '');
+  if (wantLens >= 1 && wantLens <= 3) setLens(wantLens, true);
+  if (wantNode && N[wantNode]) {
+    focusNode(wantNode, wantLens >= 1 && wantLens <= 3 ? wantLens : undefined);
+    if (P.get('trace') === '1' && N[wantNode].t !== 'C') { doTrace(wantNode); renderPanel(); draw(); }
+  }
+  setTimeout(() => { document.getElementById('hint').style.opacity = .0; }, 9000);
+}
+boot();
+</script>
+</body>
+</html>

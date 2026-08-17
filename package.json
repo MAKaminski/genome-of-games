@@ -1,0 +1,12 @@
+{
+  "name": "genome-of-games",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An ontology of video game mechanics: 168 mechanics, 619 games, 394 studios, 1962-2026.",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js && node serve.js",
+    "serve": "node serve.js"
+  },
+  "engines": { "node": ">=18" }
+}
