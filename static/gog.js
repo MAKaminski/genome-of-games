@@ -160,3 +160,35 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+/* Copy buttons on the MCP page. Separate IIFE so it runs even when the auth
+   block above bails out for want of Supabase config. */
+(function () {
+  function wire() {
+    document.querySelectorAll('[data-copy]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var pre = btn.closest('.snip').querySelector('pre');
+        var text = pre ? pre.innerText : '';
+        var done = function () {
+          var was = btn.textContent;
+          btn.textContent = 'Copied';
+          btn.setAttribute('data-done', '1');
+          setTimeout(function () { btn.textContent = was; btn.removeAttribute('data-done'); }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+        } else fallback(text, done);
+      });
+    });
+  }
+  /* Non-secure origins and older Safari have no clipboard API. */
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { /* leave it selected to copy by hand */ }
+    document.body.removeChild(ta);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
+  else wire();
+})();

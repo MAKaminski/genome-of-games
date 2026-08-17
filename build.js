@@ -46,6 +46,95 @@ function genomeStrip() {
 <div class="genome-key"><span>${y0}</span><span>${num(feats.length)} mechanics · bar height = downstream reach</span><span>${y1}</span></div>`;
 }
 
+/* ======================= MCP INDEX (generated data) =====================
+   api/mcp.mjs serves the dataset over the Model Context Protocol. Rather than
+   have the function re-derive slugs, adjacency and lineage — duplicating
+   lib/data.js and risking drift — the build denormalises everything it needs
+   into one file the function imports statically. Committed output, same as
+   data/links.json. */
+function mcpIndex() {
+  const ref = id => (N[id] ? { id, name: N[id].n, year: N[id].y || null, url: url(id) } : null);
+  const refs = ids => (ids || []).map(ref).filter(Boolean);
+  const byYear = ids => (ids || []).slice().sort((a, b) => (N[a].y || 0) - (N[b].y || 0));
+  const wiki = id => (T.LINKS[id] && T.LINKS[id].wp) || null;
+
+  const entities = {};
+
+  for (const f of T.features) {
+    const p = T.PROSE[f.id] || {};
+    entities[f.id] = {
+      id: f.id, type: 'mechanic', name: f.n, year: f.y, url: url(f.id),
+      family: { key: f.fam, name: T.FAM[f.fam].name, url: `/features/${T.famSlug[f.fam]}/` },
+      summary: p.lede || f.d,
+      prose: p.body || [f.d],
+      alsoKnownAs: p.alsoKnownAs || [],
+      origin: ref(f.origin),
+      originDeveloper: N[f.origin] && N[f.origin].dev ? ref(N[f.origin].dev) : null,
+      era: (() => { const e = T.eraOf(f.y); return { name: e.name, from: e.a, to: e.b, url: `/era/${e.slug}/` }; })(),
+      parents: refs(f.par),
+      children: refs(byYear(T.kidsOf[f.id])),
+      descendants: refs(byYear(T.allDescendants(f.id))),
+      adoptedBy: refs(byYear(T.adoptersOf[f.id])),
+      lineage: refs(T.ancestorChain(f.id)),
+      wikipedia: wiki(f.id)
+    };
+  }
+
+  for (const g of T.games) {
+    entities[g.id] = {
+      id: g.id, type: 'game', name: g.n, year: g.y, url: url(g.id),
+      summary: g.d || '',
+      developer: g.dev ? ref(g.dev) : null,
+      publisher: g.pub && g.pub !== g.dev ? ref(g.pub) : null,
+      platform: g.pf || null, genre: g.g || null, franchise: g.fr || null,
+      introduced: refs(byYear(g.intro)),
+      adopted: refs(byYear(g.ad)),
+      series: refs(g.fr ? T.franchises[g.fr] : []),
+      wikipedia: wiki(g.id)
+    };
+  }
+
+  for (const c of T.studios) {
+    entities[c.id] = {
+      id: c.id, type: 'studio', name: c.n, url: url(c.id),
+      founded: c.y || null, closed: c.end || null, country: c.ctry || null,
+      kind: S.kindLabel(c.kind), summary: c.d || '',
+      developed: refs(byYear(T.devTitles[c.id])),
+      published: refs(byYear(T.pubTitles[c.id])),
+      mechanicsCredited: refs(byYear(T.studioFeatures[c.id])),
+      foundersLeft: c.spun ? ref(c.spun) : null,
+      partOf: c.own ? ref(c.own) : null,
+      renamedFrom: T.renamedFrom[c.id] ? ref(T.renamedFrom[c.id]) : null,
+      renamedTo: T.renamedTo[c.id] ? ref(T.renamedTo[c.id]) : null,
+      spawned: refs(T.spawned[c.id]),
+      acquired: (T.acquiredList[c.id] || []).map(e => ({ ...ref(e.s), acquiredYear: e.y || null })).filter(x => x.id),
+      wikipedia: wiki(c.id)
+    };
+  }
+
+  const index = {
+    meta: {
+      name: 'The Genome of Games',
+      site: SITE,
+      repository: T.GITHUB,
+      license: 'CC BY 4.0',
+      mechanics: T.features.length, games: T.games.length, studios: T.studios.length,
+      links: T.G.edges.length,
+      firstYear: T.games[0].y, lastYear: T.games[T.games.length - 1].y,
+      verifiedWikipediaLinks: Object.values(T.LINKS).filter(v => v.wp).length
+    },
+    families: T.famOrder.map(k => ({
+      key: k, name: T.FAM[k].name, blurb: T.FAM[k].blurb, color: T.FAM[k].color,
+      url: `/features/${T.famSlug[k]}/`, mechanics: (T.featuresByFam[k] || []).length
+    })),
+    eras: T.ERAS.map(e => ({ name: e.name, from: e.a, to: e.b, url: `/era/${e.slug}/`, essay: e.essay })),
+    entities
+  };
+
+  fs.writeFileSync(path.join(__dirname, 'data', 'mcp-index.json'), JSON.stringify(index));
+  return Object.keys(entities).length;
+}
+
 /* ============================ FEATURE PAGES ============================ */
 function featurePage(f) {
   const p = T.PROSE[f.id] || {};
@@ -584,6 +673,189 @@ function newsletterPage() {
   }, body), 0.8);
 }
 
+/* ================================= MCP ================================= */
+function mcpPage() {
+  const crumb = [['Home', '/'], ['MCP server']];
+  const EP = `${SITE}/api/mcp/`;
+
+  /* Snippets carry a copy button; the block itself is a plain <pre> so it
+     still reads and selects normally with JavaScript off. */
+  const snip = (label, lang, code) => `<div class="snip">
+  <div class="snip-h"><span>${esc(label)}</span><button class="copy" type="button" data-copy>Copy</button></div>
+  <pre><code>${esc(code)}</code></pre></div>`;
+
+  const tools = [
+    ['genome_get_overview', 'Counts, families, eras, what "origin" means and where the data is weak. Start here.'],
+    ['genome_search', 'Find mechanics, games or studios by partial name.'],
+    ['genome_get_mechanic', 'Full record: origin, essay, parents, children, everything downstream, adopters.'],
+    ['genome_get_game', 'What a game introduced and what it inherited.'],
+    ['genome_get_studio', 'Titles, credited firsts and corporate lineage.'],
+    ['genome_trace_lineage', 'Walk a mechanic back to a root, or forward through its descendants.'],
+    ['genome_list_family', 'Every mechanic in one of the fifteen families.'],
+    ['genome_by_year', 'What was first shipped in a year or range.']
+  ];
+
+  const body = `${S.crumbs(crumb)}
+<div class="hero" style="padding-bottom:var(--space-lg)">
+  <div class="eyebrow">Model Context Protocol · ${num(T.G.nodes.length)} entities</div>
+  <h1>Plug the dataset into your agent</h1>
+</div>
+<div class="cols"><div>
+  <p class="lede">The whole ontology is served over MCP, so a model can trace a mechanic to its
+  root instead of guessing from whatever it absorbed in training. No key, no account, no rate limit.</p>
+
+  <div class="snip" style="margin:30px 0">
+    <div class="snip-h"><span>Endpoint · streamable http</span><button class="copy" type="button" data-copy>Copy</button></div>
+    <pre><code>${EP}</code></pre></div>
+
+  ${S.section('Claude Code', snip('Terminal', 'bash',
+    `claude mcp add --transport http --scope user genome-of-games ${EP}`) +
+    `<p class="gog-note">Then ask it something like <i>"trace battle royale back to its root using the genome server"</i>. Drop <code>--scope user</code> to add it to the current project only.</p>`)}
+
+  ${S.section('Claude Desktop and claude.ai', `<p class="gog-note">Settings → Connectors → Add custom connector, and paste the endpoint above. Claude Desktop can also read it from its config file:</p>` +
+    snip('claude_desktop_config.json', 'json', JSON.stringify({
+      mcpServers: { 'genome-of-games': { type: 'http', url: EP } }
+    }, null, 2)))}
+
+  ${S.section('Cursor, VS Code, Windsurf, Zed', `<p class="gog-note">All of them read the same shape. Cursor uses <code>.cursor/mcp.json</code>, VS Code uses <code>.vscode/mcp.json</code> with a <code>servers</code> key instead of <code>mcpServers</code>.</p>` +
+    snip('mcp.json', 'json', JSON.stringify({
+      mcpServers: { 'genome-of-games': { url: EP } }
+    }, null, 2)))}
+
+  ${S.section('Any language', `<p class="gog-note">It is JSON-RPC 2.0 over POST. There is nothing to install — these all
+  work against the raw endpoint.</p>` +
+    snip('bash · curl', 'bash',
+`curl -s ${EP} \\
+  -H 'Content-Type: application/json' \\
+  -H 'Accept: application/json, text/event-stream' \\
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+      "name": "genome_trace_lineage",
+      "arguments": { "mechanic": "battle royale" }
+    }
+  }'`) +
+    snip('python', 'python',
+`import urllib.request, json
+
+ENDPOINT = "${EP}"
+
+def genome(tool, **args):
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {"name": tool, "arguments": args},
+    }
+    req = urllib.request.Request(
+        ENDPOINT,
+        data=json.dumps(payload).encode(),
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req) as r:
+        result = json.load(r)["result"]
+    return result["content"][0]["text"]
+
+print(genome("genome_trace_lineage", mechanic="battle royale"))
+print(genome("genome_get_studio", studio="Valve"))`) +
+    snip('node', 'javascript',
+`const ENDPOINT = "${EP}";
+
+async function genome(tool, args = {}) {
+  const res = await fetch(ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "tools/call",
+      params: { name: tool, arguments: args },
+    }),
+  });
+  const { result } = await res.json();
+  return result.content[0].text;
+}
+
+console.log(await genome("genome_trace_lineage", { mechanic: "battle royale" }));`) +
+    snip('typescript · official SDK', 'typescript',
+`import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+
+const client = new Client({ name: "my-app", version: "1.0.0" });
+await client.connect(
+  new StreamableHTTPClientTransport(new URL("${EP}")),
+);
+
+const { tools } = await client.listTools();
+const out = await client.callTool({
+  name: "genome_trace_lineage",
+  arguments: { mechanic: "battle royale" },
+});`))}
+
+  ${S.section('The eight tools', `<table><thead><tr><th>Tool</th><th>What it returns</th></tr></thead><tbody>` +
+    tools.map(([n, d]) => `<tr><td><code>${n}</code></td><td>${esc(d)}</td></tr>`).join('') +
+    `</tbody></table><p class="gog-note">Every tool returns readable prose <i>and</i> a
+    <code>structuredContent</code> object, so agents can either quote it or parse it.</p>`)}
+
+  ${S.section('What you get back', `<p class="gog-note">One call, so you can see the shape before wiring anything:</p>` +
+    snip('genome_trace_lineage · mechanic: "battle royale"', 'text',
+`Shrinking-Circle Battle Royale (2017) traced back 7 steps to a root:
+01. Object Collision As Verb (1962) — introduced in Spacewar!
+02. Single-Screen Arena (1972) — introduced in Pong
+03. Same-Screen Two-Player (1972) — introduced in Pong
+04. Networked Deathmatch (1993) — introduced in Doom
+05. Internet Client-Server Play (1996) — introduced in Quake
+06. Automated Skill Matchmaking (2004) — introduced in Halo 2
+07. Shrinking-Circle Battle Royale (2017) — introduced in PUBG: Battlegrounds
+
+Note: Shrinking-Circle Battle Royale has 2 direct parents — Automated Skill
+Matchmaking (2004), Survival Needs Clock (1980). The chain above follows the
+longest single path, so the other parent is not shown in it.`))}
+
+  ${S.section('Terms', `<div class="note">Free, unauthenticated and unmetered — be reasonable and it stays that way.
+  Data is CC BY 4.0: reuse it anywhere, including commercially, as long as you attribute
+  <i>The Genome of Games</i> with a link. Origins here are contested by design; read the
+  <a href="/methodology/">methodology</a> before presenting any of it as settled, and pass the
+  caveats through to your users — <code>genome_get_overview</code> returns them for exactly that reason.</div>`)}
+</div>
+<aside class="side">
+  <h3>At a glance</h3>
+  <div class="note">
+    <b>Transport</b><br>Streamable HTTP<br><br>
+    <b>Auth</b><br>None<br><br>
+    <b>Tools</b><br>${tools.length}<br><br>
+    <b>Entities</b><br>${num(T.G.nodes.length)}<br><br>
+    <b>Licence</b><br>CC BY 4.0
+  </div>
+  <h3>Also useful</h3>
+  <div class="chips">
+    <a class="chip" href="/llms.txt">llms.txt</a>
+    <a class="chip" href="${T.GITHUB}" rel="noopener">Raw JSON on GitHub</a>
+    <a class="chip" href="/methodology/">Methodology</a>
+    <a class="chip" href="/api/mcp/">Endpoint (GET)</a>
+  </div>
+</aside></div>`;
+
+  write('/mcp/', S.page({
+    title: 'MCP server — query the game mechanic ontology from any agent',
+    desc: `Connect ${num(T.G.nodes.length)} game mechanics, games and studios to Claude, Cursor or any MCP client. Free, no key, eight tools including full lineage tracing. Copy-paste setup for Claude Code, Python, Node and curl.`,
+    canonical: '/mcp/', active: '/mcp/', accent: '#d7ff3e',
+    jsonld: {
+      '@context': 'https://schema.org', '@graph': [
+        S.breadcrumbLd(crumb),
+        {
+          '@type': 'WebAPI', name: 'The Genome of Games MCP server',
+          description: 'Model Context Protocol server exposing an ontology of video game mechanics, their origin games and their lineage.',
+          documentation: SITE + '/mcp/', url: EP, provider: { '@type': 'Organization', name: 'The Genome of Games' },
+          termsOfService: 'https://creativecommons.org/licenses/by/4.0/'
+        }
+      ]
+    }
+  }, body), 0.8);
+}
+
 function methodology() {
   const crumb = [['Home', '/'], ['Methodology']];
   const body = `${S.crumbs(crumb)}
@@ -795,6 +1067,7 @@ Origin means the first notable *shipped* implementation, not invention, and not 
 - [All studios](${SITE}/studios/): ${num(T.studios.length)} developers and publishers with spinoffs, renames and acquisitions.
 - [Interactive graph](${SITE}/graph/): pan and zoom the full lineage; deep-linkable as /graph/?node=<id>&trace=1.
 - [Newsletter](${SITE}/newsletter/): free updates, or a $10/month newsletter.
+- [MCP server](${SITE}/mcp/): query this dataset directly from an agent. Streamable HTTP at ${SITE}/api/mcp/, no key required, eight tools including full lineage tracing.
 
 ## Mechanic families
 
@@ -836,6 +1109,9 @@ erasIndex();
 T.ERAS.forEach(eraPage);
 methodology();
 newsletterPage();
+mcpPage();
+const mcpEntities = mcpIndex();
 assets();
 
 console.log(`built ${pages} pages · ${num(links)} internal links · ${urls.length} sitemap entries`);
+console.log(`mcp index: ${num(mcpEntities)} entities → data/mcp-index.json`);
