@@ -27,6 +27,25 @@ function writeRaw(name, content) {
 const num = n => n.toLocaleString('en-US');
 const famOg = f => `/og/${T.famSlug[f]}.png`;
 
+/* The genome strip — the site's signature graphic. One tick per mechanic, left
+   to right by year of introduction, coloured by family, and as tall as that
+   mechanic's downstream reach (later adopters plus descendants). It is drawn
+   entirely from the dataset, so it changes when the data does and cannot be
+   lifted from the stylesheet. sqrt keeps Numeric Score's 85 adopters from
+   flattening everything else into a baseline. */
+function genomeStrip() {
+  const feats = T.features;
+  const reach = f => (T.adoptersOf[f.id] || []).length + T.allDescendants(f.id).length;
+  const max = Math.sqrt(Math.max(...feats.map(reach)) || 1);
+  const y0 = feats[0].y, y1 = feats[feats.length - 1].y;
+  const ticks = feats.map(f => {
+    const h = 12 + Math.round((Math.sqrt(reach(f)) / max) * 88);
+    return `<i style="height:${h}%;background:${S.famColor(f.fam)}" title="${esc(f.n)} · ${f.y} · ${reach(f)} downstream"></i>`;
+  }).join('');
+  return `<div class="genome" aria-hidden="true">${ticks}</div>
+<div class="genome-key"><span>${y0}</span><span>${num(feats.length)} mechanics · bar height = downstream reach</span><span>${y1}</span></div>`;
+}
+
 /* ============================ FEATURE PAGES ============================ */
 function featurePage(f) {
   const p = T.PROSE[f.id] || {};
@@ -123,7 +142,7 @@ ${S.crumbs(crumb)}
   };
   write(url(f.id), S.page({
     title: `${f.n} — origin, lineage and the ${adopters.length} games that used it`,
-    desc: p.lede || f.d, canonical: url(f.id), og: famOg(f.fam), active: '/features/', jsonld
+    desc: p.lede || f.d, canonical: url(f.id), og: famOg(f.fam), active: '/features/', accent: fam.color, jsonld
   }, body), 0.9);
 }
 
@@ -348,7 +367,7 @@ ${S.prevNext(null, null, [])}
 </div>`;
   write(`/features/${T.famSlug[fam]}/`, S.page({
     title: `${meta.name} — ${list.length} game mechanics and where each came from`,
-    desc: (c.blurb || meta.blurb).slice(0, 300), canonical: `/features/${T.famSlug[fam]}/`,
+    desc: (c.blurb || meta.blurb).slice(0, 300), canonical: `/features/${T.famSlug[fam]}/`, accent: c.color,
     og: famOg(fam), active: '/features/',
     jsonld: { '@context': 'https://schema.org', '@graph': [S.breadcrumbLd(crumb)] }
   }, body), 0.9, 'weekly');
@@ -619,14 +638,17 @@ function home() {
   }).join('') + `</div>`;
 
   const body = `<div class="hero">
+  <div class="eyebrow">An ontology of ${num(T.features.length)} mechanics · ${T.games[0].y}–${T.games[T.games.length - 1].y}</div>
+  <h1>Where every game mechanic came from</h1>
+  <div style="margin-top:38px">${genomeStrip()}</div>
+</div>
 <div class="herogrid">
  <div>
-  <h1>Where every game mechanic came from</h1>
   <p class="lede">${esc(c.hero)}</p>
   <p style="color:var(--dim);max-width:34em;font-size:15.5px">${esc(c.sub)}</p>
-  <div style="margin-top:20px">
+  <div style="margin-top:26px">
     <a class="cta" href="/graph/">Open the interactive graph</a>
-    <a class="cta ghost" href="/features/">Browse all 168 mechanics</a>
+    <a class="cta ghost" href="/features/">Browse all ${num(T.features.length)} mechanics</a>
   </div>
  </div>
  <div class="herocard">
