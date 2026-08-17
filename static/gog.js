@@ -67,6 +67,9 @@
       .catch(function () { return null; });
   }
 
+  /* Paths keep their trailing slash: vercel.json sets trailingSlash:true for
+     the 1,244 content pages, so /api/checkout 308-redirects to /api/checkout/
+     and a redirected POST is not worth the risk. */
   function post(path) {
     var s = session();
     if (!s) { signIn(); return Promise.reject(); }
@@ -113,7 +116,7 @@
           (until ? ' · renews ' + esc(until) : '') + '</p>' +
           '<button class="gog-btn ghost" id="gog-manage">Manage billing</button>';
         document.getElementById('gog-manage').onclick = function () {
-          post('/api/portal').then(function (r) { if (r.ok && r.body.url) location.href = r.body.url; });
+          post('/api/portal/').then(function (r) { if (r.ok && r.body.url) location.href = r.body.url; });
         };
         return;
       }
@@ -122,7 +125,7 @@
         box.innerHTML = '<p class="gog-warn">Your last payment did not go through.</p>' +
           '<button class="gog-btn" id="gog-manage">Update payment method</button>';
         document.getElementById('gog-manage').onclick = function () {
-          post('/api/portal').then(function (r) { if (r.ok && r.body.url) location.href = r.body.url; });
+          post('/api/portal/').then(function (r) { if (r.ok && r.body.url) location.href = r.body.url; });
         };
         return;
       }
@@ -133,7 +136,7 @@
       document.getElementById('gog-sub').onclick = function () {
         var btn = this; btn.disabled = true; btn.textContent = 'Opening checkout…';
         track('gog_checkout_started');
-        post('/api/checkout').then(function (r) {
+        post('/api/checkout/').then(function (r) {
           if (r.ok && r.body.url) { location.href = r.body.url; return; }
           document.getElementById('gog-err').textContent = r.body.error || 'Could not start checkout.';
           btn.disabled = false; btn.textContent = 'Subscribe · $10/month';

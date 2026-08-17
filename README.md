@@ -29,6 +29,54 @@ Add it in Vercel → Settings → Environment Variables, then redeploy. It defau
 `https://genome-of-games.vercel.app` if unset. Getting this right on the first production deploy
 matters: canonical URLs pointing at the wrong host will suppress indexing.
 
+## Accounts, subscriptions and analytics
+
+The 1,244 content pages are still pure static output with no runtime. Sign-in, billing and analytics
+are bolted on at the edges: three Vercel Functions in `api/`, one client script, and nothing else.
+There are still **no npm dependencies** — Supabase (GoTrue + PostgREST) and Stripe are both reached
+over plain HTTP with `fetch`.
+
+| Piece | Where |
+|---|---|
+| Google sign-in | Supabase Auth, redirect flow, tokens land in the URL fragment |
+| Subscriber records | Supabase `public.gog_subscribers`, RLS on, read-own-row only |
+| $10/mo subscription | Stripe Checkout → `api/checkout.mjs` |
+| Billing changes and cancellation | Stripe billing portal → `api/portal.mjs` |
+| Status sync | `api/stripe-webhook.mjs`, signature verified by hand over the raw body |
+| Analytics | PostHog, loaded only when `POSTHOG_KEY` is set |
+
+Every function returns `503` with a plain message when its env vars are missing, so an unconfigured
+deployment is obviously unconfigured rather than subtly broken.
+
+**`/api` routes keep their trailing slash** (`/api/checkout/`). `vercel.json` sets
+`trailingSlash: true` for the content pages, so the unslashed form 308-redirects — which is fine in
+a browser and not fine for a Stripe webhook. Register webhook URLs with the slash.
+
+### Environment variables
+
+| Variable | Notes |
+|---|---|
+| `SITE_URL` | Canonicals, OG tags, sitemap. Set before the first production deploy. |
+| `SUPABASE_URL` · `SUPABASE_ANON_KEY` | Public by design — RLS is what protects the data. |
+| `SUPABASE_SERVICE_ROLE_KEY` | **Secret.** Server-only; bypasses RLS. Supabase → Settings → API. |
+| `STRIPE_SECRET_KEY` | **Secret.** Stripe → Developers → API keys. |
+| `STRIPE_PRICE_ID` | The recurring $10/month price. |
+| `STRIPE_WEBHOOK_SECRET` | **Secret.** Shown when the webhook endpoint is created. |
+| `POSTHOG_KEY` · `POSTHOG_HOST` | Project key is public. Host defaults to `https://us.i.posthog.com`. |
+| `GITHUB_URL` | Defaults to this repository. |
+
+### Enabling Google sign-in
+
+Supabase needs Google OAuth credentials, which have to be created by hand:
+
+1. Google Cloud Console → APIs & Services → Credentials → **OAuth client ID** → Web application.
+2. Authorised redirect URI: `https://<your-project>.supabase.co/auth/v1/callback`
+3. Supabase → Authentication → Providers → **Google**: paste the client ID and secret, enable.
+4. Supabase → Authentication → URL Configuration → add `https://<your-domain>/newsletter/` to the
+   redirect allow-list.
+
+Until step 3 is done the sign-in button will bounce off Supabase with a provider error.
+
 ## Local development
 
 ```bash
