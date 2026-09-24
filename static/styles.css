@@ -359,3 +359,11 @@ td code,th code{background:none;padding:0;color:var(--fam)}
   font-size:12.5px;line-height:1.65;color:var(--ink2);tab-size:2}
 .snip pre code{background:none;padding:0;font-size:inherit;color:inherit}
 @media(max-width:760px){.snip pre{font-size:11.5px}}
+
+/* Follow panel: the one ask on every entity page (lib/shell.js followCta) */
+.follow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;margin-top:38px;
+  padding:22px 24px;background:var(--panel);border-left:2px solid var(--gold)}
+.follow b{display:block;font-size:16px;color:var(--ink);margin-bottom:4px}
+.follow span{font-size:13.5px;color:var(--dim);line-height:1.6;max-width:44em}
+.follow .gog-btn{text-decoration:none;white-space:nowrap}
+.follow .gog-btn:hover{text-decoration:none}

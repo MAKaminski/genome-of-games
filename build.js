@@ -10,6 +10,7 @@ const { N, esc, url, SITE } = T;
 const OUT = path.join(__dirname, 'out');
 const urls = [];
 let pages = 0, links = 0;
+const linkCount = k => Object.values(T.LINKS).filter(v => v[k]).length;
 
 function write(route, html, priority, changefreq) {
   const dir = route === '/' ? OUT : path.join(OUT, route);
@@ -200,6 +201,7 @@ ${S.crumbs(crumb)}
     </div>
   </div>
 
+  ${S.followCta('mechanic', f.n)}
   ${S.prevNext(famList[idx - 1], famList[idx + 1], [`Earlier in ${fam.name}`, `Later in ${fam.name}`])}
 </div>
 <aside class="side">
@@ -219,6 +221,7 @@ ${S.crumbs(crumb)}
       {
         '@type': 'DefinedTerm', '@id': SITE + url(f.id) + '#term',
         name: f.n, description: p.lede || f.d, url: SITE + url(f.id),
+        ...(S.sameAs(f.id).length ? { sameAs: S.sameAs(f.id) } : {}),
         inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'The Genome of Games — mechanic ontology', url: SITE + '/features/' }
       },
       ...(p.question ? [{
@@ -270,6 +273,7 @@ ${S.crumbs(crumb)}
     ${g.pf ? `<span>Platform <b>${esc(g.pf)}</b></span>` : ''}
     ${g.g ? `<span>Genre <b>${esc(g.g)}</b></span>` : ''}
     <span>Era <b><a href="/era/${era.slug}/">${esc(era.name)}</a></b></span>
+    ${S.siteMeta(g.id)}
   </div>
 
   ${intro.length ? S.section('Mechanics this game introduced', `
@@ -287,6 +291,7 @@ ${S.crumbs(crumb)}
 
   <div class="sec"><h2>Look this game up elsewhere</h2>${S.externals(g.id)}</div>
 
+  ${S.followCta('game', g.n)}
   ${S.prevNext(series[si - 1], series[si + 1], ['Previous in series', 'Next in series'])}
 </div>
 <aside class="side">
@@ -308,7 +313,9 @@ ${S.crumbs(crumb)}
         '@type': 'VideoGame', name: g.n, url: SITE + url(g.id),
         datePublished: String(g.y), description: g.d,
         ...(g.g ? { genre: g.g } : {}), ...(g.pf ? { gamePlatform: g.pf } : {}),
-        author: { '@type': 'Organization', name: g.devN, ...(dev ? { url: SITE + url(g.dev) } : {}) },
+        ...(S.sameAs(g.id).length ? { sameAs: S.sameAs(g.id) } : {}),
+        author: { '@type': 'Organization', name: g.devN, ...(dev ? { url: SITE + url(g.dev) } : {}),
+          ...(dev && S.sameAs(g.dev).length ? { sameAs: S.sameAs(g.dev) } : {}) },
         ...(pub ? { publisher: { '@type': 'Organization', name: pub.n, url: SITE + url(g.pub) } } : {}),
         ...(g.fr ? { partOfSeries: { '@type': 'CreativeWorkSeries', name: g.fr } } : {})
       }
@@ -347,6 +354,7 @@ ${S.crumbs(crumb)}
     ${c.ctry ? `<span>Country <b>${esc(c.ctry)}</b></span>` : ''}
     ${titles.length ? `<span>Titles here <b>${titles.length}</b></span>` : ''}
     ${feats.length ? `<span>Mechanics credited <b>${feats.length}</b></span>` : ''}
+    ${S.siteMeta(c.id)}
   </div>
 
   ${lineageBits.length || spawn.length || acq.length ? S.section('Corporate lineage', `
@@ -368,6 +376,8 @@ ${S.crumbs(crumb)}
   ${published.length ? S.section(`Games published (${published.length})`, S.chipList(published)) : ''}
 
   <div class="sec"><h2>Look this company up elsewhere</h2>${S.externals(c.id)}</div>
+
+  ${S.followCta('studio', c.n)}
 </div>
 <aside class="side">
   <h3>Explore</h3>
@@ -385,6 +395,7 @@ ${S.crumbs(crumb)}
       S.breadcrumbLd(crumb),
       {
         '@type': 'Organization', name: c.n, url: SITE + url(c.id), description: c.d,
+        ...(S.sameAs(c.id).length ? { sameAs: S.sameAs(c.id) } : {}),
         ...(c.y ? { foundingDate: String(c.y) } : {}),
         ...(c.ctry ? { location: { '@type': 'Place', name: c.ctry } } : {}),
         ...(c.own ? { parentOrganization: { '@type': 'Organization', name: N[c.own].n, url: SITE + url(c.own) } } : {})
@@ -879,11 +890,17 @@ ${S.section('Dataset at a glance', `<table><tbody>
 <tr><td>Deepest lineage</td><td class="n">${Math.max(...T.features.map(f => T.ancestorChain(f.id).length))}</td><td>steps from a root to a leaf</td></tr>
 </tbody></table>`)}
 ${S.section('Outbound links', `<div class="note">Every entity page links out so a claim can be checked against a second
-source. The Wikipedia links are verified permalinks rather than searches: all ${num(Object.keys(T.LINKS).length)} entities
-were resolved against the Wikipedia API, ${num(Object.values(T.LINKS).filter(v => v.wp).length)} of them landed on a
-confirmed article, and the rest carry no Wikipedia link at all — an empty search result is worse than an absent link.
-Most of the gap is mechanics: this ontology names concepts that Wikipedia does not have separate articles for.
-MobyGames and Giant Bomb links remain site searches; verifying those needs API keys this project does not have.</div>`)}
+source, and so a studio or game is credited by a link to its own presence rather than a mention. The Wikipedia links are
+verified permalinks rather than searches: all ${num(Object.keys(T.LINKS).length)} entities were resolved against the
+Wikipedia API, ${num(Object.values(T.LINKS).filter(v => v.wp).length)} of them landed on a confirmed article, and the
+rest carry no Wikipedia link at all — an empty search result is worse than an absent link. Most of the gap is mechanics:
+this ontology names concepts that Wikipedia does not have separate articles for.
+<br><br>From each confirmed article, Wikidata supplies the entity's other verified identities: ${linkCount('site')} official
+websites, ${linkCount('steam')} Steam and ${linkCount('gog')} GOG store pages, ${linkCount('moby')} MobyGames and
+${linkCount('igdb')} IGDB records, and ${linkCount('x')} studio accounts on X. Nothing is guessed from a name; every one of
+those is a Wikidata claim (<code>scripts/enrich-links.js</code>), and the same set is published as <code>sameAs</code> in
+each page's structured data. Where Wikidata has no claim, MobyGames and Giant Bomb fall back to site searches, marked
+nofollow.</div>`)}
 ${S.section('Corrections', `<div class="note">This is a research artefact, not an authority. If a date, credit or lineage
 here is wrong, it is worth fixing. The whole dataset is JSON in the repository.</div>`)}`;
   write('/methodology/', S.page({
@@ -940,6 +957,7 @@ function home() {
 <div class="prose" style="max-width:38em;margin:34px 0">${c.openingClaim.split(/\n\n+/).map(x => `<p>${esc(x)}</p>`).join('')}</div>
 
 ${S.section('Six mechanics worth pulling apart', `<div class="grid">${showcase.map(S.featureCard).join('')}</div>`)}
+${S.followCta('home', 'the dataset')}
 
 ${S.section('The 15 families', `<div class="grid">${T.famOrder.map(f => `
 <a class="card" href="/features/${T.famSlug[f]}/">
@@ -1057,7 +1075,7 @@ Origin means the first notable *shipped* implementation, not invention, and not 
 
 - Coverage skews to Western PC and Japanese console history; arcade-era Japan, PC strategy and mobile interaction design are thinner than they should be.
 - \`adopts\` links are illustrative and deliberately incomplete: they show an idea spread, not everywhere it spread.
-- Wikipedia links are verified permalinks; MobyGames and Giant Bomb links are site searches.
+- Outbound links are verified: Wikipedia permalinks, plus official sites, Steam, GOG, MobyGames, IGDB and X from Wikidata claims. Only the fallback MobyGames and Giant Bomb links are site searches.
 
 ## Core pages
 
