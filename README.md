@@ -102,6 +102,8 @@ own presence. Re-run both scripts after adding entities.
 | `POSTHOG_KEY` · `POSTHOG_HOST` | Project key is public. Host defaults to `https://us.i.posthog.com`. |
 | `GITHUB_URL` | Defaults to this repository. |
 
+`SUPABASE_URL`, `SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are no longer read and can be deleted from the Vercel project.
+
 Tokens are HMAC-signed, not stored, so a magic link stays valid until it expires even after it has
 been used once; the hour-long window is the mitigation. Rotate `MAGIC_SECRET` if a link is ever
 leaked at scale.
