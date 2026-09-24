@@ -37,12 +37,64 @@
       expires_at: Number(p.get('expires_at') || 0)
     }));
     history.replaceState(null, '', location.pathname + location.search);
-    track('gog_signed_in');
+    track('gog_signed_in', { method: 'google' });
     return true;
   }
 
+  /* The emailed link carries a one-time token hash (api/magic.mjs). Exchange
+     it for a session directly with GoTrue — no redirect through Supabase, so
+     nothing in its dashboard has to be configured for this to work. */
+  function absorbMagicToken() {
+    var q = new URLSearchParams(location.search);
+    var tokenHash = q.get('token_hash');
+    if (!tokenHash) return Promise.resolve(false);
+    q.delete('token_hash');
+    history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q.toString() : ''));
+    return fetch(C.supabaseUrl + '/auth/v1/verify', {
+      method: 'POST',
+      headers: { apikey: C.supabaseKey, 'content-type': 'application/json' },
+      body: JSON.stringify({ type: 'magiclink', token_hash: tokenHash })
+    }).then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+      .then(function (r) {
+        if (!r.ok || !r.body.access_token) {
+          magicError = r.body && (r.body.msg || r.body.error_description) || 'That link has expired. Request a new one.';
+          track('gog_magic_failed');
+          return false;
+        }
+        localStorage.setItem(STORE, JSON.stringify({
+          access_token: r.body.access_token,
+          refresh_token: r.body.refresh_token,
+          expires_at: Number(r.body.expires_at || (Math.floor(Date.now() / 1000) + Number(r.body.expires_in || 3600)))
+        }));
+        track('gog_signed_in', { method: 'email' });
+        return true;
+      }).catch(function () { magicError = 'Could not complete sign-in. Request a new link.'; return false; });
+  }
+  var magicError = null;
+
+  function requestMagicLink(email, box, btn) {
+    track('gog_signin_started', { method: 'email' });
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch('/api/magic/', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: email })
+    }).then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+      .then(function (r) {
+        if (r.ok) {
+          track('gog_magic_sent');
+          box.innerHTML = '<p class="gog-ok">Link sent</p><p class="gog-note">Check <b>' + esc(email) +
+            '</b> for a sign-in link. It works once and expires in an hour.</p>';
+          return;
+        }
+        document.getElementById('gog-err').textContent = r.body.error || 'Could not send the link.';
+        btn.disabled = false; btn.textContent = 'Email me a sign-in link';
+      }).catch(function () {
+        document.getElementById('gog-err').textContent = 'Could not send the link.';
+        btn.disabled = false; btn.textContent = 'Email me a sign-in link';
+      });
+  }
+
   function signIn() {
-    track('gog_signin_started');
+    track('gog_signin_started', { method: 'google' });
     location.href = C.supabaseUrl + '/auth/v1/authorize?provider=google&redirect_to=' +
       encodeURIComponent(C.site + '/newsletter/');
   }
@@ -90,10 +142,25 @@
 
     if (!who) {
       panel.innerHTML =
-        '<button class="gog-btn" id="gog-in">Continue with Google</button>' +
+        '<form id="gog-magic" class="gog-form" novalidate>' +
+        '<input type="email" name="email" id="gog-email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">' +
+        '<button class="gog-btn" type="submit" id="gog-send">Email me a sign-in link</button></form>' +
+        '<div class="gog-err" id="gog-err">' + (magicError ? esc(magicError) : '') + '</div>' +
         '<p class="gog-note">Free. You get an email when mechanics are added or an origin is corrected. ' +
-        'Unsubscribe in one click; the dataset stays free either way.</p>';
-      document.getElementById('gog-in').onclick = signIn;
+        'Unsubscribe in one click; the dataset stays free either way.</p>' +
+        '<p class="gog-note" style="margin-top:10px">Or <a href="#" id="gog-in">continue with Google</a>.</p>';
+      magicError = null;
+      document.getElementById('gog-in').onclick = function (e) { e.preventDefault(); signIn(); };
+      document.getElementById('gog-magic').onsubmit = function (e) {
+        e.preventDefault();
+        var input = document.getElementById('gog-email');
+        var email = input.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+          document.getElementById('gog-err').textContent = 'Enter an email address.';
+          input.focus(); return;
+        }
+        requestMagicLink(email, panel, document.getElementById('gog-send'));
+      };
       return;
     }
 
@@ -154,7 +221,9 @@
          re-read the row shortly after rather than showing a stale status. */
       setTimeout(render, 2500);
     }
-    render();
+    /* A magic-link landing exchanges its token before the first paint of the
+       panel, so the visitor never sees the signed-out form flash. */
+    absorbMagicToken().then(render);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);

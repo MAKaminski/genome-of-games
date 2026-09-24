@@ -639,7 +639,9 @@ function newsletterPage() {
   <p class="lede">This dataset changes. Mechanics get added, origins get contested and corrected, and the
   lineage shifts when they do. Two ways to follow that — one free, one paid.</p>
 
-  <div class="sec"><h2>Sign in</h2>
+  <div class="sec"><h2>Get updates</h2>
+    <p style="color:var(--dim);font-size:14px;max-width:36em">Enter your email and we send a one-time sign-in link.
+    No password to remember; no account to set up.</p>
     <div id="gog-panel" class="gog-panel">
       <p class="gog-note">Loading…</p>
     </div>
@@ -659,7 +661,7 @@ function newsletterPage() {
   <a href="${T.GITHUB}" rel="noopener">the whole repository</a> stays public. Paying supports the
   research and gets you the monthly write-up — the argument, not the access.</div>`)}
 
-  ${S.section('Privacy', `<div class="note">Google sign-in gives this site your email address and nothing
+  ${S.section('Privacy', `<div class="note">Signing in gives this site your email address and nothing
   else. Payments are handled entirely by Stripe; no card details touch this server. Cancel any time from
   the billing portal on this page — no email required.</div>`)}
 </div>

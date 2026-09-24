@@ -367,3 +367,10 @@ td code,th code{background:none;padding:0;color:var(--fam)}
 .follow span{font-size:13.5px;color:var(--dim);line-height:1.6;max-width:44em}
 .follow .gog-btn{text-decoration:none;white-space:nowrap}
 .follow .gog-btn:hover{text-decoration:none}
+
+/* Email sign-in form (static/gog.js) */
+.gog-form{display:flex;flex-wrap:wrap;gap:10px;max-width:40em}
+.gog-form input{flex:1 1 220px;font:15px var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--line2);
+  padding:13px 14px;outline:0}
+.gog-form input:focus{border-color:var(--gold)}
+.gog-form .gog-btn{flex:0 0 auto}
