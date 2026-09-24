@@ -38,7 +38,8 @@ over plain HTTP with `fetch`.
 
 | Piece | Where |
 |---|---|
-| Google sign-in | Supabase Auth, redirect flow, tokens land in the URL fragment |
+| Email sign-in (primary) | `api/magic.mjs` mints a one-time token with GoTrue's admin API and emails it through Resend; the browser exchanges it for a session with `POST /auth/v1/verify`. Needs no Google credentials and no Supabase dashboard configuration. |
+| Google sign-in (optional) | Supabase Auth, redirect flow, tokens land in the URL fragment. Only works once the Google provider is configured (below). |
 | Subscriber records | Supabase `public.gog_subscribers`, RLS on, read-own-row only |
 | $10/mo subscription | Stripe Checkout → `api/checkout.mjs` |
 | Billing changes and cancellation | Stripe billing portal → `api/portal.mjs` |
@@ -61,7 +62,7 @@ sign-in is an event, so the funnel can be read end to end:
 | `search_used` / `search_result_click` | `static/app.js` | Header search, one event per settled query |
 | `cta_viewed` / `cta_click` | `static/app.js` | Follow panel seen / clicked; `placement` is `home`, `mechanic`, `game` or `studio` |
 | `mcp_snippet_copied` / `repo_click` | `static/app.js` | Developer intent: copied an MCP config, or opened the repository |
-| `gog_signin_started` → `gog_signed_in` | `static/gog.js` | Google sign-in — **the conversion** |
+| `gog_signin_started` → `gog_magic_sent` → `gog_signed_in` | `static/gog.js` | Sign-in — **the conversion**; `method` is `email` or `google` |
 | `gog_checkout_started` → `gog_subscribed` | `static/gog.js` | Stripe checkout for the paid tier |
 
 The funnel and the supporting charts live on the PostHog dashboard **Genome of Games — conversion**
@@ -99,10 +100,15 @@ a browser and not fine for a Stripe webhook. Register webhook URLs with the slas
 | `STRIPE_SECRET_KEY` | **Secret.** Stripe → Developers → API keys. |
 | `STRIPE_PRICE_ID` | The recurring $10/month price. |
 | `STRIPE_WEBHOOK_SECRET` | **Secret.** Shown when the webhook endpoint is created. |
+| `RESEND_API_KEY` | **Secret.** Sends the sign-in link email. Resend → API Keys → sending access is enough. |
+| `MAGIC_FROM` | From address for the sign-in email, e.g. `The Genome of Games <genome@yourdomain.com>`. The domain must be verified in Resend. |
 | `POSTHOG_KEY` · `POSTHOG_HOST` | Project key is public. Host defaults to `https://us.i.posthog.com`. |
 | `GITHUB_URL` | Defaults to this repository. |
 
-### Enabling Google sign-in
+### Enabling Google sign-in (optional)
+
+Email sign-in above is the primary path and works with nothing but `RESEND_API_KEY`. Google is
+offered as a secondary link on the same panel and bounces with a provider error until this is done:
 
 Supabase needs Google OAuth credentials, which have to be created by hand:
 
