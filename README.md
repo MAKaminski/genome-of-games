@@ -45,6 +45,43 @@ over plain HTTP with `fetch`.
 | Status sync | `api/stripe-webhook.mjs`, signature verified by hand over the raw body |
 | Analytics | PostHog, loaded only when `POSTHOG_KEY` is set |
 
+### Conversion and analytics
+
+The conversion this site optimises for is the **free Google sign-in**: it turns an anonymous reader
+into a person with an email in PostHog (`posthog.identify` in `static/gog.js`), which is what makes
+the $10/month newsletter sellable later. Every entity page and the homepage carry one ask — the
+"Follow" panel (`followCta` in `lib/shell.js`) — and everything a reader can do that predicts a
+sign-in is an event, so the funnel can be read end to end:
+
+| Event | Fired by | Meaning |
+|---|---|---|
+| `$pageview` | PostHog | Visit |
+| `engaged_read` | `static/app.js` | 60% of the page scrolled, or 45 s on it, whichever first |
+| `outbound_click` | `static/app.js` | Left for a linked source; `target` is `site`, `steam`, `gog`, `wikipedia`, `mobygames`, `igdb`, `x` or `giantbomb` |
+| `search_used` / `search_result_click` | `static/app.js` | Header search, one event per settled query |
+| `cta_viewed` / `cta_click` | `static/app.js` | Follow panel seen / clicked; `placement` is `home`, `mechanic`, `game` or `studio` |
+| `mcp_snippet_copied` / `repo_click` | `static/app.js` | Developer intent: copied an MCP config, or opened the repository |
+| `gog_signin_started` → `gog_signed_in` | `static/gog.js` | Google sign-in — **the conversion** |
+| `gog_checkout_started` → `gog_subscribed` | `static/gog.js` | Stripe checkout for the paid tier |
+
+The funnel and the supporting charts live on the PostHog dashboard **Genome of Games — conversion**
+(project 199170). `cta_viewed` exists so the panel's click-through is a rate, not a count; compare
+placements before moving or rewording it.
+
+### Outbound links
+
+`data/links.json` is committed output from two scripts, neither of which runs at build time:
+
+1. `node scripts/verify-links.js` — resolves every entity to a **verified Wikipedia permalink**
+   (or records that no article exists).
+2. `node scripts/enrich-links.js` — from each verified article, reads the entity's other identities
+   off Wikidata: official website, Steam, GOG, IGDB, MobyGames and the studio's X account. Nothing
+   is guessed from a name; every link is a Wikidata claim.
+
+Pages render them as followed links (`lib/shell.js` `externals`) and publish the same set as
+schema.org `sameAs`, so a search or answer engine can merge each page with the studio's or game's
+own presence. Re-run both scripts after adding entities.
+
 Every function returns `503` with a plain message when its env vars are missing, so an unconfigured
 deployment is obviously unconfigured rather than subtly broken.
 
