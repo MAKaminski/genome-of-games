@@ -662,8 +662,8 @@ function newsletterPage() {
   research and gets you the monthly write-up — the argument, not the access.</div>`)}
 
   ${S.section('Privacy', `<div class="note">Signing in gives this site your email address and nothing
-  else. Payments are handled entirely by Stripe; no card details touch this server. Cancel any time from
-  the billing portal on this page — no email required.</div>`)}
+  else — there is no password and no account database. Payments are handled entirely by Stripe; no card
+  details touch this server. Cancel any time from the billing portal on this page — no email required.</div>`)}
 </div>
 <aside class="side">
   <h3>The dataset is open</h3>

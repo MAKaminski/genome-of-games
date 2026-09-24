@@ -32,27 +32,33 @@ matters: canonical URLs pointing at the wrong host will suppress indexing.
 ## Accounts, subscriptions and analytics
 
 The 1,244 content pages are still pure static output with no runtime. Sign-in, billing and analytics
-are bolted on at the edges: three Vercel Functions in `api/`, one client script, and nothing else.
-There are still **no npm dependencies** — Supabase (GoTrue + PostgREST) and Stripe are both reached
-over plain HTTP with `fetch`.
+are bolted on at the edges: five small Vercel Functions in `api/`, one client script, and nothing
+else. There are still **no npm dependencies** and **no database** — Stripe and Resend are reached
+over plain HTTP with `fetch`, and the "account" is a signed token.
 
 | Piece | Where |
 |---|---|
-| Email sign-in (primary) | `api/magic.mjs` mints a one-time token with GoTrue's admin API and emails it through Resend; the browser exchanges it for a session with `POST /auth/v1/verify`. Needs no Google credentials and no Supabase dashboard configuration. |
-| Google sign-in (optional) | Supabase Auth, redirect flow, tokens land in the URL fragment. Only works once the Google provider is configured (below). |
-| Subscriber records | Supabase `public.gog_subscribers`, RLS on, read-own-row only |
+| Sign-in | `api/magic.mjs` emails a one-time link (signed token, one hour) through Resend; `api/session.mjs` exchanges it for a thirty-day session token the browser keeps in `localStorage` |
+| Who is subscribed | Stripe. `api/status.mjs` looks the reader's email up as a Stripe customer and reads their subscription live — there is no subscriber table to keep in sync and no webhook |
 | $10/mo subscription | Stripe Checkout → `api/checkout.mjs` |
 | Billing changes and cancellation | Stripe billing portal → `api/portal.mjs` |
-| Status sync | `api/stripe-webhook.mjs`, signature verified by hand over the raw body |
-| Analytics | PostHog, loaded only when `POSTHOG_KEY` is set |
+| The free-updates list | Resend contacts. Every sign-in adds the address (`addContact` in `lib/api.mjs`) |
+| Analytics | PostHog, loaded only when `POSTHOG_KEY` is set; sign-in identifies the person by email |
+
+Every function returns `503` with a plain message when its env vars are missing, so an unconfigured
+deployment is obviously unconfigured rather than subtly broken.
+
+**`/api` routes keep their trailing slash** (`/api/checkout/`). `vercel.json` sets
+`trailingSlash: true` for the content pages, so the unslashed form 308-redirects — fine in a
+browser, not fine for a POST.
 
 ### Conversion and analytics
 
-The conversion this site optimises for is the **free Google sign-in**: it turns an anonymous reader
-into a person with an email in PostHog (`posthog.identify` in `static/gog.js`), which is what makes
-the $10/month newsletter sellable later. Every entity page and the homepage carry one ask — the
-"Follow" panel (`followCta` in `lib/shell.js`) — and everything a reader can do that predicts a
-sign-in is an event, so the funnel can be read end to end:
+The conversion this site optimises for is the **free sign-in**: it turns an anonymous reader into a
+person with an email in PostHog and on the Resend list, which is what makes the $10/month newsletter
+sellable later. Every entity page and the homepage carry one ask — the "Follow" panel (`followCta`
+in `lib/shell.js`) — and everything a reader can do that predicts a sign-in is an event, so the
+funnel can be read end to end:
 
 | Event | Fired by | Meaning |
 |---|---|---|
@@ -62,7 +68,7 @@ sign-in is an event, so the funnel can be read end to end:
 | `search_used` / `search_result_click` | `static/app.js` | Header search, one event per settled query |
 | `cta_viewed` / `cta_click` | `static/app.js` | Follow panel seen / clicked; `placement` is `home`, `mechanic`, `game` or `studio` |
 | `mcp_snippet_copied` / `repo_click` | `static/app.js` | Developer intent: copied an MCP config, or opened the repository |
-| `gog_signin_started` → `gog_magic_sent` → `gog_signed_in` | `static/gog.js` | Sign-in — **the conversion**; `method` is `email` or `google` |
+| `gog_signin_started` → `gog_magic_sent` → `gog_signed_in` | `static/gog.js` | Sign-in — **the conversion** |
 | `gog_checkout_started` → `gog_subscribed` | `static/gog.js` | Stripe checkout for the paid tier |
 
 The funnel and the supporting charts live on the PostHog dashboard **Genome of Games — conversion**
@@ -83,42 +89,22 @@ Pages render them as followed links (`lib/shell.js` `externals`) and publish the
 schema.org `sameAs`, so a search or answer engine can merge each page with the studio's or game's
 own presence. Re-run both scripts after adding entities.
 
-Every function returns `503` with a plain message when its env vars are missing, so an unconfigured
-deployment is obviously unconfigured rather than subtly broken.
-
-**`/api` routes keep their trailing slash** (`/api/checkout/`). `vercel.json` sets
-`trailingSlash: true` for the content pages, so the unslashed form 308-redirects — which is fine in
-a browser and not fine for a Stripe webhook. Register webhook URLs with the slash.
-
 ### Environment variables
 
 | Variable | Notes |
 |---|---|
-| `SITE_URL` | Canonicals, OG tags, sitemap. Set before the first production deploy. |
-| `SUPABASE_URL` · `SUPABASE_ANON_KEY` | Public by design — RLS is what protects the data. |
-| `SUPABASE_SERVICE_ROLE_KEY` | **Secret.** Server-only; bypasses RLS. Supabase → Settings → API. |
+| `SITE_URL` | Canonicals, OG tags, sitemap, and the host in sign-in links. Set before the first production deploy. |
+| `MAGIC_SECRET` | **Secret.** Signs sign-in links and session tokens. 32 random bytes as hex: `openssl rand -hex 32`. Rotating it signs everyone out. |
+| `RESEND_API_KEY` | **Secret.** Sends the sign-in link and adds sign-ins to the contact list. A key with sending access is enough for the email; adding contacts needs full access. |
+| `MAGIC_FROM` | From address for the sign-in email, e.g. `The Genome of Games <genome@yourdomain.com>`. The domain must be verified in Resend. |
 | `STRIPE_SECRET_KEY` | **Secret.** Stripe → Developers → API keys. |
 | `STRIPE_PRICE_ID` | The recurring $10/month price. |
-| `STRIPE_WEBHOOK_SECRET` | **Secret.** Shown when the webhook endpoint is created. |
-| `RESEND_API_KEY` | **Secret.** Sends the sign-in link email. Resend → API Keys → sending access is enough. |
-| `MAGIC_FROM` | From address for the sign-in email, e.g. `The Genome of Games <genome@yourdomain.com>`. The domain must be verified in Resend. |
 | `POSTHOG_KEY` · `POSTHOG_HOST` | Project key is public. Host defaults to `https://us.i.posthog.com`. |
 | `GITHUB_URL` | Defaults to this repository. |
 
-### Enabling Google sign-in (optional)
-
-Email sign-in above is the primary path and works with nothing but `RESEND_API_KEY`. Google is
-offered as a secondary link on the same panel and bounces with a provider error until this is done:
-
-Supabase needs Google OAuth credentials, which have to be created by hand:
-
-1. Google Cloud Console → APIs & Services → Credentials → **OAuth client ID** → Web application.
-2. Authorised redirect URI: `https://<your-project>.supabase.co/auth/v1/callback`
-3. Supabase → Authentication → Providers → **Google**: paste the client ID and secret, enable.
-4. Supabase → Authentication → URL Configuration → add `https://<your-domain>/newsletter/` to the
-   redirect allow-list.
-
-Until step 3 is done the sign-in button will bounce off Supabase with a provider error.
+Tokens are HMAC-signed, not stored, so a magic link stays valid until it expires even after it has
+been used once; the hour-long window is the mitigation. Rotate `MAGIC_SECRET` if a link is ever
+leaked at scale.
 
 ## Local development
 
