@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const T = require('./lib/data');
 const S = require('./lib/shell');
-const { N, esc, url, SITE } = T;
+const { N, esc, url, SITE, MCP_ENDPOINT } = T;
 
 const OUT = path.join(__dirname, 'out');
 const urls = [];
@@ -48,7 +48,8 @@ function genomeStrip() {
 }
 
 /* ======================= MCP INDEX (generated data) =====================
-   api/mcp.mjs serves the dataset over the Model Context Protocol. Rather than
+   lib/mcp-core.mjs serves the dataset over the Model Context Protocol, from
+   both the Cloudflare Worker in worker/ and the Vercel route api/mcp.mjs. Rather than
    have the function re-derive slugs, adjacency and lineage — duplicating
    lib/data.js and risking drift — the build denormalises everything it needs
    into one file the function imports statically. Committed output, same as
@@ -117,6 +118,7 @@ function mcpIndex() {
     meta: {
       name: 'The Genome of Games',
       site: SITE,
+      endpoint: MCP_ENDPOINT,
       repository: T.GITHUB,
       license: 'CC BY 4.0',
       mechanics: T.features.length, games: T.games.length, studios: T.studios.length,
@@ -689,7 +691,7 @@ function newsletterPage() {
 /* ================================= MCP ================================= */
 function mcpPage() {
   const crumb = [['Home', '/'], ['MCP server']];
-  const EP = `${SITE}/api/mcp/`;
+  const EP = MCP_ENDPOINT;
 
   /* Snippets carry a copy button; the block itself is a plain <pre> so it
      still reads and selects normally with JavaScript off. */
@@ -715,7 +717,7 @@ function mcpPage() {
 </div>
 <div class="cols"><div>
   <p class="lede">The whole ontology is served over MCP, so a model can trace a mechanic to its
-  root instead of guessing from whatever it absorbed in training. No key, no account, no rate limit.</p>
+  root instead of guessing from whatever it absorbed in training. No key and no account.</p>
 
   <div class="snip" style="margin:30px 0">
     <div class="snip-h"><span>Endpoint · streamable http</span><button class="copy" type="button" data-copy>Copy</button></div>
@@ -827,7 +829,8 @@ Note: Shrinking-Circle Battle Royale has 2 direct parents — Automated Skill
 Matchmaking (2004), Survival Needs Clock (1980). The chain above follows the
 longest single path, so the other parent is not shown in it.`))}
 
-  ${S.section('Terms', `<div class="note">Free, unauthenticated and unmetered — be reasonable and it stays that way.
+  ${S.section('Terms', `<div class="note">Free and unauthenticated. Each IP gets 60 requests a minute, which is
+  plenty for an agent; past that the server answers 429 for the rest of the minute.
   Data is CC BY 4.0: reuse it anywhere, including commercially, as long as you attribute
   <i>The Genome of Games</i> with a link. Origins here are contested by design; read the
   <a href="/methodology/">methodology</a> before presenting any of it as settled, and pass the
@@ -838,6 +841,7 @@ longest single path, so the other parent is not shown in it.`))}
   <div class="note">
     <b>Transport</b><br>Streamable HTTP<br><br>
     <b>Auth</b><br>None<br><br>
+    <b>Rate limit</b><br>60 a minute per IP<br><br>
     <b>Tools</b><br>${tools.length}<br><br>
     <b>Entities</b><br>${num(T.G.nodes.length)}<br><br>
     <b>Licence</b><br>CC BY 4.0
@@ -847,7 +851,7 @@ longest single path, so the other parent is not shown in it.`))}
     <a class="chip" href="/llms.txt">llms.txt</a>
     <a class="chip" href="${T.GITHUB}" rel="noopener">Raw JSON on GitHub</a>
     <a class="chip" href="/methodology/">Methodology</a>
-    <a class="chip" href="/api/mcp/">Endpoint (GET)</a>
+    <a class="chip" href="${EP}" rel="noopener">Endpoint (GET)</a>
   </div>
 </aside></div>`;
 
@@ -1087,7 +1091,7 @@ Origin means the first notable *shipped* implementation, not invention, and not 
 - [All studios](${SITE}/studios/): ${num(T.studios.length)} developers and publishers with spinoffs, renames and acquisitions.
 - [Interactive graph](${SITE}/graph/): pan and zoom the full lineage; deep-linkable as /graph/?node=<id>&trace=1.
 - [Newsletter](${SITE}/newsletter/): free updates, or a $10/month newsletter.
-- [MCP server](${SITE}/mcp/): query this dataset directly from an agent. Streamable HTTP at ${SITE}/api/mcp/, no key required, eight tools including full lineage tracing.
+- [MCP server](${SITE}/mcp/): query this dataset directly from an agent. Streamable HTTP at ${MCP_ENDPOINT}, no key required, eight tools including full lineage tracing.
 
 ## Mechanic families
 

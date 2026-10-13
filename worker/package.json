@@ -1,0 +1,13 @@
+{
+  "name": "genome-of-games-mcp-worker",
+  "private": true,
+  "description": "Cloudflare Worker that serves lib/mcp-core.mjs. Not part of the site build.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "wrangler deploy --dry-run --outdir dist"
+  },
+  "devDependencies": {
+    "wrangler": "4.150.0"
+  }
+}

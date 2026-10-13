@@ -1,0 +1,20 @@
+# The Genome of Games MCP server on Cloudflare Workers.
+# Deploy:  cd worker && npx wrangler deploy
+# The server code is ../lib/mcp-core.mjs, shared with the Vercel route.
+name = "genome-of-games-mcp"
+main = "src/index.mjs"
+compatibility_date = "2025-09-01"
+workers_dev = true
+preview_urls = false
+
+# 60 requests per 60s per client IP (see src/index.mjs). Period must be 10 or 60.
+[[ratelimits]]
+name = "MCP_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 60
+  period = 60
+
+[observability]
+enabled = true
