@@ -2,6 +2,8 @@
    Requests — so a change that breaks the protocol fails here before it ships.
    node scripts/test-mcp.mjs */
 import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { GET, POST, OPTIONS, handleRequest, rateLimited } from '../lib/mcp-core.mjs';
 
 const rpc = body => new Request('https://example.test/mcp', {
@@ -77,6 +79,17 @@ await test('rate-limited response is a readable 429', async () => {
   assert.equal(r.status, 429);
   assert.equal(r.headers.get('retry-after'), '60');
   assert.equal(r.headers.get('access-control-allow-origin'), '*');
+});
+
+await test('old Vercel URL 308s to MCP_ENDPOINT, with no function behind it', async () => {
+  const { MCP_ENDPOINT } = createRequire(import.meta.url)('../lib/data.js');
+  const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+  /* Only the trailing-slash form: trailingSlash: true 308s /api/mcp to /api/mcp/
+     before user redirects run, so a rule for /api/mcp could never match. */
+  const r = vercel.redirects.find(x => x.source === '/api/mcp/');
+  assert.equal(r.destination, MCP_ENDPOINT);
+  assert.equal(r.permanent, true);
+  assert.equal(existsSync(new URL('../api/mcp.mjs', import.meta.url)), false);
 });
 
 console.log(`\n${passed} passed`);

@@ -48,11 +48,11 @@ function genomeStrip() {
 }
 
 /* ======================= MCP INDEX (generated data) =====================
-   lib/mcp-core.mjs serves the dataset over the Model Context Protocol, from
-   both the Cloudflare Worker in worker/ and the Vercel route api/mcp.mjs. Rather than
-   have the function re-derive slugs, adjacency and lineage — duplicating
-   lib/data.js and risking drift — the build denormalises everything it needs
-   into one file the function imports statically. Committed output, same as
+   lib/mcp-core.mjs serves the dataset over the Model Context Protocol from
+   the Cloudflare Worker in worker/. Rather than have the server re-derive
+   slugs, adjacency and lineage — duplicating lib/data.js and risking drift —
+   the build denormalises everything it needs into one file the server
+   imports statically. Committed output, same as
    data/links.json. */
 function mcpIndex() {
   const ref = id => (N[id] ? { id, name: N[id].n, year: N[id].y || null, url: url(id) } : null);

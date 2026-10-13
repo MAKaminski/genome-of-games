@@ -111,14 +111,14 @@ leaked at scale.
 
 ## MCP server
 
-The dataset is served over the Model Context Protocol from **one module, two hosts**.
+The dataset is served over the Model Context Protocol from a Cloudflare Worker.
 `lib/mcp-core.mjs` is the whole server: JSON-RPC over streamable HTTP, eight tools, and nothing
 but the Fetch API's `Request` and `Response`.
 
-| Host | Entry | Role |
+| Where | Entry | Role |
 |---|---|---|
 | Cloudflare Worker `genome-of-games-mcp` | `worker/src/index.mjs` | The public endpoint. Adds routing (`/mcp`) and a per-IP limit of 60 requests a minute through the Workers Rate Limiting binding |
-| Vercel | `api/mcp.mjs` | A one-line re-export of the core, kept only while old clients move over |
+| Vercel | `vercel.json` redirect | The old URL `/api/mcp/` is a 308 to the Worker, with no function behind it. Generic HTTP clients follow it; MCP SDK clients don't follow cross-origin redirects by default, and fail with an error that names the new URL. Transitional: replaced by a firewall deny after 7 days |
 
 The public URL is a single value, `MCP_ENDPOINT` in `lib/data.js`. `build.js` writes it into the
 `/mcp/` docs page, `llms.txt` and `meta.endpoint` in `data/mcp-index.json`, so moving the server
@@ -150,7 +150,7 @@ build.js              page generation — every route is defined here
 serve.js              local static preview server
 lib/data.js           loads JSON, builds slugs, indexes, adjacency and lineage helpers
 lib/shell.js          HTML shell, <head>, nav, footer, shared components
-lib/mcp-core.mjs      the MCP server, shared by worker/ and api/mcp.mjs
+lib/mcp-core.mjs      the MCP server, served by worker/
 worker/               Cloudflare Worker that serves the MCP endpoint (wrangler.toml)
 data/mcp-index.json   denormalised dataset the MCP server bundles (built by build.js)
 docs/architecture.md  system layers and data-model ERD

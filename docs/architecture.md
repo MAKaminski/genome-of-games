@@ -7,8 +7,8 @@ There is no database: the dataset is committed JSON and the account system is a 
 > **Why the MCP server moved (October 2026).** The open MCP endpoint was ~98% of this
 > project's Vercel traffic. That was ~84% of the whole team's CDN requests and ~97% of its
 > function invocations, enough to push the team past Vercel Hobby limits. The server now runs on
-> Cloudflare Workers with a per-IP rate limit. The server code itself did not fork:
-> `lib/mcp-core.mjs` uses only the Fetch API, and both hosts import it.
+> Cloudflare Workers with a per-IP rate limit. The server code did not change:
+> `lib/mcp-core.mjs` uses only the Fetch API, so it moved hosts as-is.
 
 ## Systems architecture, by layer
 
@@ -23,6 +23,7 @@ flowchart TB
     pages["1,245 static pages<br/>out/ from build.js"]
     assets["styles.css · app.js · graph.html<br/>search-index.json · og/*.png"]
     seo["sitemap.xml · robots.txt · llms.txt<br/>/mcp/ docs page"]
+    legacy["vercel.json redirect<br/>/api/mcp/ → 308 to the Worker<br/>(7 days, then firewall deny)"]
   end
 
   subgraph mw["Middleware · APIs"]
@@ -32,9 +33,8 @@ flowchart TB
     subgraph vfn["Vercel Functions"]
       auth["api/magic.mjs · api/session.mjs<br/>sign-in"]
       bill["api/checkout.mjs · api/portal.mjs<br/>api/status.mjs · billing"]
-      legacy["/api/mcp → 308 to the Worker<br/>(7 days, then firewall deny)"]
     end
-    core["lib/mcp-core.mjs<br/>JSON-RPC handlers · 8 tools<br/>(shared by both hosts)"]
+    core["lib/mcp-core.mjs<br/>JSON-RPC handlers · 8 tools"]
   end
 
   subgraph be["Back-end · data"]
@@ -67,7 +67,7 @@ flowchart TB
 |---|---|---|---|
 | Front-end | Static pages, assets, `llms.txt`, `/mcp/` docs | Vercel CDN | No runtime. Built by `build.js` into `out/` |
 | Middleware | MCP server (`lib/mcp-core.mjs`) | **Cloudflare Worker** `genome-of-games-mcp` | The public endpoint. Per-IP rate limit of 60/min via the Workers Rate Limiting binding |
-| Middleware | `/api/mcp` | Vercel | Transitional. A thin re-export of the same core until the 308 redirect ships, then a firewall deny |
+| Front-end | `/api/mcp/` | Vercel CDN | Transitional. A `vercel.json` 308 to the Worker, no function. MCP SDK clients don't follow cross-origin redirects by default and fail with an error naming the new URL; generic HTTP clients follow it. Replaced by a firewall deny after 7 days |
 | Middleware | Sign-in, billing (`api/*.mjs`) | Vercel Functions | Zero dependencies, `fetch` only |
 | Back-end | Dataset JSON, `mcp-index.json` | Committed to git, bundled into the Worker | Read-only. Changing data means a rebuild and a redeploy |
 | Back-end | Stripe, Resend | SaaS | The only state outside git |

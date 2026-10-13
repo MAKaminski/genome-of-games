@@ -5,6 +5,13 @@
   "framework": null,
   "cleanUrls": true,
   "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/api/mcp/",
+      "destination": "https://genome-of-games-mcp.bestendlighting.workers.dev/mcp",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.(css|js|png|svg)",
