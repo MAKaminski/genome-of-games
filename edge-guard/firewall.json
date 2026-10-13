@@ -1,0 +1,53 @@
+{
+  "$comment": "Edge Guard: one Vercel Firewall template for every project in team Kaminski. Written in LOG mode; apply.sh --mode enforce derives the blocking version. Rules are matched by name, so re-running is idempotent and never touches rules it did not create. Hobby allows 3 custom rules per project, 1 of them rate limiting.",
+  "rules": [
+    {
+      "name": "edge-guard: rate limit /api",
+      "description": "More than 60 requests in 60s from one IP on /api/*. Enforce: deny, plus a 15m persistent block on Pro (persistent actions do not exist on Hobby; the deny still applies).",
+      "active": true,
+      "conditionGroup": [
+        { "conditions": [{ "type": "path", "op": "pre", "value": "/api/" }] }
+      ],
+      "action": {
+        "mitigate": {
+          "action": "rate_limit",
+          "rateLimit": { "algo": "fixed_window", "window": 60, "limit": 60, "keys": ["ip"], "action": "log" },
+          "actionDuration": null
+        }
+      },
+      "enforce": { "rateLimitAction": "deny", "actionDuration": "15m" }
+    },
+    {
+      "name": "edge-guard: deny junk on /api",
+      "description": "No or blank User-Agent on /api/*. Add abusive ASNs or user agents found in Phase 0 as extra OR groups here; the third slot is taken by the bypass below.",
+      "active": true,
+      "conditionGroup": [
+        { "conditions": [{ "type": "path", "op": "pre", "value": "/api/" }, { "type": "header", "key": "user-agent", "op": "nex" }] },
+        { "conditions": [{ "type": "path", "op": "pre", "value": "/api/" }, { "type": "user_agent", "op": "re", "value": "^\\s*$" }] }
+      ],
+      "action": { "mitigate": { "action": "log", "actionDuration": null } },
+      "enforce": { "action": "deny", "actionDuration": "15m" }
+    },
+    {
+      "name": "edge-guard: exempt /api from Bot Protection",
+      "description": "Bot Protection challenges anything that is not a browser, which would break webhooks (Stripe, Twilio, Slack), MCP clients and server-to-server calls. Custom rules run before managed rulesets, so /api/* still meets the two rules above first.",
+      "active": true,
+      "conditionGroup": [
+        { "conditions": [{ "type": "path", "op": "pre", "value": "/api/" }] }
+      ],
+      "action": { "mitigate": { "action": "bypass", "actionDuration": null } },
+      "enforce": { "action": "bypass" }
+    }
+  ],
+  "managedRules": {
+    "ai_bots":        { "active": true, "action": "log", "enforce": "deny" },
+    "bot_protection": { "active": true, "action": "log", "enforce": "challenge" }
+  },
+  "projectOverrides": {
+    "$comment": "Per-project exceptions, keyed by project name. Applied after the mode is resolved.",
+    "genome-of-games": {
+      "$comment": "This site invites AI crawlers on purpose (robots.txt, llms.txt). Decide at the go/no-go whether AI Bots should deny here.",
+      "managedRules": { "ai_bots": { "active": true, "action": "log" } }
+    }
+  }
+}
