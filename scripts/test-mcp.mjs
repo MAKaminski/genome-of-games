@@ -4,7 +4,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { GET, POST, OPTIONS, handleRequest, rateLimited } from '../lib/mcp-core.mjs';
+import { GET, POST, OPTIONS, handleRequest } from '../lib/mcp-core.mjs';
 
 const rpc = body => new Request('https://example.test/mcp', {
   method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body)
@@ -72,13 +72,6 @@ await test('handleRequest routes by method', async () => {
   assert.equal((await handleRequest(new Request('https://example.test/mcp'))).status, 200);
   assert.equal((await handleRequest(new Request('https://example.test/mcp', { method: 'OPTIONS' }))).status, 204);
   assert.equal((await handleRequest(new Request('https://example.test/mcp', { method: 'PUT' }))).status, 405);
-});
-
-await test('rate-limited response is a readable 429', async () => {
-  const r = rateLimited();
-  assert.equal(r.status, 429);
-  assert.equal(r.headers.get('retry-after'), '60');
-  assert.equal(r.headers.get('access-control-allow-origin'), '*');
 });
 
 await test('old Vercel URL 308s to MCP_ENDPOINT, with no function behind it', async () => {

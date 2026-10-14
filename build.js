@@ -829,8 +829,9 @@ Note: Shrinking-Circle Battle Royale has 2 direct parents — Automated Skill
 Matchmaking (2004), Survival Needs Clock (1980). The chain above follows the
 longest single path, so the other parent is not shown in it.`))}
 
-  ${S.section('Terms', `<div class="note">Free and unauthenticated. Each IP gets 60 requests a minute, which is
-  plenty for an agent; past that the server answers 429 for the rest of the minute.
+  ${S.section('Terms', `<div class="note">Free and unauthenticated. The endpoint runs on a free plan with one
+  daily request budget shared by every caller, which resets at 00:00 UTC; once it is spent,
+  requests fail until then. Cache what you fetch rather than asking twice.
   Data is CC BY 4.0: reuse it anywhere, including commercially, as long as you attribute
   <i>The Genome of Games</i> with a link. Origins here are contested by design; read the
   <a href="/methodology/">methodology</a> before presenting any of it as settled, and pass the
@@ -841,7 +842,7 @@ longest single path, so the other parent is not shown in it.`))}
   <div class="note">
     <b>Transport</b><br>Streamable HTTP<br><br>
     <b>Auth</b><br>None<br><br>
-    <b>Rate limit</b><br>60 a minute per IP<br><br>
+    <b>Budget</b><br>Shared daily, resets 00:00 UTC<br><br>
     <b>Tools</b><br>${tools.length}<br><br>
     <b>Entities</b><br>${num(T.G.nodes.length)}<br><br>
     <b>Licence</b><br>CC BY 4.0

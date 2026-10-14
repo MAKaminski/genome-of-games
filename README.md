@@ -117,7 +117,7 @@ but the Fetch API's `Request` and `Response`.
 
 | Where | Entry | Role |
 |---|---|---|
-| Cloudflare Worker `genome-of-games-mcp` | `worker/src/index.mjs` | The public endpoint. Adds routing (`/mcp`) and a per-IP limit of 60 requests a minute through the Workers Rate Limiting binding |
+| Cloudflare Worker `genome-of-games-mcp` | `worker/src/index.mjs` | The public endpoint. Adds routing (`/mcp`). No rate limit: on the Workers Free plan a 429 still counts toward the 100,000-a-day account cap, so abuse is denied upstream by the Vercel Firewall instead |
 | Vercel | `vercel.json` redirect | The old URL `/api/mcp/` is a 308 to the Worker, with no function behind it. Generic HTTP clients follow it; MCP SDK clients don't follow cross-origin redirects by default, and fail with an error that names the new URL. Transitional: replaced by a firewall deny after 7 days |
 
 The public URL is a single value, `MCP_ENDPOINT` in `lib/data.js`. `build.js` writes it into the
