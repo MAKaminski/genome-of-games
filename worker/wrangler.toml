@@ -1,0 +1,11 @@
+# The Genome of Games MCP server on Cloudflare Workers.
+# Deploy:  cd worker && npx wrangler deploy
+# The server code is ../lib/mcp-core.mjs; this Worker is its only host.
+name = "genome-of-games-mcp"
+main = "src/index.mjs"
+compatibility_date = "2025-09-01"
+workers_dev = true
+preview_urls = false
+
+[observability]
+enabled = true

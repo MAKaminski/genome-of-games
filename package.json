@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node build.js",
     "dev": "node build.js && node serve.js",
-    "serve": "node serve.js"
+    "serve": "node serve.js",
+    "test": "node scripts/test-mcp.mjs"
   },
   "engines": { "node": ">=18" }
 }

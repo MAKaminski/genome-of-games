@@ -32,7 +32,7 @@ matters: canonical URLs pointing at the wrong host will suppress indexing.
 ## Accounts, subscriptions and analytics
 
 The 1,244 content pages are still pure static output with no runtime. Sign-in, billing and analytics
-are bolted on at the edges: five small Vercel Functions in `api/`, one client script, and nothing
+are bolted on at the edges: five small Vercel Functions in `api/` (plus the MCP route, below), one client script, and nothing
 else. There are still **no npm dependencies** and **no database** — Stripe and Resend are reached
 over plain HTTP with `fetch`, and the "account" is a signed token.
 
@@ -101,12 +101,40 @@ own presence. Re-run both scripts after adding entities.
 | `STRIPE_PRICE_ID` | The recurring $10/month price. |
 | `POSTHOG_KEY` · `POSTHOG_HOST` | Project key is public. Host defaults to `https://us.i.posthog.com`. |
 | `GITHUB_URL` | Defaults to this repository. |
+| `MCP_ENDPOINT` | The public MCP URL advertised by the docs page, `llms.txt` and the server itself. Defaults to the value in `lib/data.js`. |
 
 `SUPABASE_URL`, `SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are no longer read and can be deleted from the Vercel project.
 
 Tokens are HMAC-signed, not stored, so a magic link stays valid until it expires even after it has
 been used once; the hour-long window is the mitigation. Rotate `MAGIC_SECRET` if a link is ever
 leaked at scale.
+
+## MCP server
+
+The dataset is served over the Model Context Protocol from a Cloudflare Worker.
+`lib/mcp-core.mjs` is the whole server: JSON-RPC over streamable HTTP, eight tools, and nothing
+but the Fetch API's `Request` and `Response`.
+
+| Where | Entry | Role |
+|---|---|---|
+| Cloudflare Worker `genome-of-games-mcp` | `worker/src/index.mjs` | The public endpoint. Adds routing (`/mcp`). No rate limit: on the Workers Free plan a 429 still counts toward the 100,000-a-day account cap, so abuse is denied upstream by the Vercel Firewall instead |
+| Vercel | `vercel.json` redirect | The old URL `/api/mcp/` is a 308 to the Worker, with no function behind it. Generic HTTP clients follow it; MCP SDK clients don't follow cross-origin redirects by default, and fail with an error that names the new URL. Transitional: replaced by a firewall deny after 7 days |
+
+The public URL is a single value, `MCP_ENDPOINT` in `lib/data.js`. `build.js` writes it into the
+`/mcp/` docs page, `llms.txt` and `meta.endpoint` in `data/mcp-index.json`, so moving the server
+means changing one line and rebuilding. Preflights carry `Access-Control-Max-Age: 86400`, and the
+GET discovery document is `public, s-maxage=3600, stale-while-revalidate=86400`.
+
+```bash
+npm test                       # protocol tests against lib/mcp-core.mjs
+cd worker && npm install       # wrangler, for the Worker only, never the site
+npx wrangler dev               # local Worker at http://localhost:8787/mcp
+npx wrangler deploy            # publish (needs a Cloudflare login or CLOUDFLARE_API_TOKEN)
+```
+
+`worker/` bundles `data/mcp-index.json`, so **after a data change, rebuild and redeploy the
+Worker**. Otherwise the Worker keeps serving the old dataset. See
+[`docs/architecture.md`](docs/architecture.md) for the layered system diagram and the data-model ERD.
 
 ## Local development
 
@@ -122,6 +150,11 @@ build.js              page generation — every route is defined here
 serve.js              local static preview server
 lib/data.js           loads JSON, builds slugs, indexes, adjacency and lineage helpers
 lib/shell.js          HTML shell, <head>, nav, footer, shared components
+lib/mcp-core.mjs      the MCP server, served by worker/
+worker/               Cloudflare Worker that serves the MCP endpoint (wrangler.toml)
+data/mcp-index.json   denormalised dataset the MCP server bundles (built by build.js)
+docs/architecture.md  system layers and data-model ERD
+scripts/test-mcp.mjs  MCP protocol tests (npm test)
 data/graph.json       1,180 nodes and 4,366 edges with precomputed graph layouts
 data/prose.json       ~34,000 words: three body paragraphs per mechanic
 data/copy.json        homepage, 15 family essays, 7 era essays, methodology
