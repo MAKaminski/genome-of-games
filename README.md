@@ -99,7 +99,7 @@ own presence. Re-run both scripts after adding entities.
 | `MAGIC_FROM` | From address for the sign-in email, e.g. `The Genome of Games <genome@yourdomain.com>`. The domain must be verified in Resend. |
 | `STRIPE_SECRET_KEY` | **Secret.** Stripe → Developers → API keys. |
 | `STRIPE_PRICE_ID` | The recurring $10/month price. |
-| `POSTHOG_KEY` · `POSTHOG_HOST` | Project key is public. Host defaults to `https://us.i.posthog.com`. |
+| `POSTHOG_KEY` | Project key is public. Events go through the `/ingest` rewrites in `vercel.json` to PostHog US. `POSTHOG_HOST` is no longer read. |
 | `GITHUB_URL` | Defaults to this repository. |
 
 `SUPABASE_URL`, `SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are no longer read and can be deleted from the Vercel project.
