@@ -6,19 +6,7 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "routes": [
-    { "src": "/api/mcp/?", "methods": ["GET"], "dest": "/mcp-endpoint.json" },
-    {
-      "src": "/api/mcp/?",
-      "methods": ["POST"],
-      "has": [{ "type": "header", "key": "accept", "value": { "re": "^(\\*/\\*|application/json|text/html.*)$" } }],
-      "status": 406
-    },
-    {
-      "src": "/api/mcp/?",
-      "methods": ["POST"],
-      "missing": [{ "type": "header", "key": "accept" }],
-      "status": 406
-    }
+    { "src": "/api/mcp/?", "methods": ["GET"], "dest": "/mcp-endpoint.json" }
   ],
   "headers": [
     {
