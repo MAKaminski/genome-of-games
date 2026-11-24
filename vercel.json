@@ -9,12 +9,7 @@
     { "src": "/api/mcp/?", "methods": ["GET"], "dest": "/mcp-endpoint.json" },
     {
       "src": "/api/mcp/?",
-      "missing": [{ "type": "header", "key": "accept" }],
-      "mitigate": { "action": "deny" }
-    },
-    {
-      "src": "/api/mcp/?",
-      "has": [{ "type": "header", "key": "accept", "value": { "re": "^(?!.*text/event-stream).*$" } }],
+      "has": [{ "type": "header", "key": "accept", "value": { "re": "^(\\*/\\*|application/json|text/html.*)$" } }],
       "mitigate": { "action": "deny" }
     }
   ],
