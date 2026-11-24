@@ -5,6 +5,15 @@
   "framework": null,
   "cleanUrls": true,
   "trailingSlash": true,
+  "routes": [
+    { "src": "/api/mcp/?", "methods": ["GET"], "dest": "/mcp-endpoint.json" },
+    {
+      "src": "/api/mcp/?",
+      "methods": ["POST"],
+      "missing": [{ "type": "header", "key": "accept", "value": { "re": "text/event-stream" } }],
+      "mitigate": { "action": "deny" }
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.(css|js|png|svg)",
