@@ -10,7 +10,13 @@
     {
       "src": "/api/mcp/?",
       "methods": ["POST"],
-      "missing": [{ "type": "header", "key": "accept", "value": { "re": "text/event-stream" } }],
+      "missing": [{ "type": "header", "key": "accept" }],
+      "mitigate": { "action": "deny" }
+    },
+    {
+      "src": "/api/mcp/?",
+      "methods": ["POST"],
+      "has": [{ "type": "header", "key": "accept", "value": { "re": "^(?!.*text/event-stream).*$" } }],
       "mitigate": { "action": "deny" }
     }
   ],
