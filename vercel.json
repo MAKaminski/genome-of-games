@@ -5,6 +5,9 @@
   "framework": null,
   "cleanUrls": true,
   "trailingSlash": true,
+  "routes": [
+    { "src": "/api/mcp/?", "methods": ["GET"], "dest": "/mcp-endpoint.json" }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.(css|js|png|svg)",

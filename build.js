@@ -708,6 +708,16 @@ function mcpPage() {
     ['genome_by_year', 'What was first shipped in a year or range.']
   ];
 
+  /* vercel.json routes GET /api/mcp/ to this file, so describing the endpoint
+     to a browser or a crawler never starts a function. */
+  writeRaw('mcp-endpoint.json', JSON.stringify({
+    name: 'genome-of-games-mcp', version: '1.0.0', transport: 'streamable-http',
+    endpoint: EP,
+    docs: `${SITE}/mcp/`,
+    tools: tools.map(t => t[0]),
+    hint: 'POST JSON-RPC 2.0 to this URL with "Accept: application/json, text/event-stream". Start with the "initialize" method.'
+  }));
+
   const body = `${S.crumbs(crumb)}
 <div class="hero" style="padding-bottom:var(--space-lg)">
   <div class="eyebrow">Model Context Protocol · ${num(T.G.nodes.length)} entities</div>
@@ -765,7 +775,7 @@ def genome(tool, **args):
     req = urllib.request.Request(
         ENDPOINT,
         data=json.dumps(payload).encode(),
-        headers={"Content-Type": "application/json"},
+        headers={"Content-Type": "application/json", "Accept": "application/json, text/event-stream"},
     )
     with urllib.request.urlopen(req) as r:
         result = json.load(r)["result"]
@@ -779,7 +789,7 @@ print(genome("genome_get_studio", studio="Valve"))`) +
 async function genome(tool, args = {}) {
   const res = await fetch(ENDPOINT, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream" },
     body: JSON.stringify({
       jsonrpc: "2.0",
       id: 1,
